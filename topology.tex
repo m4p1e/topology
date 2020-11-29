@@ -1,0 +1,69 @@
+\documentclass{article}
+
+\usepackage{ctex}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{unicode-math}
+
+
+\usepackage[textwidth=18cm]{geometry} % 设置页宽=18
+
+\usepackage{blindtext}
+\usepackage{bm}
+\parindent=0pt
+\setlength{\parindent}{2em} 
+\usepackage{indentfirst}
+
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\titleformat{\section}[block]{\color{blue}\Large\bfseries\filcenter}{}{1em}{}
+\titleformat{\subsection}[hang]{\bfseries}{}{0em}{}
+%\setcounter{secnumdepth}{1} %section 序号
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{exercise}{Exercise}[section]
+
+\newcommand*{\xfunc}[4]{{#2}\colon{#3}{#1}{#4}}
+\newcommand*{\func}[3]{\xfunc{\to}{#1}{#2}{#3}}
+
+\begin{document}
+\title{Topology}
+\author{枫聆}
+\maketitle
+
+\tableofcontents
+\section{写在最前面}
+
+拓扑对我来说是新名字，我对它几乎一无所知，虽然我嘴上总是吵吵着代数拓扑是我的终极目标\verb|(～ o ～)~zZ|，终于今天抱着巨大的勇气翻开了包志强老师的《点集拓扑和代数拓扑引论》，被文中老师幽默的行文，深深折服了，似乎拓扑也并没有想象中那么难，我想这是还不错的开始，我的第一直观感受拓扑也是给定一堆对象，在上面用一些公理弄些不一样的结构和代数一样，但是我暂时还不知道这堆结构要拿来干什么？有什么有趣的性质？
+
+好吧，前面的路还很长，路漫漫，不过一想到前路那些绮丽的景色，多少还是有些兴奋的！虽然这路上没有一起分享喜悦的人...
+
+2020年11月29日23:12:17
+
+\section{Topology Space}
+\subsection{Definition of Topology Space} 
+
+\begin{itemize}
+	\item 对于开集$U$的理解，首先它是$X$的子集，并且对于$\forall x \in U$,存在$x$的邻域包含于$U$。包老师的书里解释为$U$是每一个$x$的邻域，我感觉在这里似乎有点强了。wiki上解释为实数轴上的开区间的一般性推广。
+	\item 那邻域是什么？在邻域之前，应该先理解基准开邻域结构(base open neighborhood),像定义代数结构一样，基准开邻域结构是一个映射$\func{\mathcal{N}}{X}{2^(2^X)}$,把每一个点$x \in X$对应到一个子集族$\mathcal{N}(x)$上，满足下面几条公理
+		\begin{itemize}
+			\item $\forall x \in X,\mathcal{N}(x) \neq \emptyset,$并且$\forall U \in \mathcal{U}(x),x \in U$
+			\item 若$U,V \in \mathcal{U}(x),$则存在$W \in \mathcal{U}(x)$,使得$W = U \cap V$
+			\item 若$y \in U \in \mathcal{U}(x)$,则存在$V \in \mathcal{N}(y)$，使得$V \subseteq U$
+		\end{itemize}
+\end{itemize}
+
+
+\end{document}
