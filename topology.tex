@@ -23,7 +23,7 @@
 \usepackage{xcolor}
 \usepackage{titlesec}
 \titleformat{\section}[block]{\color{blue}\Large\bfseries\filcenter}{}{1em}{}
-\titleformat{\subsection}[hang]{\bfseries}{}{0em}{}
+\titleformat{\subsection}[hang]{\color{red}\bfseries}{}{0em}{}
 %\setcounter{secnumdepth}{1} %section 序号
 
 \newtheorem{theorem}{Theorem}[section]
@@ -54,16 +54,41 @@
 
 \section{Topology Space}
 \subsection{Definition of Topology Space} 
+预备知识
 
 \begin{itemize}
 	\item 对于开集$U$的理解，首先它是$X$的子集，并且对于$\forall x \in U$,存在$x$的邻域包含于$U$。包老师的书里解释为$U$是每一个$x$的邻域，我感觉在这里似乎有点强了。wiki上解释为实数轴上的开区间的一般性推广。
 	\item 那邻域是什么？在邻域之前，应该先理解基准开邻域结构(base open neighborhood),像定义代数结构一样，基准开邻域结构是一个映射$\func{\mathcal{N}}{X}{2^(2^X)}$,把每一个点$x \in X$对应到一个子集族$\mathcal{N}(x)$上，满足下面几条公理
 		\begin{itemize}
-			\item $\forall x \in X,\mathcal{N}(x) \neq \emptyset,$并且$\forall U \in \mathcal{U}(x),x \in U$
-			\item 若$U,V \in \mathcal{U}(x),$则存在$W \in \mathcal{U}(x)$,使得$W = U \cap V$
-			\item 若$y \in U \in \mathcal{U}(x)$,则存在$V \in \mathcal{N}(y)$，使得$V \subseteq U$
+			\item $\forall x \in X,\mathcal{N}(x) \neq \emptyset,$并且$\forall U \in \mathcal{N}(x),x \in U$
+			\item 若$U,V \in \mathcal{N}(x),$则存在$W \in \mathcal{N}(x)$,使得$W = U \cap V$
+			\item 若$y \in U \in \mathcal{N}(x)$,则存在$V \in \mathcal{N}(y)$，使得$V \subseteq U$
 		\end{itemize}
+	用文字来叙述就是
+		\begin{itemize}
+			\item 每一个$x$都一定有基准开邻域，并且是其任意基准开邻域的元素
+			\item $x$的任意两个基准开邻域的交是$x$的邻域
+			\item 任意基准开邻域是其所含每个元素$y$的邻域
+		\end{itemize}
+	\item 子集族是指$X$幂集的子集,所有子集族构成的集合则是$2^{(2^X)}$				
 \end{itemize}
 
+
+拓扑定义的直觉来自于微积分中连续函数的"$\varepsilon-\delta$"语言定义。
+
+\begin{definition}
+如果函数$\func{f}{\mathbb{R}}{\mathbb{R}}$满足: 任取$\varepsilon > 0$,存在$\delta > 0$使得$|x-x_0| < \delta$,对$|f(x)-f(x_0)| < \varepsilon$成立。
+\end{definition}
+
+这个定义需要$|x-x_0| < \delta$和$|f(x)-f(x_0)| < \varepsilon$这样的度量关系来定义，但是对于抽象的结构，不需要这样具体的度量关系，所以我们抽象的“邻域”来描述两点之前的具体,把所有接近$x_0$程度为$\delta$的点记做$B_{\delta}(x_0)$,这就是邻域的形式化表示，然后对于各种稀奇古怪的接近标准都可以用这个形式来表示。于是乎上面的连续定义可以稍微变一下了
+
+\begin{proposition}
+如果函数$\func{f}{\mathbb{R}}{\mathbb{R}}$满足对任意的$\varepsilon > 0$,存在$\delta > 0$有$x \in B_{\delta}(x_0)$,使得$f(x) \in B_{\varepsilon}(f(x_0))$,即$B_{\delta}(x_0) \subseteq f^{-1}(B_{\varepsilon}(f(x_0)))$
+\end{proposition}
+
+完美的略掉了度量关系，在这里$B_{\delta}(x_0)$表示$\{x \in \mathbb{R} |\ |x-x_0| < \delta \}$,最后那个包含关系是指$f(x_0)$的任何$\varepsilon$程度下的原像包含$x_0$的某个$\delta$邻域.
+
+%https://math.stackexchange.com/questions/157735/definition-of-neighborhood-and-open-set-in-topology
+\subsection{Properties of Topology Space}
 
 \end{document}
