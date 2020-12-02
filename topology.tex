@@ -58,18 +58,6 @@
 
 \begin{itemize}
 	\item 对于开集$U$的理解，首先它是$X$的子集，并且对于$\forall x \in U$,存在$x$的邻域包含于$U$。包老师的书里解释为$U$是每一个$x$的邻域，我感觉在这里似乎有点强了。wiki上解释为实数轴上的开区间的一般性推广。
-	\item 那邻域是什么？在邻域之前，应该先理解基准开邻域结构(base open neighborhood),像定义代数结构一样，基准开邻域结构是一个映射$\func{\mathcal{N}}{X}{2^(2^X)}$,把每一个点$x \in X$对应到一个子集族$\mathcal{N}(x)$上，满足下面几条公理
-		\begin{itemize}
-			\item $\forall x \in X,\mathcal{N}(x) \neq \emptyset,$并且$\forall U \in \mathcal{N}(x),x \in U$
-			\item 若$U,V \in \mathcal{N}(x),$则存在$W \in \mathcal{N}(x)$,使得$W = U \cap V$
-			\item 若$y \in U \in \mathcal{N}(x)$,则存在$V \in \mathcal{N}(y)$，使得$V \subseteq U$
-		\end{itemize}
-	用文字来叙述就是
-		\begin{itemize}
-			\item 每一个$x$都一定有基准开邻域，并且是其任意基准开邻域的元素
-			\item $x$的任意两个基准开邻域的交是$x$的邻域
-			\item 任意基准开邻域是其所含每个元素$y$的邻域
-		\end{itemize}
 	\item 子集族是指$X$幂集的子集,所有子集族构成的集合则是$2^{(2^X)}$				
 \end{itemize}
 
@@ -88,7 +76,54 @@
 
 完美的略掉了度量关系，在这里$B_{\delta}(x_0)$表示$\{x \in \mathbb{R} |\ |x-x_0| < \delta \}$,最后那个包含关系是指$f(x_0)$的任何$\varepsilon$程度下的原像包含$x_0$的某个$\delta$邻域.
 
+是否我们可以通过上面这种定义邻域的方式去把度量空间变成一般拓扑空间呢？当然是可以的，但是我们现在还没有给出邻域的一般定义。那邻域是什么？在邻域之前，应该先理解基准开邻域结构(base open neighborhood),像定义代数结构一样，基准开邻域结构是一个映射(算子)$\func{\mathcal{N}}{X}{2^(2^X)}$,把每一个点$x \in X$对应到一个子集族$\mathcal{N}(x)$上，满足下面几条公理
+		\begin{itemize}
+			\item $\forall x \in X,\mathcal{N}(x) \neq \emptyset,$并且$\forall U \in \mathcal{N}(x),x \in U$
+			\item 若$U,V \in \mathcal{N}(x),$则存在$W \in \mathcal{N}(x)$,使得$W = U \cap V$
+			\item 若$y \in U \in \mathcal{N}(x)$,则存在$V \in \mathcal{N}(y)$，使得$V \subseteq U$
+		\end{itemize}
+用文字来叙述就是
+		\begin{itemize}
+			\item 每一个$x$都一定有基准开邻域，并且是其任意基准开邻域的元素
+			\item $x$的任意两个基准开邻域的交是$x$的邻域
+			\item 任意基准开邻域是其所含每个元素$y$的邻域
+		\end{itemize}
+如果$U$是$x$的一个邻域，则$U$包含了某个$x$基准开邻域，在这里其实我们又可以在基准开邻域的基础上，把邻域也公理化，需要加上一个公理，如果$U$是$x$的一个领域，则$U$的任意超集也是$x$的一个邻域。
+
+我们现在可以用邻域的公理来定义拓扑空间，用$\mathbf{N}$表示一个邻域拓扑，即$\mathbf{N}$表示一个所有非空的$\mathbf{N}(x)$构成的邻域族，最后$(X,\mathbf{N})$表示一个拓扑空间，这种构造方式是Hausdorff提出来的，但是一般地经常用开集的公理来定义领域。
+
+用$(X,\uptau)$表示一个拓扑空间，其中$\uptau$表示$X$的一个子集族，并且满足下面公理：
+\begin{itemize}
+	\item $\emptyset \in \uptau,X \in \uptau$
+	\item $\uptau$中任意两个元素的交集仍属于$\uptau$
+	\item $\uptau$中任意多个元素的并集仍属于$\uptau$
+\end{itemize}	
+则称$\uptau$里面的元素为开集，$\uptau$表示$X$上的一个拓扑结构
+
+开集定义的拓扑空间看起来要比邻域定义，要稍微简洁那么一点，两个定义都是等价的，你可以用邻域的推到开集。在邻域上基础上我们定义如果$U$是$X$的一个子集，且$U$是每一个$x \in U$的领域，则称$U$是一开集。基准开邻域的第三条公理告诉我们基准开邻域肯定是一个开集，然后我们给出一个命题
+
+\begin{proposition}
+一个集合是开集当且仅当它是若干个基准开领域的并集
+\end{proposition}
+
+\begin{proof}
+如果当一个集合是开集时，根据开集的定义，它里面每个元素都有一个基准开领域，这些基准开领域的并就是这个开集。反之若干个基准开领域的并，还是一个基准开领域，前面说过基准开领域是一个开集。
+
+注意，开集也是一族基准开领域的并，只不过这个集合族是空族。
+\end{proof}
+
+这个命题证明以后，现在来看看我们用基准开领域定义得到的开集是否遵循开集的基本公理？很显然是当并集是基准开领域并的情况下，是满足上诉的开集公理的。
+
+疑问来了，到底是基准开领域去定义拓扑结构，还是邻域呢？
+
+
+
+
+
 %https://math.stackexchange.com/questions/157735/definition-of-neighborhood-and-open-set-in-topology
 \subsection{Properties of Topology Space}
+
+
+
 
 \end{document}
