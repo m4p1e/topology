@@ -180,5 +180,16 @@
 如果在拓扑空间$(X,\tau)$中，子集$A$的余集$A^{c}$是开集，则称$A$为\textbf{闭集}(closed set)
 \end{definition}
 
-其中余集$A^{c}= X \smallsetminus A$,在平凡拓扑中，闭集就是$\emptyset$和$X$;在离散拓扑中，任何子集都是闭集;
+其中余集$A^{c}= X \smallsetminus A$,在平凡拓扑中，闭集就是$\emptyset$和$X$;在离散拓扑中，任何子集都是闭集;闭集和开集互为余集，也可以从闭集出发定义拓扑结构:
+
+\begin{definition}
+$X$的子集族$\sigma$是某个拓扑结构下全体闭集构成的集合当且仅当它满足下述三条公理：
+\begin{itemize}
+	\item $X \in \sigma$,$\emptyset \in \sigma$;
+	\item $\sigma$中任意多个元素的交集仍属于$\sigma$;
+	\item $\sigma$中任意两个元素的并集仍属于$\sigma$;
+\end{itemize}
+\end{definition}
+
+我们尝试来推一下开集公理，第一个公理很显然，主要看第二个和第三个，开集和闭集互为余集，如果$A$和$B$为闭集,则$A^c$和$B^c$为开集，根据De Morgan定律\[A^c \cup B^c = (A \cap B)^c , A^c \cap B^c = (A \cup B)^c\]，根据闭集公理，上面两个等式结果都是开集。
 \end{document}
