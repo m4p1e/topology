@@ -19,6 +19,7 @@
 \setlength{\parindent}{2em} 
 \usepackage{indentfirst}
 
+\usepackage{graphicx} %图片
 
 \usepackage{xcolor}
 \usepackage{titlesec}
@@ -146,7 +147,38 @@
 
 内点和内部的概念，需要建立在具体的拓扑结构上，取不同的拓扑结构会得到完全不同的结论。
 
+\begin{center}
+\includegraphics[width=5cm, height=4cm]{images/Interior_illustration.png}
+\end{center}
+
+
+
 \begin{proposition}
 集合的内部具有以下基本性质：
+\begin{itemize}
+	\item $A^{\circ}=A$当且仅当$A$是开集;
+	\item $A^{\circ}$是$A$包含的所有开集的并集，也是$A$中最大的开集;
+	\item 若$A \subseteq B$，则$A^{\circ} \subseteq B^{\circ}$;
+	\item $(A_1 \cap \ldots \cap A_n)^{\circ}=A_1^{\circ} \cap \ldots \cap A_n^{\circ}$;
+	\item ${\left(\bigcup\limits_{i \in n} A_i\right)}^{\circ} \supseteq \bigcup\limits_{i \in n} A_i^{\circ}$
+\end{itemize}
 \end{proposition}
+\begin{proof}
+\begin{enumerate}
+	\item 这个性质根据开集的定义很显然。
+	\item 如果$A$的子集是一个开集，这个子集很显然也是属于$A^{\circ}$,所以$A$里面的所有开集含于$A^{\circ}$,如何证明$A^{\circ}$是一个开集呢？任取$A^{\circ}$中一点$x$,$A$是x的邻域，那么一定存在一个包含$x$的基准开邻域，我们最大基准开邻域是一个并集，根据基准开邻域的定义，这个基准邻域肯定也是属于$A^{\circ}$，所以$A^{\circ}$是其每个点$x$的邻域，所以$A^{\circ}$是一个开集，同时也证明了它是所有这样点$x$的基准开邻域的并。再来证明它是$A$内最大的开集，假设如果它不是$A$内最大的开集，那么存在$A^{'}$包含$A^{\circ}$，但是呢$A'$是其所有点的邻域(根据开集定义)，所有$A'$属于$A^{\circ}$，这样产生了矛盾，所以$A^{\circ}$是最大的开集。
+	\item 根据邻域的最后一条公理，邻域的超集还是邻域,所以B是$A^{\circ}$中所有点的邻域，所以很自然的$A^{\circ} \subseteq B^{\circ}$
+	\item 等式的左边表示，所有集合的交的内部，等式的右边表示，所有集合的内部的交，这里为什么等价呢？这个关系用图来说是非常明显的，怎么用文字呢？应该用数学归纳法来证明，我先证明对两个集合是成立的，首先利用第2个性质，${(A_1 \cap A_2)}^{\circ}=U_1 \cup \ldots \cup U_n $,其中$U_1,\ldots,U_n \in A_1 \cap A_2$,很显然它们也属于$A_1^{\circ}$和$A_2^{\circ}$,即${(A_1 \cap A_2)}^{\circ} \subseteq A_1^{\circ} \cap A_2^{\circ}$,反过来$A_1^{\circ} \cap A_2^{\circ}$是一个开集，并且属于$(A_1 \cap A_2)$,所以$A_1^{\circ} \cap A_2^{\circ} \subseteq {(A_1 \cap A_2)}^{\circ}$,两边一夹所以，${(A_1 \cap A_2)}^{\circ} = A_1^{\circ} \cap A_2^{\circ}$,再用一下数学归纳法，即可。
+	\item 这个也需要数学归纳法来证明，这里只证明两个集合的情况下，$A_1^{\circ} \cup A_2^{\circ} \subseteq {(A_1 \cup A_2)}^{\circ}$这还是显然的，用第三条性质就可以知道。但是反过来不一样成立，$A_1$和$A_2$的"公共边界"上的点,完全有可能变成$A_1 \cup A_2$内部的点。
+	\begin{center}
+		\includegraphics[width=4cm, height=2cm]{images/A_B_same_border.png}
+	\end{center}	
+\end{enumerate}
+\end{proof}
+
+\begin{definition}
+如果在拓扑空间$(X,\tau)$中，子集$A$的余集$A^{c}$是开集，则称$A$为\textbf{闭集}(closed set)
+\end{definition}
+
+其中余集$A^{c}= X \smallsetminus A$,在平凡拓扑中，闭集就是$\emptyset$和$X$;在离散拓扑中，任何子集都是闭集;
 \end{document}
