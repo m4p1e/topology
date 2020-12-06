@@ -39,6 +39,9 @@
 \newcommand*{\xfunc}[4]{{#2}\colon{#3}{#1}{#4}}
 \newcommand*{\func}[3]{\xfunc{\to}{#1}{#2}{#3}}
 
+
+\newcommand\Set[2]{\{\,#1\mid#2\,\}} %集合
+\newcommand\SET[2]{\Set{#1}{\text{#2}}} %
 \begin{document}
 \title{Topology}
 \author{枫聆}
@@ -58,7 +61,7 @@
 预备知识
 
 \begin{itemize}
-	\item 对于开集$U$%的理解，首先它是$X$的子集，并且对于$\forall x \in U$,存在$x$的邻域包含于$U$。包老师的书里解释为$U$是每一个$x$的邻域，我感觉在这里似乎有点强了。wiki上解释为实数轴上的开区间的一般性推广。
+	%\item 对于开集$U$%的理解，首先它是$X$的子集，并且对于$\forall x \in U$,存在$x$的邻域包含于$U$。包老师的书里解释为$U$是每一个$x$的邻域，我感觉在这里似乎有点强了。wiki上解释为实数轴上的开区间的一般性推广。
 	\item 子集族是指$X$幂集的子集,所有子集族构成的集合则是$2^{(2^X)}$				
 \end{itemize}
 
@@ -127,6 +130,18 @@
 集合$X$上的一个离散拓扑为$\{X,2^{X}\}$,形象一点说就是“在$X$上只有等于$x$才算是和$x$充分接近”,离散拓扑是$X$上最大的拓扑结构。 暂时不理解为什么是等于，而不是包含，但是最大的子集族确实是$2^{X}$
 \end{example}
 
+还有两个比较重要的拓扑结构
+
+\begin{example}
+设$X$含有无穷多个元素，定义\[\tau_f = \Set{A \subseteq X}{A = \emptyset \text{ 或者 } A^c \text{ 有限}}\]则$\tau_f$是一个拓扑结构，称为$X$上的余有限拓扑(cofinite topology)
+\end{example}
+
+\begin{example}
+设$X$含有不可数无穷多个元素，定义\[\tau_c = \Set{A \subseteq X}{A = \emptyset \text{ 或者 } A^c \text{ 可数}}\]则$\tau_c$也是一个拓扑结构，称为$X$上的余可数拓扑(cocountable topology)
+\end{example}
+
+
+\newpage
 %https://math.stackexchange.com/questions/157735/definition-of-neighborhood-and-open-set-in-topology
 \subsection{Properties of Topology Space}
 
@@ -192,4 +207,56 @@ $X$的子集族$\sigma$是某个拓扑结构下全体闭集构成的集合当且
 \end{definition}
 
 我们尝试来推一下开集公理，第一个公理很显然，主要看第二个和第三个，开集和闭集互为余集，如果$A$和$B$为闭集,则$A^c$和$B^c$为开集，根据De Morgan定律\[A^c \cup B^c = (A \cap B)^c , A^c \cap B^c = (A \cup B)^c\]，根据闭集公理，上面两个等式结果都是开集。
+
+\begin{definition}
+如果$x$每个邻域中都含有$A \smallsetminus \{x\}$中的点，则称$x$为$A$的聚点或者极限点(limit point 或 cluster point 或 point of accumulation)，全体聚点构成的集合$A'$称之为$A$的导集(derived set),$\overline{A}=A \cup A'$称为$A$的闭包(closure).换言之，$x \in \overline{A}$当且仅当$x$的每个邻域中都含有$A$中的点。
+\end{definition}
+
+突然多了很多定义，让人触不及防，因为一开始不知道它们的深刻含义。这个定义感觉很模糊，因为没有给$A$到底是什么东西，$x$和$A$关系是什么？
+
+假设$A$是任意给定一个$X$的子集，那么$x$也是任意取的，所以两者并没有直接关系，而是靠上面刻画的几个关系，首先把用聚点的定义，把$x$和$A$联系起来，然后把这样的$x$都找出来，于是就有全体聚点这个概念，再给它一个定义为导集，把导集和$A$本身并起来，再给一个定义就是闭包。
+
+上面重新解读了一下定义，那么再研究一下这个闭包有什么性质？闭包$\overline{A}$中任意一点$x$,如果$x \in A'$,则$x$的每个邻域都含有$A$中的点。如果$x \in A$，怎么推出和前面一样的结论呢？注意这样好像只需要含有就行，不需要全含，所以$x$本身在$A$里面这个条件是天然成立的。
+
+\begin{proposition}
+设$A$是$X$的一个子集，则$(A^{c})^{\circ}=(\overline{A})^c$.
+\end{proposition}
+
+\begin{proof}
+这个命题在说明内部和闭包的关系，从右边出发好像简单一点，$A$的闭包的余集，是指那些点$x$的邻域都不包括$A$中的点。换句话说就是指点$x$有一个邻域都只包含$A^c$的点，则这个邻域是含于$A^c$,根据内点的定义，点$x$是$A^c$的内点，所有这样的点，就是$(A^c)^{\circ}$.总结一下就是$A$的闭包和$A^c$的开集互为余集。	
+\end{proof}
+
+于是，所有关于内部的性质都可以用De Morgan定律翻译成闭包的性质。
+
+\begin{itemize}
+	\item $\overline{A} = A$,当且仅当$A$是闭集。
+	\item $\overline{A}$是包含$A$的所有闭集的交集，也是包含$A$的最小闭集。
+	\item 若$A \subseteq B$,则$\overline{A} \subseteq \overline{B}$
+	\item $(A_1 \cup \ldots \cup A_n)^{\circ}=A_1^{\circ} \cup \ldots \cup A_n^{\circ}$;
+	\item ${\left(\bigcap\limits_{i \in n} A_i\right)}^{\circ} \subseteq \bigcap\limits_{i \in n} \overline{A_i}$
+\end{itemize}
+
+\begin{proof}
+我尝试用$(A^{c})^{\circ}=(\overline{A})^c$,来简单证明一下第一条,若$\overline{A}=A$，则$(\overline{A})^c = A^c=(A^{c})^{\circ}$，后面这个根据内部的性质则$A^c$是开集，所以$A$为闭集(开集和闭集互为余集)。
+\end{proof}
+
+
+\begin{definition}
+如果$\overline{A}=X$,则称$A$在$X$中稠密(dense)。如果$X$有只含有可数多个元素的稠密子集，则称$X$可分(separable).
+\end{definition}
+
+这个定义有点抽象，第一个话是指，定义$X$某个子集$A$，如果对$X$中任意的点$x$，要么属于$A$或者是$A$的一个聚点，则称$A$在$X$中是稠密的。非正式说法是，对于$X$中任意的点$x$,要么属于$A$或者“任意接近”$A$中的某个点。
+
+\begin{example}
+有理数集是实数集一个稠密集，因为每一个实数，可能是一个有理数或者存在一个任意接近它的有理数(丢番图近似)。
+\end{example}
+
+\begin{example}
+用$\tau_f$表示$\mathbb{R}$上的余有限拓扑，则$(\mathbb{R},\tau_f)$可分，$\mathbb{N}$就是它的一个可数稠密子集。但是为什么呢？首先$\mathbb{N}$可数就不用说了，那么为什么$\mathbb{N}$是稠密的呢？根据闭包的性质，$\overline{\mathbb{N}}$等于所有包含$\mathbb{N}$闭集的交集。再根据余有限拓扑的定义，其闭集是有限的，但是不存在包含$\mathbb{N}$的有限闭集，那包含$\mathbb{N}$只有$\mathbb{R}$了，所以$\overline{\mathbb{•}b{N}}=\mathbb{X}$.
+\end{example}
+
+\begin{example}
+用$\tau_c$表示$\mathbb{R}$上的余可数拓扑，则$(\mathbb{R},\tau_c)$不可分。任意的$\mathbb{R}$的可数子集$U$，在余可数拓扑上都是闭集，而闭集的闭包是自己，$U \neq \mathbb{R}$，所以不存在这样的可数子集。
+\end{example}
+
 \end{document}
