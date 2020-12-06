@@ -252,11 +252,34 @@ $X$的子集族$\sigma$是某个拓扑结构下全体闭集构成的集合当且
 \end{example}
 
 \begin{example}
-用$\tau_f$表示$\mathbb{R}$上的余有限拓扑，则$(\mathbb{R},\tau_f)$可分，$\mathbb{N}$就是它的一个可数稠密子集。但是为什么呢？首先$\mathbb{N}$可数就不用说了，那么为什么$\mathbb{N}$是稠密的呢？根据闭包的性质，$\overline{\mathbb{N}}$等于所有包含$\mathbb{N}$闭集的交集。再根据余有限拓扑的定义，其闭集是有限的，但是不存在包含$\mathbb{N}$的有限闭集，那包含$\mathbb{N}$只有$\mathbb{R}$了，所以$\overline{\mathbb{•}b{N}}=\mathbb{X}$.
+用$\tau_f$表示$\mathbb{R}$上的余有限拓扑，则$(\mathbb{R},\tau_f)$可分，$\mathbb{N}$就是它的一个可数稠密子集。但是为什么呢？首先$\mathbb{N}$可数就不用说了，那么为什么$\mathbb{N}$是稠密的呢？根据闭包的性质，$\overline{\mathbb{N}}$等于所有包含$\mathbb{N}$闭集的交集。再根据余有限拓扑的定义，其闭集是有限的，但是不存在包含$\mathbb{N}$的有限闭集，那包含$\mathbb{N}$只有$\mathbb{R}$了，所以$\overline{\mathbb{N}}=\mathbb{R}$.
 \end{example}
 
 \begin{example}
 用$\tau_c$表示$\mathbb{R}$上的余可数拓扑，则$(\mathbb{R},\tau_c)$不可分。任意的$\mathbb{R}$的可数子集$U$，在余可数拓扑上都是闭集，而闭集的闭包是自己，$U \neq \mathbb{R}$，所以不存在这样的可数子集。
 \end{example}
+
+\subsection{Potency of Set and countable set}
+
+对于一个空间来说，比拓扑性质和概念更基本的是它作为集合的那些性质和概念。
+
+\begin{definition}
+设$A$,$B$是两个集合。如果存在双射$\func{f}{A}{B}$,则称$A$和$B$的基数(cardinality)或者势(potency)相等,记做$\|A\|=\|B\|$.
+\end{definition}
+
+\begin{lemma}
+如果$A$,$B$是有限集，则$\|A\|=\|B\|$当且仅当它们所含的元素相等.
+\end{lemma}
+
+\begin{proposition}
+集合$A$无限当且仅当它与一个真子集基数相等.
+\end{proposition}
+
+\begin{proof}
+这个命题值得证明一下,从前面那个lemma我们知道，如果$A$和真子集基数相等，那它肯定不是有限集。反过来$A$如果不是有限集，假设$A$有一系列元素$a_1,a_2,\ldots$(两两不相等),然后我取它的真子集$A \smallsetminus {a_1}$，然后呢建立一连串从$a_i \in A$到$a_{i+1} \in B$的一一映射，并把除此之外的每个$b \in A$映到$b$(为什么呢？)。
+\end{proof}
+
+
+
 
 \end{document}
