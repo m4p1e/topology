@@ -271,12 +271,21 @@ $X$的子集族$\sigma$是某个拓扑结构下全体闭集构成的集合当且
 如果$A$,$B$是有限集，则$\|A\|=\|B\|$当且仅当它们所含的元素相等.
 \end{lemma}
 
+\begin{lemma}
+如果$A$是无限集，则它必有一个可数无限集
+\end{lemma}
+
+\begin{proof}
+按顺序每次取一个就行。
+\end{proof}
+
 \begin{proposition}
 集合$A$无限当且仅当它与一个真子集基数相等.
 \end{proposition}
 
+%https://proofwiki.org/wiki/Infinite_Set_is_Equivalent_to_Proper_Subset
 \begin{proof}
-这个命题值得证明一下,从前面那个lemma我们知道，如果$A$和真子集基数相等，那它肯定不是有限集。反过来$A$如果不是有限集，假设$A$有一系列元素$a_1,a_2,\ldots$(两两不相等),然后我取它的真子集$A \smallsetminus {a_1}$，然后呢建立一连串从$a_i \in A$到$a_{i+1} \in B$的一一映射，并把除此之外的每个$b \in A$映到$b$(为什么呢？)。
+这个命题值得证明一下,从前面第一个lemma我们知道，如果$A$和真子集基数相等，那它肯定不是有限集。反过来$A$如果不是有限集，则它是无限集，第二lemma可知，我们可以构造一个可数无限集$S=\{a_1,a_2,\ldots\}$,然后对它再分一个类：\[S_1 = \{a_1, a_3, a_5, \ldots\}, S_2 = \{a_2, a_4, a_6, \ldots\}\]再建立一个$S$和$S_1$之间的双射$a_n \leftrightarrow a_{2n-1}$,然后再把这个双射扩展到$S \cup (A \smallsetminus S) = T$ 和 $S_1 \cup (A \smallsetminus S) = A \smallsetminus S_2$,都并上了$A \smallsetminus S$，所以把$a \in A \smallsetminus S$映到它自己就行，还是维持$S$和$S_1$的映射。所以现在建立了一个$A$与$A \smallsetminus S_1$的双射。这个证明看起来就没有那么违反直觉,不错不错。
 \end{proof}
 
 
