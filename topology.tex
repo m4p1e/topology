@@ -288,7 +288,41 @@ $X$的子集族$\sigma$是某个拓扑结构下全体闭集构成的集合当且
 这个命题值得证明一下,从前面第一个lemma我们知道，如果$A$和真子集基数相等，那它肯定不是有限集。反过来$A$如果不是有限集，则它是无限集，第二lemma可知，我们可以构造一个可数无限集$S=\{a_1,a_2,\ldots\}$,然后对它再分一个类：\[S_1 = \{a_1, a_3, a_5, \ldots\}, S_2 = \{a_2, a_4, a_6, \ldots\}\]再建立一个$S$和$S_1$之间的双射$a_n \leftrightarrow a_{2n-1}$,然后再把这个双射扩展到$S \cup (A \smallsetminus S) = T$ 和 $S_1 \cup (A \smallsetminus S) = A \smallsetminus S_2$,都并上了$A \smallsetminus S$，所以把$a \in A \smallsetminus S$映到它自己就行，还是维持$S$和$S_1$的映射。所以现在建立了一个$A$与$A \smallsetminus S_1$的双射。这个证明看起来就没有那么违反直觉,不错不错。
 \end{proof}
 
+\begin{theorem}
+Cantor-Schroder-Bernstein
+\end{theorem}
 
+\begin{proof}
+有趣的定理，留空以后再证明。
+\end{proof}
+
+
+\begin{definition}
+若$\|A\| \leqslant \|\mathbb{N}\|$,则称$\|A\|$可数。 
+\end{definition}
+
+显然可数集的子集一定也是可数集，并且可数无限集一定和$\mathbb{N}$基数相等。
+
+著名的连续统假设，$\|\mathbb{R}\|$是不是就是紧挨着$\|\mathbb{N}\|=\mathcal{N}_0$的最小基数呢？
+
+\subsection{Continuous map and homeomorphism}
+
+\begin{definition}
+设$X$,$Y$是两个拓扑空间. 如果映射$\func{f}{X}{Y}$满足: 任取$f(x_0)$的邻域$V$,$f^{-1}(V)$都是$x_0$的邻域，则称$f$在$x_0$处\textbf{连续}(continuous). 在定义域上处处都连续的映射称为\textbf{连续映射}(continuous map).
+\end{definition}
+
+这个定义要注意的是，连续的条件是“邻域的原像是邻域”，而不是“邻域的像是邻域”，这个地方要想一想，参考函数连续，出发是从$f(a)$的接近程度来找到合适的$x$接近$a$.
+
+\begin{example}
+不论$X$,$Y$是什么拓扑空间，取定$b \in Y$,\textbf{常值映射}(constant map)\[\func{e_b}{X}{Y},\ x \mapsto b\]是连续映射，因为$b$的任意邻域的原像都是全空间$X$.
+\end{example}
+
+这个逆映射的定义是啥？奇奇怪怪的,直接找原像不就完了吗？:)
+
+\begin{example}
+拓扑空间$X$上的\textbf{恒同映射}(identity map)\[\func{id_{X}}{X}{X},\ x\mapsto x\]是连续映射，因为每个邻域的原像都是它本身.注意这里的定义域和值域都是相同的拓扑结构。
+\end{example}
 
 
 \end{document}
+
