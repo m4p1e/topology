@@ -294,6 +294,22 @@ Cantor-Schroder-Bernstein,if $|A|\leq|B|$ and $|B|\leq |A|$,then $|A|=|B|$.
 
 \begin{proof}
 定义两个单射$\func{f}{A}{B}$和$\func{g}{A}{B}$.想象下面的序列:\[\cdots \rightarrow  f^{-1}(g^{-1}(a)) \rightarrow g^{-1}(a) \rightarrow   a  \rightarrow  f(a) \rightarrow  g(f(a)) \rightarrow \cdots\]，其中$a \in A$，从$a$点往左好理解，就是重复使用$f$,$g$，那从$a$点往右呢？也很好理解，就是重复使用$f^{-1}$和$g^{-1}$，但是呢它可能到某个位置就停了，因为有可能某个地方它们没有定义了，因为我们只保证了$f$和$g$是一个单射。先理解这个性质，我们再来想办法用$f$和$g$构造一个$\func{h}{A}{B}$的双射.
+
+按照上面的理解，这个序列有三种情况:
+\begin{itemize}
+	\item 从a点出发转一圈，有转回来了。其实就是指这条路径上的$f^{-1}$和$g^{-1}$都有定义。
+	\item 想象一直往左边看，如果某个点$f^{-1}$没有定义，那么其实就在某个$x \in B$位置停下了。
+	\item 想象一直往左边看，如果某个点$g^{-1}$没有定义，那么其实就是就在某个$x \in A$位置停下了。	
+\end{itemize}
+
+先看后面两种情况，如果在B点停下了，那么我们就让$h(x)$在这点$h^{-1}(x)=g(x)$，即$h(x)=g^{-1}(x)$，现在我们确定了一个点的对应关系，为什么可以这样取呢？因为$g(x)$是单射，确定这点对应的两点之前关系是唯一的，也就是$g(x)$引出的箭头是唯一的(因为$f^(-1)$在这点没有定义了，我们考虑这点的$g^{-1}$.)。对应的如果在A点停下了，我们就让$h(x)=f(x)$.那么是一个循环序列我们怎么吗？那么对应这个循环序列里面连着的两点，统一用$g^(-1)$或者$f$来表示对应关系，即可。下图，做一个形象记忆，采自wiki。
+
+\begin{center}
+\includegraphics[width=10cm, height=8cm]{images/Cantor-Bernstein.png}
+\end{center}
+
+König's definition of a bijection h:A → B from given example injections f:A → B and g:B → A. An element in A and B is denoted by a number and a letter, respectively. The sequence 3 → e → 6 → ... is an A-stopper, leading to the definitions h(3) = f(3) = e, h(6) = f(6), .... The sequence d → 5 → f → ... is a B-stopper, leading to h(5) = g−1(5) = d, .... The sequence ... → a → 1 → c → 4 → ... is doubly infinite, leading to h(1) = g−1(1) = a, h(4) = g−1(4) = c, .... The sequence b → 2 → b is cyclic, leading to h(2) = g−1(2) = b.
+
 \end{proof}
 
 
@@ -323,7 +339,25 @@ Cantor-Schroder-Bernstein,if $|A|\leq|B|$ and $|B|\leq |A|$,then $|A|=|B|$.
 拓扑空间$X$上的\textbf{恒同映射}(identity map)\[\func{id_{X}}{X}{X},\ x\mapsto x\]是连续映射，因为每个邻域的原像都是它本身.注意这里的定义域和值域都是相同的拓扑结构。
 \end{example}
 
+\begin{proposition}
+对$X$和$Y$分别取定能生成对应结构的基准开邻域结构，则$f$在$x_0$处处连续的充分必要条件是: $f(x_0)$的任何基准开领域$U$的原像$f^{-1}(U)$包含一个$x_0$的基准开邻域.
+\end{proposition}
 
+\begin{proof}
+基准开邻域也是一个邻域，必要性比较显然，主要看充分性如何证明，$f(x_0)$的任意邻域$U$都有一个基准开邻域$U_0$，即$U \supseteq U_0$，那么$f^{-1}(U) \supseteq f^{-1}(U_0)$,所以$f^{-1}(U)$同样包含一个基准开邻域，即$f$在$x_0$处连续。
+\end{proof}
+
+\begin{example}
+设$X$,$Y$都是度量拓扑空间，则上述命题说明$\func{f}{X}{Y}$在$x_0 \in X$连续当且仅当$f(x_0)$的任意球形邻域的原像，包含一个$x_0$的球形邻域，这个条件可以进一步改写为:\[\forall \vartheta ,\exists \delta,\text{ 使得 } d_X(x,x_0) < \delta \text{ 蕴含 }d_Y((f(x),f(x_0)) < \vartheta\]
+\end{example}
+
+\begin{proposition}
+若$\func{f}{X}{Y}$在$x$点连续，$\func{g}{Y}{Z}$在$f(x)$点连续，则$\func{g \circ f}{X}{Z}$在$x$点连续。
+\end{proposition}
+
+\begin{proof}
+这个命题说明连续的复合还是连续，按照定义来证明，任取$g(f(x))$的邻域$U$,则$g^{-1}(U)$是$f(x)$的邻域，接着$f^{-1}(g^{-1}(U))$是$x$的邻域，因为$(g \circ f)^{-1}(U)=f^{-1}(g^{-1}(U))$,证毕。
+\end{proof}
 
 \end{document}
 
