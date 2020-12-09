@@ -289,11 +289,11 @@ $X$的子集族$\sigma$是某个拓扑结构下全体闭集构成的集合当且
 \end{proof}
 
 \begin{theorem}
-Cantor-Schroder-Bernstein
+Cantor-Schroder-Bernstein,if $|A|\leq|B|$ and $|B|\leq |A|$,then $|A|=|B|$.
 \end{theorem}
 
 \begin{proof}
-有趣的定理，留空以后再证明。
+定义两个单射$\func{f}{A}{B}$和$\func{g}{A}{B}$.想象下面的序列:\[\cdots \rightarrow  f^{-1}(g^{-1}(a)) \rightarrow g^{-1}(a) \rightarrow   a  \rightarrow  f(a) \rightarrow  g(f(a)) \rightarrow \cdots\]，其中$a \in A$，从$a$点往左好理解，就是重复使用$f$,$g$，那从$a$点往右呢？也很好理解，就是重复使用$f^{-1}$和$g^{-1}$，但是呢它可能到某个位置就停了，因为有可能某个地方它们没有定义了，因为我们只保证了$f$和$g$是一个单射。先理解这个性质，我们再来想办法用$f$和$g$构造一个$\func{h}{A}{B}$的双射.
 \end{proof}
 
 
@@ -322,6 +322,7 @@ Cantor-Schroder-Bernstein
 \begin{example}
 拓扑空间$X$上的\textbf{恒同映射}(identity map)\[\func{id_{X}}{X}{X},\ x\mapsto x\]是连续映射，因为每个邻域的原像都是它本身.注意这里的定义域和值域都是相同的拓扑结构。
 \end{example}
+
 
 
 \end{document}
