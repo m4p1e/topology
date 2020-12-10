@@ -359,5 +359,15 @@ König's definition of a bijection h:A → B from given example injections f:A �
 这个命题说明连续的复合还是连续，按照定义来证明，任取$g(f(x))$的邻域$U$,则$g^{-1}(U)$是$f(x)$的邻域，接着$f^{-1}(g^{-1}(U))$是$x$的邻域，因为$(g \circ f)^{-1}(U)=f^{-1}(g^{-1}(U))$,证毕。
 \end{proof}
 
+前面用了太多邻域的概念，不妨用本原开集来定义一下连续的概念
+
+\begin{theorem}
+考虑一个映射$\func{f}{X}{Y}$，下述两个条件都是$f$为连续映射的充分必要条件:
+\begin{enumerate}
+	\item $Y$中任意开集关于$f$的完全原像都是$X$中的开集.
+	\item $Y$中任意闭集关于$f$的完全原像都是$X$中的闭集.
+\end{enumerate}
+\end{theorem}
+
 \end{document}
 
