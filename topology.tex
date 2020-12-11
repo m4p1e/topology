@@ -389,8 +389,25 @@ König's definition of a bijection h:A → B from given example injections f:A �
 设$\func{f}{X}{Y}$是一个双射，然后我取$X$上的拓扑结构为离散拓扑，$Y$上的拓扑结构为平凡拓扑。显然在$f$上是连续的，因为不管$f(x)$取什么，其原像对应的子集都是开集,但是反过来$f^{-1}$，就可能不是连续了，因为$Y$上拓扑就两个元素，我大可以找很多$X$上的邻域，对应到$Y$上，并不在这样拓扑里面.
 \end{example}
 
-这样看来同胚，其实就是我们在给定一一对应的集合映射上，需要再关注拓扑结构，也就是所谓的连续.
+这样看来同胚，其实就是我们在给定一一对应的集合映射上，需要再去关注拓扑结构之间的关系，也就是所谓的连续.
 
+\begin{theorem}
+同胚是拓扑空间之间的等价关系.我们称一个关系$\cong$是\textbf{等价关系}(equivalence relation)，如果它满足:
+\begin{enumerate}
+	\item 自反性(reflexivity) $X \cong X$
+	\item 对称性(symmetry) 如果$X \cong Y$,则$Y \cong X$ 
+	\item 传递性(transitivity) 如果$X \cong Y$，则$Y \cong Z$，则$X \cong Z$
+\end{enumerate}
+\end{theorem}
 
+\begin{proof}
+\begin{enumerate}
+	\item 恒同映射$\func{id_X}{X}{X}$.
+	\item 同胚的定义.
+	\item 前面的提到连续的复合映射，就可以用到这里.
+\end{enumerate}
+\end{proof}
+
+注意前面的$X$,$Y$，$Z$都表示拓扑空间，就是指对应的各自已经先确定好了拓扑，在这里不要造成歧义。
 \end{document}
 
