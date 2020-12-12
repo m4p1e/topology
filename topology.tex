@@ -188,8 +188,16 @@ $X$和$d$合起来叫一个\textbf{度量空间}(metric space)，记做$(X,d)$.
 \end{proposition}
 
 \begin{proof}
-从左边证右边，很显然，因为当$A$是$x$的邻域时，可以找到一个$x$的一个基准开邻域，这个基准开邻域也是一个开集。\\
+从左边证右边，很显然，因为当$A$是$x$的邻域时，可以找到一个$x$的一个基准开邻域，这个基准开邻域也是一个开集，这个还可以用interior来证明，interior就是一个开集。\\
+从右边证左边，稍微有点繁琐但是呢，也好证，先给定邻域子集族\[\mathcal{N}(x)=\Set{A}{A \supseteq U, \text{U是一个开集}}\],然后从邻域的4条公理出发：
+\begin{enumerate}
+	\item $x \in U \subseteq A$，这个很显然.
+	\item $A' \subseteq A \subseteq U$,所以$A' \in \mathcal{N}(x)$.
+	\item 给定一个$A' \subseteq U'$，其中$U'$也是一个开集,然后呢我再设${U'}^c=A' \smallsetminus U'$,相同地$U^c= A \smallsetminus U$,那么$A' \cap A =({U'}^c \cup U') \cap (U^c \cup U)= (U'^c \cap U^c) \cup (U'^c \cap U) \cup (U' \cap U^c ) \cup (U' \cap U)$.其中$U' \cap U$是一个开集，所以$A' \cap A \in \mathcal{N}(x) $.
+	\item 任意的$x \in A$，总能找到一个$A' = \{x\} \cup U \subseteq A$,且$A' \in   \mathcal{N}(x)$.
+\end{enumerate}
 
+终于完整证完了，其他书上的证明都很简单，给我一种循环论证的感觉。
 \end{proof}
 
 %\begin{enumerate}
@@ -204,7 +212,7 @@ $X$和$d$合起来叫一个\textbf{度量空间}(metric space)，记做$(X,d)$.
 
 
 \begin{definition}
-如果$A$是$x$的邻域，则称$x$为$A$的\textbf{内点}(interior point).全体内点构成的集合称为\textbf{内部}(interior point),记做$A^{\circ}$
+如果$A$是$x$的邻域，则称$x$为$A$的\textbf{内点}(interior point).全体内点构成的集合称为\textbf{内部}(interior),记做$A^{\circ}$
 \end{definition}
 
 内点和内部的概念，需要建立在具体的拓扑结构上，取不同的拓扑结构会得到完全不同的结论。
@@ -213,6 +221,11 @@ $X$和$d$合起来叫一个\textbf{度量空间}(metric space)，记做$(X,d)$.
 \includegraphics[width=5cm, height=4cm]{images/Interior_illustration.png}
 \end{center}
 
+interior有一个性质很重要就是interior是其内部所有点的邻域。
+
+\begin{proof}
+假设$M$是$x$的邻域，且$M \subseteq A$,那么$M$里面的所有点都有一个邻域含于$M$，也含于$A$,所以$A$是$M$所有点的邻域，自然地$M \subseteq A^{\circ}$,所以$A^{\circ}$是$x$的邻域，这里的$x$是任意地。
+\end{proof}
 
 
 \begin{proposition}
