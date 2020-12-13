@@ -86,13 +86,22 @@
 			\item 若$U,V \in \mathcal{N}(x),$则存在$W \in \mathcal{N}(x)$,使得$W = U \cap V$
 			\item 若$y \in U \in \mathcal{N}(x)$,则存在$V \in \mathcal{N}(y)$，使得$V \subseteq U$
 		\end{itemize}
-用文字来叙述就是
-		\begin{itemize}
-			\item 每一个$x$都一定有基准开邻域，并且是其任意基准开邻域的元素
-			\item $x$的任意两个基准开邻域的交是$x$的邻域
-			\item 任意基准开邻域是其所含每个元素$y$的邻域
-		\end{itemize}
-如果$U$是$x$的一个邻域，则$U$包含了某个$x$基准开邻域，在这里其实我们又可以在基准开邻域的基础上，把邻域也公理化，需要加上一个公理，如果$U$是$x$的一个领域，则$U$的任意超集也是$x$的一个邻域。
+如果$U$是$x$的一个邻域，则$U$包含了某个$x$基准开邻域。用文字来叙述就是：
+\begin{itemize}
+	\item 每一个$x$都一定有基准开邻域，并且是其任意基准开邻域的元素
+	\item $x$的任意两个基准开邻域的交是$x$的邻域
+	\item 任意基准开邻域是其所含每个元素$y$的邻域
+\end{itemize}
+
+这个邻域的定义非常的奇特，那它奇特在什么地方呢？其他地方("Topology and Groupoids")关于邻域的定义是这样的:
+\begin{itemize}
+	\item 如果$N$是$x$的一个邻域，则$x \in N$;
+	\item 如果$N$是一个包含$x$某个邻域的$X$的子集，则$N$同样是$x$的邻域;
+	\item 两个$x$的邻域的交还是一个$x$的一个邻域;
+	\item 如果$N$是$x$的一个邻域，且$N$包含一个$x$的邻域$M$，则$N$是$M$中所有点的邻域;
+\end{itemize}
+
+我更倾向于后面这种定义邻域的办法，不要用基准开邻域来定义，因为基准开领域其实是open neighborhood的概念，它是指它确实同时满足开和邻域的条件.这里同样可以给一个命题"如果一个子集$N$是$x$的open neighborhood当且仅当它是一个基准开邻域"。基准开邻域这个概念似乎非常old fashion，我在其他书中都没有看见过，奈何包包老师的书里有，所以这里需要好好思考一下。后面用基准开邻域的时候就想一下open neighborhood.
 
 我们现在可以用邻域的公理来定义拓扑空间，用$\mathbf{N}$表示一个邻域拓扑，即$\mathbf{N}$表示一个所有非空的$\mathbf{N}(x)$构成的邻域族，最后$(X,\mathbf{N})$表示一个拓扑空间，这种构造方式是Hausdorff提出来的，但是一般地经常用开集的公理来定义领域。
 
@@ -488,7 +497,7 @@ König's definition of a bijection h:A → B from given example injections f:A �
 
 
 \begin{definition}
-考虑一个集合$X$.设$\Lambda$是一个指标集，并且对于每个指标$\lambda in \Lambda$,取定一个拓扑空间$(Y_\lambda,\tau_\lambda)$以及一个映射$\func{f_\lambda}{X}{Y_\lambda}$.则$X$上满足条件每个$\func{\lambda}{X}{Y_\lambda}$都连续的最小拓扑$\tau$称为由这些$f_\lambda$决定的\textbf{弱拓扑}(weak topology).
+考虑一个集合$X$.设$\Lambda$是一个指标集，并且对于每个指标$\lambda \in \Lambda$,取定一个拓扑空间$(Y_\lambda,\tau_\lambda)$以及一个映射$\func{f_\lambda}{X}{Y_\lambda}$.则$X$上满足条件每个$\func{\lambda}{X}{Y_\lambda}$都连续的最小拓扑$\tau$称为由这些$f_\lambda$决定的\textbf{弱拓扑}(weak topology).
 \end{definition}
 
 注意前面已经提到过的最小的含义，如果更形式化的理解是:如果有其他拓扑$\mu$也满足上述条件,则$\tau \subseteq \mu$.
@@ -496,9 +505,57 @@ König's definition of a bijection h:A → B from given example injections f:A �
 那么如何构造这个弱拓扑呢？很显然有一个拓扑是天然满足的上述条件的，那就是离散拓扑.但是我们寻找是符合这样条件的一个最小的拓扑。上述条件也可以理解为要求每个$Y_\lambda$中开集的原像都是开集,所以$\tau$是包含这些原像的，但是只包含这些原像是不够的，因为我们并不能保证这些原像的交或者并是满足开集公理的，解决办法是把这些有限原像的交和任意的原像的并也取做开集。
 
 \begin{proposition}
-设$\Lambda$是一个指标集，并且对于每个指标$\lambda \in \Lambda$,取定一个拓扑空间$(Y_\lambda,\tau_\lambda)$以及一个映射$\func{f_\lambda}{X}{Y_\lambda}$.取 \[\mathcal{U}(x)=\Set{f_{\lambda}^{-1}(U_\lambda)}{\lambda \in \Lambda,f_\lambda(x) \in U_\lambda \in \tau_\lambda}\],然后取\[\mathcal{N}(x)=\{\mathcal{U}(x)\text{ 中有限个元素的交集}\}\]
+设$\Lambda$是一个指标集，并且对于每个指标$\lambda \in \Lambda$,取定一个拓扑空间$(Y_\lambda,\tau_\lambda)$以及一个映射$\func{f_\lambda}{X}{Y_\lambda}$.取 \[\mathcal{U}(x)=\Set{f_{\lambda}^{-1}(U_\lambda)}{\lambda \in \Lambda,f_\lambda(x) \in U_\lambda \in \tau_\lambda}\],然后取\[\mathcal{N}(x)=\{\mathcal{U}(x)\text{ 中有限个元素的交集}\}\],这样得到的$\mathcal{N}$是一个基准开邻域结构。并且由它生产的拓扑就是$X$上由这些$f_\lambda$决定的弱拓扑
 \end{proposition}
 
+\begin{proof}
+这里命题言下之意其实就直接把$Y_\lambda$中开集原像直接拿来当基准开邻域用,基准开邻域结构的公理是显然满足的.
+
+然后我们来说明它是最小的拓扑,只需要证明它是含于$X$上的任意拓扑，任意$X$上的拓扑$\tau$,则当去$U_\lambda \in \tau_\lambda$,则$f^{-1}(U_\lambda) \in \tau$,因此$\mathcal{N}(x)$中基准开邻域均属于$\tau$,而由$\mathbb{N}$生成的拓扑中的开集都是若干基准开邻域的并，所以也是属于$\tau$，这说明$\mathcal{N}$生成的拓扑是$\tau$的子族.
+\end{proof}
+
+生成弱拓扑的过程简而言之就是\[\{U_\lambda\}\stackrel{\cap_{finite}}\longrightarrow \mathcal{N}\stackrel{\cup_{arbitrary}}\longrightarrow \tau\].
+
+
+\begin{example}
+设$(Y,\mu)$是一个拓扑空间，$X$是一个集合，考虑$X$到$Y$的所有映射构成的结合$Y^X$.任取$x \in X$可以定义赋值函数\[\func{e_x}{Y^{X}}{Y}, e_x(f)=f(x).\]于是$Y^{X}$上就有一个由所有这些$e_x$决定的弱拓扑.这种弱拓扑刻画的映射空间的“连续性”，是数学分析里面函数序列的"逐点收敛"概念的拓扑推广。
+\end{example}
+
+有了弱拓扑的概念，我们可以尝试去理解一下乘积拓扑“为什么它要这么构造”。
+
+
+\begin{definition}
+设$(X,\tau_X)$，$(Y,\tau_Y)$是两个拓扑空间.令\[\tau = \Set{\bigcup\limits_{\lambda \in \Lambda}(U_\lambda \times V_\lambda)}{\forall U_\lambda \in \tau_X, \forall V_\lambda \in \tau_Y},\]则$\tau$是$X \times Y$上的一个拓扑结构，称为$\tau_X$和$\tau_Y$的\textbf{乘积拓扑}(product topology).拓扑空间$(X \times Y,\tau)$称为这两个空间的\textbf{乘积空间}(product space),记为$(X,\tau_X) \times (Y,\tau_Y)$.
+\end{definition}
+
+简而言之,$X \times Y$中的子集开当且仅当它是形如$(U \times V)$的子集的并集，这里要求$U$,$V$分别是$X$和$Y$上开集，但是为什么要这样定义？
+
+\begin{proposition}
+设$(X,\tau_X)$，$(Y,\tau_Y)$是两个拓扑空间.考虑集合$X$和$Y$的直积$X \times Y=\Set{(x,y)}{x \in X,y \in Y}$,在其上定义\textbf{投影}(canonical  projection)\[\begin{aligned}
+			\func{j_X}{X \times Y}{X} ,& (x,y) \mapsto x;\\
+			\func{j_Y}{X \times Y}{Y} ,& (x,y) \mapsto y; 
+			\end{aligned}.	
+			\]则$X \times Y$上由$j_X$，$j_Y$决定的弱拓扑就是乘积拓扑.		
+\end{proposition}
+
+有点小疑问，这里的一组映射值域和前面提到的似乎有点不同啊？弱拓扑并没有要求映射的值域是相同的，定义域是相同的即可.
+
+\begin{proof}
+分别取$X$和$Y$的开集$U$和$V$,注意到$j_X^{-1}(U) \cap j_Y^{-1}(V)=(U \times V)$，并且\[(U_1 \times V_1) \cap (U_2 \times V_1)=(U_1 \cap U_1)\times (V_1 \cap V_2).\]后面性质为了进一步保证我们交出来的结果没问题。这个按照用基准开邻域刻画刻画的弱拓扑，我们有\[\mathcal{N}(x)=\Set{(p_x,p_y)}{p_x \in U \in \tau_X,p_y \in V \in \tau_Y}.\]
+\end{proof}
+
+\begin{example}
+设$(X,d_X)$，$(Y,d_Y)$是两个度量空间，则在$X \times Y$上可以定义度量$d$如下: 任取两点$p=(p_x,p_y)$,$q=(q_x,q_y)$,\[d(p,q)=max(d_X(p_x,q_x),d_Y(p_y,q_y))\]并且该度量决定的度量拓扑就是$X \times Y$上的乘积拓扑.
+\end{example}
+
+
+\begin{proof}
+先写一下我们的证明思路，要证明上述度量诱导出来的拓扑是乘积拓扑，只能用经典的两边夹了。
+
+$X \times Y$上的用$d$作为度量表示的邻域为$B_\varepsilon(p)$.根据开集定义下邻域，如果一个子集$A \subseteq X \times Y$是邻域，那么存在一个开集含于它，所以我们必须找到这样一个$X \times Y$乘积拓扑里面的开集，乘积拓扑上的开集为$\bigcup(U,V)$，其中$U \in \tau_X$,$V \in \tau_Y$.这样不好操作啊，怎么把前面个bigcup去掉呢？
+
+%我们得先把$X \times Y$上的乘积拓扑$\tau$表示出来,分别取$X$和$Y$上的开集$B_\varepsilon(p_x)$和$B_\delta(p_y)$,然后再分别取其中一点$q_x$和$q_y$,那么$(q_x,q_y) \in \tau$
+\end{proof}
 
 \end{document}
 
