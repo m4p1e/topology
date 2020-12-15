@@ -613,6 +613,11 @@ $A$是邻域的充分必要条件是: 分别存在$X$中的开集$U$和$Y$中的
 \end{enumerate}
 \end{proposition}
 
+这里需要非常注意一个东西，无论是开集还是闭集，一定要讲清楚是相对哪个拓扑而言的,这一点非常重要.
+
+\begin{example}
+我们来思考一个度量空间上的自然的子空间是什么呢？设$(X,d)$是一个度量空间，度量拓扑为$\tau$.$A$是$X$的子集，则可以在$A$上规定一个自然的度量$d_A$,使得任取$x,y \in A$,$d_A(x,y)=d(x,y)$.任取$a \in A$,考察它在$X$中的一个$\varepsilon$球型邻域$B_\varepsilon=\Set{x \in X}{d(a,x) < \varepsilon}$,你会发现\[B_\varepsilon \cap A = \Set{x \in A}{d(x,y) < \varepsilon}.\]恰好就是$a$在$A$中关于度量$d_A$的$\varepsilon$球形邻域.	
+\end{example}
 \end{document}
 
 
