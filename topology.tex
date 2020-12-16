@@ -650,6 +650,23 @@ $A$是邻域的充分必要条件是: 分别存在$X$中的开集$U$和$Y$中的
 设有一族拓扑空间$(X_\lambda,\tau_\lambda)$及映射$\func{f_\lambda}{X_\lambda}{Y}$.则$Y$上满足条件使得每个$f_\lambda$都连续的最大拓扑$\tau$称为由这些$f_\lambda$决定的强拓扑(strong topology).
 \end{definition}
 
+最大的意思是: 如果有其他拓扑$\mu$也满足上述条件，则$\tau \supseteq \mu$.那么如何构造最强拓扑？
+
+\begin{definition}
+设有一族拓扑空间$(X_\lambda,\tau_\lambda)$及映射$\func{f_\lambda}{X_\lambda}{Y}$.则$Y$上使得所有$f_\lambda$都连续的最强拓扑为\[\tau = \Set{U \subseteq Y}{\forall f_\lambda^{-1}(U) \in \tau_\lambda}\].
+\end{definition}
+
+上面的命题就说把$Y$里面在所有$f_\lambda$下原像都是开集的子集搞到一块就是最强拓扑.
+
+\begin{proof}
+现在来证明这个$\tau$确实是个拓扑结构，很明显$\emptyset \in \tau$和$X \in \tau$.有\[f^{-1}_\lambda(\bigcup\limits_{\alpha} U_\alpha)=\bigcup\limits_\alpha f_\lambda^{-1}(U_\alpha).\]所以当$U_\alpha \in \tau$,则$f^{-1}_\lambda(\bigcup\limits_{\alpha} U_\alpha) \in \tau$.同理，有\[f^{-1}_\lambda(\bigcap\limits_{\alpha} U_\alpha)=\bigcap\limits_\alpha f_\lambda^{-1}(U_\alpha).\]所以当$U_\alpha \in \tau$,则$f^{-1}_\lambda(\bigcap\limits_{\alpha} U_\alpha) \in \tau$.然后再说明这个拓扑是最强的，取满足上述条件任意拓扑$\mu$，任取$U \in \mu$,则每个$f_\lambda^{-1}(U) \in \tau_\lambda$,所以$U \in \tau$，由于$U$是任意的，所以$\mu \subseteq \tau$.
+\end{proof}
+
+\begin{definition}
+设$(X,\tau_X)$,$(Y,\tau_Y)$是两个拓扑空间,$\func{f}{X}{Y}$是一个满射，并且$\tau_Y$恰好是$f$所决定的强拓扑，即$U \subseteq Y$是开集当且仅当$f^{-1}(U) \subseteq \tau_X$,则称$f$为商空间.
+\end{definition}
+
+
 
 \end{document}
 
