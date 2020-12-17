@@ -666,7 +666,54 @@ $A$是邻域的充分必要条件是: 分别存在$X$中的开集$U$和$Y$中的
 设$(X,\tau_X)$,$(Y,\tau_Y)$是两个拓扑空间,$\func{f}{X}{Y}$是一个满射，并且$\tau_Y$恰好是$f$所决定的强拓扑，即$U \subseteq Y$是开集当且仅当$f^{-1}(U) \subseteq \tau_X$,则称$f$为商空间.
 \end{definition}
 
+\begin{proposition}
+设$\func{f}{X}{Y}$是一个满射，则$f$是商映射的充分必要条件是: $U$是闭集当且仅当$f^{-1}(U)$是闭集.
+\end{proposition}
 
+\begin{proposition}
+两个商映射的复合映射还是商映射.
+\end{proposition}
+
+\begin{proposition}
+设$\func{f}{X}{Y}$是个连续满射，则下列两个条件都是$f$是商映射的充分非必要条件:
+\begin{enumerate}
+	\item $f$是开映射(open map),即任意开集$A \subseteq X$在$f$下的像集是$Y$中的开集.
+	\item $f$是闭映射(closed map),即任意闭集$A \subseteq X$在$f$下的像集是$Y$中的闭集.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+当$f$是一个满射时，$U=f(f^{-1}(U))$,其中$U \in Y$,在开映射的条件下若$f^{-1}(U)$是一个开集，那么$U$也是一个开集，同时$f$连续，所以$U$开，那么$f^{-1}(U)$开，证毕。
+\end{proof}
+
+显然同胚是一个商映射。那么如何形象的理解商映射呢？在代数里面有商群和商环，但是它们都有一个比较特殊的性质就是构造了很多的等价类，相当于把两个在某种等价关系的刻画下放到了一个等价类里面，如果把这个性质类比到商映射，其实也有类似的性质，商映射带来了一种“拓扑粘合”的观点: 我们可以把被$f$映射到同一个像上的$X$中的点理解成是被粘在了一起，然后把$f(X)$整体理解称是用$f$把$X$粘起来的空间.
+
+生活中我们可以用一些小纸片涂上胶水粘出复杂的手工艺品，或者把积木插在一起搭出复杂的大模型.商映射就是拓扑空间的胶水，它让我们可以去刻画以前无法想象的复杂空间，把它们分解成简单直观的小块，并为分解和重新组装等操作提供严禁可靠的拓扑解释.
+
+这种理解很是奇妙，需要靠例子来细细品尝...
+
+\begin{theorem}
+设$\func{p}{X}{Y}$是商映射，则任取映射$\func{f}{Y}{Z}$，$f$连续当且仅当$\func{f \circ p}{X}{Z}$连续.
+\end{theorem}
+
+\begin{proof}
+若$f$连续，任取$U \in Z$,其中$U$是开集，所以$f^{-1}(U)$是开集，$p$是商映射，那么$p^{-1}(f^{-1}(U))$也是开集，所以$f \circ p$连续.若$f \circ p$连续，还是任取$Z$中的开集的$U$，则$p^{-1}(f^{-1}(U))$是开集，$p$是商映射，所以$f^{-1}(U)$是$Y$中的开集,所以$f$连续.
+\end{proof}
+
+\begin{theorem}
+如果$\func{p}{X}{Y}$和$\func{q}{X}{Z}$都是商映射，并且$p(x)=p(x')$当且仅当$q(x)=q(x')$,则$Y$和$Z$同胚.
+\begin{center}
+% https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZARgBoAGAXVJADcBDAGwFcYkQANEAX1PU1z5CKcqWLU6TVuwCaPPiAzY8BIgCYxEhizaIQALR4SYUAObwioAGYAnCAFskokDghIyIRvQBGMRgAUBFWEQGyxTAAscEBptaT00eWs7R0RnVyQNSR12AEckkFsHdxoMxCy43UKjbiA
+\begin{tikzcd}
+                  & X \arrow[ld, "p"'] \arrow[rd, "q"] &   \\
+Y \arrow[rr, "f"] &                                    & Z
+\end{tikzcd}
+\end{center}
+\end{theorem}
+
+\begin{proof}
+终于有一点范畴的东西了，这里要说明$Y$和$Z$同胚，需要先构造$Y$和$Z$之间的映射$f$,上述命题已经给出了一个非常显然的命题，$p$和$q$给出的等价类是一一对应的，那我们定义这样一种映射$\func{f}{Y}{Z}$,即$Y$中任意元素对应于$p(x)$,$f$把它映到$q(x)$,任取$Z$中开集$U$，其中$q(x) \in U$对应$p(x) \in f^{-1}(U)$,，$f$是双射,有"并且$p(x)=p(x')$当且仅当$q(x)=q(x')$"保证,即它们的原像$A$是一样的,因为$q$是商映射,所以$A$是$X$中的开集，作用到同样是商映射的$p$上，我们就可以得到一个$Y$上的开集$p(A)$,同理再证一下$f^{-1}$，这样$f$下的$Y$和$Z$是同胚的。
+\end{proof}
 
 \end{document}
 
