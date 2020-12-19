@@ -715,6 +715,51 @@ Y \arrow[rr, "f"] &                                    & Z
 终于有一点范畴的东西了，这里要说明$Y$和$Z$同胚，需要先构造$Y$和$Z$之间的映射$f$,上述命题已经给出了一个非常显然的命题，$p$和$q$给出的等价类是一一对应的，那我们定义这样一种映射$\func{f}{Y}{Z}$,即$Y$中任意元素对应于$p(x)$,$f$把它映到$q(x)$,任取$Z$中开集$U$，其中$q(x) \in U$对应$p(x) \in f^{-1}(U)$,，$f$是双射,有"并且$p(x)=p(x')$当且仅当$q(x)=q(x')$"保证,即它们的原像$A$是一样的,因为$q$是商映射,所以$A$是$X$中的开集，作用到同样是商映射的$p$上，我们就可以得到一个$Y$上的开集$p(A)$,同理再证一下$f^{-1}$，这样$f$下的$Y$和$Z$是同胚的。
 \end{proof}
 
+\begin{definition}
+称$\mathbb{E}^3$中过原点的直线为中心直线.所有中心直线构成的拓扑空间\[\mathbb{R}\mathbb{P}^2=\{\mathbb{E}^3\text{里的中心直线}\}\]称为实射影平面，简称射影平面，其上的拓扑定义为如下度量所决定的度量拓扑: 任取两条中心直线$\mathcal{l}_1$, $\mathcal{l}_2$，$d(\mathcal{l}_1,\mathcal{l}_2)$等于两条直线夹角的弧度(取介于0到$\pi / 2$弧度之间的那个夹角).
+\end{definition}
+
+射影平面，这个概念源于射影几何.设想有一只拓扑的"眼镜"位于欧式空间中的原点，用它去观察全空间. 此时每条过原点的直线可以称为一条视线，这条视线上的点在那只眼镜看来都是重叠的，或者说会被当做视野里的同一个点.
+
+怎么直观的去理解这个“平面”？过原点的全部直线可以分为两类，一类是与$xy$平面($z=0$)有非零倾角的; 另一类是位于$xy$平面上的. 我们可以任取一个在$R^3$中与$xy$平面平行单不重合的平面，例如$z=1$，则前一类直线都和这个平面有且仅有一个交点，另一类$xy$上过原点的直线，并不会和$z=1$平面相交. 但是在射影平面中，为了统一这些直线，可以将它们与$z=1$平面的交点定在“无穷远”，这种说法可以看做是过原点直线与$xy$平面倾角趋于0的极限情况.
+
+想把$\mathbb{R}\mathbb{P}^2$嵌入$\mathbb{E}^3$是不可能的，这一点我现在还不知道为什么:(,但是我们可以借助商映射在球面上观察它.
+
+考虑连续满射\[\func{\mathcal{l}}{S^2}{\mathbb{R}\mathbb{P}^2},\ (x,y,z) \mapsto \Set{(tx,ty,tz)}{t \in \mathbb{R}}\],即把每个点$P$映为$P$所在的中心直线$\mathcal{l}_P$.
+\begin{center}
+\includegraphics[width=10cm, height=8cm]{images/sp2.jpg}
+\end{center}
+
+如何来说明它是一个商映射呢？我们只需要考虑上半球面，即当$\delta < \sqrt{2}$时，$\mathcal{l}$把每一个$P$在$S^2$每个球形邻域$B_\delta(P)$都变成$\mathcal{l}_P$在$\mathbb{R}\mathbb{P}^2$中的球形邻域$B_\varepsilon(\mathcal{l}_P)$,从上图里面我们可以知道$\delta=2 \sin(\frac{\varepsilon}{2})$,即这是一个开映射，所以$\mathcal{l}$是一个商映射.
+
+\begin{center}
+\includegraphics[width=12cm, height=12cm]{images/antipodal_point.png}
+\end{center}
+
+对于球面上的每个点$P=(x,y,z)$,$Q=(-x,-y,-z)$称其为\textbf{对跖点}(antipodal point),注意$\mathcal{l}_P=\mathcal{l}_Q$当且仅当$P=Q$或者$P,Q$互为对跖点,因此可以直观的说，射影平面就是“把球面的每一对对跖点粘合成一个点“所得的拓扑空间.
+
+在$\mathbb{E}^3$不能把直线掰弯，关于在$\mathbb{E}^4$中怎么做，留到后面再说...
+
+现在我用前面提到的等价关系来看待"粘合"即商空间,集合上等价关系的定义在这里不想再累述了,我们直接用等价关系来刻画“粘合规则”，那就是: 两个点粘在一起当且仅当它们在同一个等价类里面. 
+
+\begin{definition}
+设$\sim$是集合$X$上的一个等价关系，则所有等价类构成的集合称为$X$关于$\sim$的\textbf{商集}(quotient set),记做$X / \sim$. 称映射\[\func{p}{X}{X / \sim},\ x \mapsto \left<x\right>\]为\textbf{粘合映射}(gluing map).若$X$上有拓扑$\tau$,则称$p$在$X / \sim$上决定的相应的强拓扑为\textbf{商拓扑}(quotient topology)，记做$\tau / \sim$.称拓扑空间$(X / \sim, \tau /\sim)$为$(X,\tau)$的\textbf{商空间}(quotient space)，记做$(X,\tau) / \sim$.
+\end{definition}
+
+\begin{example}
+把一条很长的带子两端粘合起来可以得到平环$S^1 \times [0,1]$或者Mobius带. 利用商空间的语言，现在可以数学上严格地重新定义Mobius带为如下的粘合结果: 考虑$(x,y)$即$[0,1] \times [0,1]$上的子集族\[\mathcal{U}_M = \Set{\{(0,y),(1,(1-y))\}}{y \in [0,1]} \cup \Set{{(x,y)}}{x \in (0,1), y \in [0,1]} \]
+\begin{center}
+\includegraphics[width=15cm, height=15cm]{images/Mobius.png}
+\end{center}
+在Mobius带上，我们考虑把带子两边上的点拧半圈，然后粘合到一起，从上面的图可以尝试形象的理解一下. 按照$\mathcal{U}_M$里面划分的等价类,商空间$([0,1] \times [0,1]) / \sim_M$就称为Mobius带.另一方我们考虑下面这种划分方式\[\mathcal{U}_A = \Set{\{(0,y),(1,y)\}}{y \in [0,1]} \cup \Set{{(x,y)}}{x \in (0,1), y \in [0,1]}\],这种划分方式就是把带子两边直觉对着粘起来，参考下面图中紫色的部分，而商空间$([0,1] \times [0,1]) / \sim_A$就是平环.
+
+\begin{center}
+\includegraphics[width=20cm, height=12cm]{images/gluing.png}
+\end{center}
+\end{example}
+
+
+
 \end{document}
 
 
