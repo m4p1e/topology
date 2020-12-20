@@ -749,7 +749,7 @@ Y \arrow[rr, "f"] &                                    & Z
 \begin{example}
 把一条很长的带子两端粘合起来可以得到平环$S^1 \times [0,1]$或者Mobius带. 利用商空间的语言，现在可以数学上严格地重新定义Mobius带为如下的粘合结果: 考虑$(x,y)$即$[0,1] \times [0,1]$上的子集族\[\mathcal{U}_M = \Set{\{(0,y),(1,(1-y))\}}{y \in [0,1]} \cup \Set{{(x,y)}}{x \in (0,1), y \in [0,1]} \]
 \begin{center}
-\includegraphics[width=15cm, height=15cm]{images/Mobius.png}
+\includegraphics[width=20cm, height=15cm]{images/Mobius.png}
 \end{center}
 在Mobius带上，我们考虑把带子两边上的点拧半圈，然后粘合到一起，从上面的图可以尝试形象的理解一下. 按照$\mathcal{U}_M$里面划分的等价类,商空间$([0,1] \times [0,1]) / \sim_M$就称为Mobius带.另一方我们考虑下面这种划分方式\[\mathcal{U}_A = \Set{\{(0,y),(1,y)\}}{y \in [0,1]} \cup \Set{{(x,y)}}{x \in (0,1), y \in [0,1]}\],这种划分方式就是把带子两边直觉对着粘起来，参考下面图中紫色的部分，而商空间$([0,1] \times [0,1]) / \sim_A$就是平环.
 
@@ -759,6 +759,68 @@ Y \arrow[rr, "f"] &                                    & Z
 \end{example}
 
 
+\begin{proposition}
+商空间里面的子集开当且仅当其关于粘合映射的原像开，言下之意粘合映射是商映射.
+\end{proposition}
+
+上面这个命题很显然了，强拓扑加满射(等价关系的基本定义).
+
+\begin{theorem}
+设$\func{f}{X}{Y}$是商映射，$\sim_f$是$X$上的等价关系，满足$f(x)=f(x')$当且仅当$x \sim_f x'$. 则商空间$X / \sim_f$与$Y$同胚.
+\end{theorem}
+
+\begin{proof}
+它来了，同态第一定理？同胚第一定理？哈哈),$f$和$p$都是商映射，且$f(x)=f(x')$当且仅当$p(x)=p(x')$,由定义2.62，$X / \sim_f$和$Y$同胚.
+\end{proof}
+
+商空间和商映射本质上考虑的是一样的问题，只不过出发点不同，考虑不同空间之间的映射和相互关系时商映射比较好用，而单纯为了理解空间本身的时候，商空间就比较好用一些. 上述定理给出了两者之间的联系，当我们为一个空间给出了一种“粘合”式的构造方法时，并且想严格说明得到的空间和这个空间原本具有的另一个定义一致(即同胚)时，应用该定理也是一种标准的做法.
+
+还需要一些例子来好好理解一下
+\begin{example}
+考虑两个不相交的圆的并集\[A=\Set{(x,y) \in \mathbb{E}^2}{(x+2)^2+y^2=1 \text{ 或者 }(x-2)^2+y^2=1\]}在这两个圆上各取一点$p=(-1,0)$,$q=(1,0)$,然后把这两个点粘到一起，得到的空间$S^1 \vee S^1$称为两个圆的\textbf{一点并}(one-point union). 用商空间的语言来讲，$S^1 V S^1=A / \sim$，这里若两点等价$a \sim b$当且仅当$a=b$或者${a,b} = {p,q}.$ 在代数里面要理解关于商的东西，并不直观，例如商环等等，只有通过同构来来间接的描述，同样在这里我觉得也是这样的思想，所以可以另取一个空间\[B=\Set{(x,y) \in \mathbb{E}^2}{(x+1)^2+y^2=1 \text{ 或者 }(x-1)^2+y^2=1}\]两圆相切于一点的并集，然后考虑如下映射
+$$
+	\func{f}{A}{B},\ (x,y) \mapsto \left\{
+    \begin{array}{cc}
+           (x+1,y) ,& x<0 \\
+           (x-1,y) ,& x>0
+    \end{array}
+	\right.
+$$
+
+容易验证该映射是一个连续满射，考虑$A$中任意点$P$球形邻域，对应$B$中点$P$球形邻域，有点麻烦，但是可以对应上，这样说明它是一个商映射，从上述定理可知$A / \sim_f = B$. $sim_f$和$f$确立的等价关系是相同的，所以$A / \sim = B$.
+
+\begin{center}
+\includegraphics[width=15cm, height=10cm]{images/one-point-union.png}
+\end{center}
+\end{example}
+
+我们再来用商空间的重新定义一下射影平面,利用商空间的语言，可以把它解释成$\mathbb{R}\mathbb{P}^2=(\mathbb{R}^3 \smallsetminus \{(0,0,0)\}) / \sim$,这里$sim$每一个等价类都是过原点的直线，但是每个等价类都不能相交，所以拿掉了原点，也就是说点$(x,y,z)$所在的等价类是$\Set{(tx,ty,tz)}{ t \neq 0}$.然后再把这个概念推广到高维的情况下.
+
+\begin{definition}
+称一个向量空间中的一维子空间维一条\textbf{中心直线}(line through origin). 在$\mathbb{E}^{n+1} \smallsetminus \{0\}$中任取$x=(x_0,\ldots,x_n)$，记其所在的中心直线为$\mathcal{l}_x=\Set{(tx_0,\ldots,tx_n)}{t \in \mathcal{R}}$. 则集合族\[\mathcal{U} = \Set{\mathcal{l}_x \smallsetminus \{0\} }{x \in \mathbb{E}^{n+1} \smallsetminus \{0\}}\]定义了$\mathbb{E}^{n+1} \smallsetminus \{0\}$上的一个等价关系$\sim_{\mathcal{U}}$.商空间\[\mathbb{R}\mathbb{P}^n=(\mathbb{E}^{n+1} \smallsetminus \{0\}) / \sim_{\mathcal{U}}\]称为$n$维实射影空间.特别地，$\mathbb{R}\mathbb{P}^2$就是射影平面.
+\end{definition}
+
+想想我们之前定义的射影平面，里面的度量是两条直线的夹角，然后我们建立了一个$S^2$和$\mathbb{R}\mathbb{P}^2$的商映射，用邻域的形式说明了它。在这里我们用“粘合”的观点来看一下它
+
+\begin{example}
+射影平面同胚于球面粘合对跖点。
+\begin{proof}
+考虑映射\[\func{p}{S^2}{\mathbb{R}\mathbb{P}^2},\ x \mapsto \left< x \right>.\],其中$\mathbb{R}\mathbb{P}^2$现在是$\mathbb{E}^3$下的商空间。我们任取$S^2$中的开集$U$,这里记$\mathbb{E}^3$到商空间$\mathbb{R}\mathbb{P}^2$的粘合映射为$\mathcal{l}$,$p(U)$是若干等价类的并，$l^{-1}(p(U))$对应锥形是$\mathbb{E}^3$中的开集，所以$p(U)$开集,即$p$是开映射,从而是商映射.
+
+$\mathbb{R}\mathbb{P}^2$中每个点$x$的原像集$p^{-1}(x)$恰好由球面上的一对对跖点构成.因此球面粘合对跖点所得商空间是同胚于$\mathbb{R}\mathbb{P}^2$.
+\end{proof}
+\end{example}
+
+\newpage
+
+\section{General Topology}
+\subsection{Countability}
+
+\begin{definition}
+拓扑空间$X$中点$x$的一个\textbf{邻域基}(neighborhood base)指由$x$的邻域构造成的子集族$\mathcal{N}_x$，使得$x$的任何邻域均包含$\mathcal{N}$中的某个邻域.
+\end{definition}
+
+回想一下前面定义的基准开邻域，包含一个基准开邻域的子集是邻域，所以基准开邻域结构天然构造了一个领域基.
 
 \end{document}
 
