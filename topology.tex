@@ -853,7 +853,36 @@ $\mathbb{R}\mathbb{P}^2$中每个点$x$的原像集$p^{-1}(x)$恰好由球面上
 这个命题反过来似乎在告诉我们，可数邻域基可以由一个最小的邻域，不断的填充，变成新的邻域，再把这些邻域合起来就是新的邻域基，那么如何取最小的邻域呢？ 所有这样的邻域交一下不就是吗？下面严格证明。
 
 \begin{proof}
-若$x$有一个可数邻域集，则$x$有一个可数邻域基${U_1,U_2,\cdots}$,令$V_n=U_1 \cap \cdots \cap U_n$,这样当$m>n$是，一定有$V_m \subseteq V_n$,然后再证明它是一组邻域基，由已知的邻域基有任取$x$邻域$U$,存在某个正整数$n$，使得$U_n \subseteq U$, 因为$V_n \subseteq U_n$,所以$V_n \subseteq U$.
+若$x$有一个可数邻域集，则$x$有一个可数邻域基$\{U_1,U_2,\cdots\}$,令$V_n=U_1 \cap \cdots \cap U_n$,这样当$m>n$是，一定有$V_m \subseteq V_n$,然后再证明它是一组邻域基，由已知的邻域基有任取$x$邻域$U$,存在某个正整数$n$，使得$U_n \subseteq U$, 因为$V_n \subseteq U_n$,所以$V_n \subseteq U$.
+\end{proof}
+
+下面一些包包老师书的掺杂邻域的东西，感觉很模糊，但是还是记录一下，比较不同的视角也许能发现一些新的东西.
+\begin{definition}
+设${x_n}$是一个点列，若点$x$满足任取$x$的邻域$U$,存在自然数$N$,使得当$n > N$时每个$x_n$都在$U$中，则称$x$为点列${x_n}$的一个\textbf{极限}(limit).
+\end{definition}
+
+数学分析中的数列极限的推广，把里面的$\varepsilon$变成了一般性的邻域$U$可刻画.在数学分析中聚点的定义是若点$a$的任意去心邻域内都有数集$A$中的点，就称点$a$就是数集$A$的聚点(accumulating point).用形式语言来描述就是\[\forall \delta > 0,\exists x \in A \colon 0 < |x-a| < \delta.\].在拓扑学里面来描述就是在拓扑空间$X$下，若$A$是$X$的某个子集，取$x \in X$,若$x$的每个邻域都含有$A \smallsetminus \{x\}$的点，则称$x$是$A$的聚点.这里有一个聚点另外一种形式的刻画
+
+\begin{proposition}
+设$x \in X$有可数邻域基，$A \subseteq X$，则$x$是$A$的聚点当且仅当存在由$A \smallsetminus {x}$中的点构成的点列${x_n}$以$x$为极限.
+\end{proposition}
+
+\begin{proof}
+从数分里面的定义，看起来确实像可以取定一个数列，它的极限点. 来严格证明一下，若$x$是$A$的聚点，怎么来构造一个点列让它的极限是$x$呢？从上一个命题里面我们可以找一个$x$的可数邻域为$\{V_1,V_2,\cdots\}$使得$m > n$时$V_m \subseteq V_n$,然后在分别在$V_n \cap A$取一点$x_n \neq x$(聚点的定义是每个邻域都有$A$中的点),则以点列${x_n}$以$x$为极限.
+
+反过来存在$A \smallsetminus \{x\}$中的点列${x_n}$以$x$为极限,则$x$的任何邻域都要包含某个$x_n \in A \smallsetminus \{x\}$,因此$x$是$A$的聚点.
+\end{proof}
+
+还有一个用极限来刻画连续的命题
+
+\begin{proposition}
+设$x \in X$有可数邻域基，则映射$\func{f}{X}{Y}$在$x$点处连续的充分必要条件是: 任取以$x$为极限的点列$\{x_n\}$，点列$\{f(x_n)\}$都以$f(x)$为极限.
+\end{proposition}
+
+\begin{proof}
+很优雅的结论，若$f$连续且取以$x$为极限的点列$x_n$,任取$f(x)$的邻域$U$,$f^{-1}(x)$的领域，根据极限的定义,则存在当$n > N$是$x_n \in f^{-1}(U)$，从而$f(x_n) \in U$,则以$\{f(x_n)\}$为点列的极限是$f(x)$.
+
+反过来,取$x$的可数邻域基$\{V_1,V_2,\cdots\}$使得$m > n$时总有$V_m \subseteq V_n$,任取$f(x)$的邻域$U$,假设$f(U)$不是$x$的邻域，则我们可以在前面可数邻域基里面取这样一组点$x_n \in V_n \smallsetminus f^{-1}(U)$,为什么可以取到这样一组点呢？因为当$f^(-1)(U)$不是$x$邻域的时候$f^(-1){U}$不包含任何可数邻域基里面的成员. 取到这样的一组点同样是以$x$为极限的点列，但是它$f(x_n)$并不含于$U$，所以$\{f(x_n)\}$以$f(x)$为极不成立，与条件矛盾，所以$f^{-1}(U)$是$x$的邻域.
 \end{proof}
 \end{document}
 
