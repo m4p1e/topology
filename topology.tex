@@ -139,6 +139,11 @@
 集合$X$上的一个离散拓扑为$\{X,2^{X}\}$,形象一点说就是“在$X$上只有等于$x$才算是和$x$充分接近”,离散拓扑是$X$上最大的拓扑结构。 暂时不理解为什么是等于，而不是包含，但是最大的子集族确实是$2^{X}$
 \end{example}
 
+这里有一个简单的小命题
+\begin{proposition}
+如果$(X,\tau)$是一个$\tau$包含了所有$x \in X$的单点集的拓扑空间，则它是一个离散拓扑空间.
+\end{proposition}
+
 还有两个比较重要的拓扑结构
 
 \begin{example}
@@ -329,7 +334,7 @@ $X$的子集族$\sigma$是某个拓扑结构下全体闭集构成的集合当且
 \end{example}
 
 \newpage
-\subsection{Potency of Set and Countable set}
+\subsection{Potency of Set and Countable Set}
 
 对于一个空间来说，比拓扑性质和概念更基本的是它作为集合的那些性质和概念。
 
@@ -391,7 +396,7 @@ König's definition of a bijection h:A → B from given example injections f:A �
 
 著名的连续统假设，$\|\mathbb{R}\|$是不是就是紧挨着$\|\mathbb{N}\|=\mathcal{N}_0$的最小基数呢？
 \newpage
-\subsection{Continuous map and Homeomorphism}
+\subsection{Continuous Map and Homeomorphism}
 
 \begin{definition}
 设$X$,$Y$是两个拓扑空间. 如果映射$\func{f}{X}{Y}$满足: 任取$f(x_0)$的邻域$V$,$f^{-1}(V)$都是$x_0$的邻域，则称$f$在$x_0$处\textbf{连续}(continuous). 在定义域上处处都连续的映射称为\textbf{连续映射}(continuous map).
@@ -488,7 +493,7 @@ König's definition of a bijection h:A → B from given example injections f:A �
 
 
 \newpage
-\subsection{Product topology}
+\subsection{Product Topology}
 这章主要讲如何构造一个拓扑结构？这里有一种非常有趣的定义拓扑结构的方法.设有一个映射$\func{f}{X}{Y}$，集合$X$上尚未确定具体的拓扑结构，而集合$Y$上有个拓扑结构$\mu$,则可以利用$f$把这个拓扑"向左转移"到$X$上，即取$\tau$为$X$上使得$\func{f}{(X,\tau)}{(Y,u)}$连续的最小拓扑(最小的概念是指最小的$X$的子集族).
 
 这个方法可以推广到一族映射$\func{f_\lambda}{X}{Y_\lambda}$上，相应地得到的拓扑就是$X$上所谓的"弱拓扑".类似地，也有一套利用映射"向右转移"拓扑结构的方法，相应地得到的拓扑就是$Y$上的"强拓扑".弱拓扑和强拓扑作用，都是利用映射把一个空间上的拓扑结构以最能充分利用该映射的方式转移到另一个空间上去.
@@ -587,7 +592,7 @@ $A$是邻域的充分必要条件是: 分别存在$X$中的开集$U$和$Y$中的
 乘积拓扑？弱拓扑？奇妙...
 
 \newpage
-\subsection{Subspace topology}
+\subsection{Subspace Topology}
 
 拓扑空间$X$的一个子集$A$上可以很简单地定义一种非常自然的拓扑结构，称为子空间拓扑.子空间拓扑也是使得含入映射$i \colon A \hookrightarrow X$连续的最弱拓扑.
 
@@ -642,7 +647,7 @@ $A$是邻域的充分必要条件是: 分别存在$X$中的开集$U$和$Y$中的
 
 
 \newpage
-\subsection{Quotient map and Quotient space}
+\subsection{Quotient Map and Quotient Space}
 和弱拓扑相对应地，有另外一种非常自然的定义拓扑结构的方法叫“强拓扑”，就是利用映射$\func{f}{X}{Y}$把集合$X$上的拓扑结构$\tau$“向右转移”到集合$Y$上去.那么这里为什么叫强拓扑呢？因为使得$f$连续的$Y$上的最小拓扑是平凡拓扑$\{Y,\emptyset\}$.与弱拓扑相反的是取使得$f$连续的$Y$上最强的拓扑(即在对于集合族中是最大的).
 
 
