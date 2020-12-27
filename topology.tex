@@ -4,12 +4,13 @@
 \usepackage{tikz}
 \usetikzlibrary{cd}
 
+\usepackage{mathrsfs} %\mathscr
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb}
 
-\usepackage{unicode-math}
-\usepackage{pgfplots}
+%\usepackage{unicode-math}
+%\usepackage{pgfplots}
 
 
 \usepackage[textwidth=18cm]{geometry} % 设置页宽=18
@@ -25,7 +26,7 @@
 \usepackage{xcolor}
 \usepackage{titlesec}
 \titleformat{\section}[block]{\color{blue}\Large\bfseries\filcenter}{}{1em}{}
-\titleformat{\subsection}[hang]{\color{red}\bfseries}{}{0em}{}
+\titleformat{\subsection}[hang]{\color{red}\bfseries\Large}{}{0em}{}
 %\setcounter{secnumdepth}{1} %section 序号
 
 \newtheorem{theorem}{Theorem}[section]
@@ -49,6 +50,8 @@
 \maketitle
 
 \tableofcontents
+
+\newpage
 \section{写在最前面}
 
 拓扑对我来说是新名字，我对它几乎一无所知，虽然我嘴上总是吵吵着代数拓扑是我的终极目标\verb|(～ o ～)~zZ|，终于今天抱着巨大的勇气翻开了包志强老师的《点集拓扑和代数拓扑引论》，被文中老师幽默的行文，深深折服了，似乎拓扑也并没有想象中那么难，我想这是还不错的开始，我的第一直观感受拓扑也是给定一堆对象，在上面用一些公理弄些不一样的结构，似乎和代数一样，但是我暂时还不知道这堆结构要拿来干什么？有什么有趣的性质？
@@ -56,6 +59,7 @@
 好吧，前面的路还很长，路漫漫，不过一想到前路那些绮丽的景色，多少还是有些兴奋的！虽然这路上没有一起分享喜悦的人...
 
 2020年11月29日23:12:17
+\newpage
 
 \section{Topology Space}
 \subsection{Definition of Topology Space} 
@@ -106,13 +110,13 @@
 
 我们现在可以用邻域的公理来定义拓扑空间，用$\mathbf{N}$表示一个邻域拓扑，即$\mathbf{N}$表示一个所有非空的$\mathbf{N}(x)$构成的邻域族，最后$(X,\mathbf{N})$表示一个拓扑空间，这种构造方式是Hausdorff提出来的，但是一般地经常用开集的公理来定义领域。
 
-用$(X,\uptau)$表示一个拓扑空间，其中$\uptau$表示$X$的一个子集族，并且满足下面公理：
+用$(X,\tau)$表示一个拓扑空间，其中$\tau$表示$X$的一个子集族，并且满足下面公理：
 \begin{itemize}
-	\item $\emptyset \in \uptau,X \in \uptau$
-	\item $\uptau$中任意两个元素的交集仍属于$\uptau$
-	\item $\uptau$中任意多个元素的并集仍属于$\uptau$
+	\item $\emptyset \in \tau,X \in \tau$
+	\item $\tau$中任意两个元素的交集仍属于$\tau$
+	\item $\tau$中任意多个元素的并集仍属于$\tau$
 \end{itemize}	
-则称$\uptau$里面的元素为开集，$\uptau$表示$X$上的一个拓扑结构
+则称$\tau$里面的元素为开集，$\tau$表示$X$上的一个拓扑结构.注意这里第二条公理并不是和第三条公理一样是infinite，这里特指finite，为什么呢？我举个后面会提及的特殊拓扑结构--余有限拓扑，把这个拓扑结构放到正整数$\mathbb{N}$上，生成的开集如下\[S_n=\{1\} \cup \{n+1\} \cup \{n+1\} \cup \{n+1\} \cup \cdots = \{1\} \cup \bigcup\limits_{m=n+1}^{\infty}\{m\}  \]它们的闭集都是有限的，然后把这些开集交起来你会发现\[\bigcap\limits_{n=1}^{\infty} S_n = \{1\}\],得到的结果并不是一个开集，因为它的闭集并不是有限的.
 
 开集定义的拓扑空间看起来要比邻域定义，要稍微简洁那么一点，两个定义都是等价的，你可以用邻域的推到开集。在邻域上基础上我们定义如果$U$是$X$的一个子集，且$U$是每一个$x \in U$的领域，则称$U$是一开集。基准开邻域的第三条公理告诉我们基准开邻域肯定是一个开集，然后我们给出一个命题
 
@@ -148,12 +152,36 @@
 还有两个比较重要的拓扑结构
 
 \begin{example}
-设$X$含有无穷多个元素，定义\[\tau_f = \Set{A \subseteq X}{A = \emptyset \text{ 或者 } A^c \text{ 有限}}\]则$\tau_f$是一个拓扑结构，称为$X$上的余有限拓扑(cofinite topology)
+设$X$含有无穷多个元素，定义\[\tau_f = \Set{A \subseteq X}{A = \emptyset \text{ 或者 } A^c \text{ 有限}}\]则$\tau_f$是一个拓扑结构，称为$X$上的余有限拓扑(cofinite topology),它还有一个直观的名字叫finite-closed topology.
 \end{example}
 
 \begin{example}
-设$X$含有不可数无穷多个元素，定义\[\tau_c = \Set{A \subseteq X}{A = \emptyset \text{ 或者 } A^c \text{ 可数}}\]则$\tau_c$也是一个拓扑结构，称为$X$上的余可数拓扑(cocountable topology)
+设$X$含有不可数无穷多个元素，定义\[\tau_c = \Set{A \subseteq X}{A = \emptyset \text{ 或者 } A^c \text{ 可数}}\]则$\tau_c$也是一个拓扑结构，称为$X$上的余可数拓扑(cocountable topology)，它同样也还有一个直观的名字叫countable-closed topology.
 \end{example}
+
+\begin{example}
+如果所有的单点集$\{x\}$都在拓扑空间$(X,\tau)$上是闭集，则称$(X,\tau)$是一个$\text{T}_1$-space.
+\end{example}
+
+\begin{example}
+如果对于任意的$a,b \in X$且$a \neq b$,存在一个开集包含$a$而不包含$b$或者包含$b$而不包含$a$,则称$(X,\tau)$是一个$\text{T}_0$-space.
+\end{example}
+
+$\text{T}_1$-space 一定是 $\text{T}_0$-space，反过来就不一定。
+
+\begin{example}
+只含两个元素的拓扑空间，只有一个单点集是闭集，则称这个拓扑空间是一个Sierpinski sapce. 如果跟明确的刻画就是$X = \{0,1\}$,然后在它上面定义拓扑结构为$\{\emptyset,\{0\},\{0,1\}\}$,很明显这个就是一个$\text{T}_0$-space，但是它并不是$\text{T}_1$-space.
+\end{example}
+
+再来思考一个有意思的问题，如果在$X$上构造出了多个拓扑结构，然后用它们是否可以做一些运算？
+
+\begin{example}
+定义$X$上的拓扑结构$\tau_1$和$\tau_2$,那么$\tau_3 = \tau_1 \cup \tau_2$不一定是一个拓扑结构. 直观上两个拓扑结构合在一起之后，并不能保持封闭性，比如让$tau_1=\{\emptyset,\{1,3\},X\}, \tau_2 = \{\emptyset,\{2,4\},X\}$,很显然它们并起来并不是一个拓扑结构.
+
+但是，我们接着定义$\tau_4 = \tau_1 \cap \tau_2$,现在$\tau_4$就是一个拓扑结构了，证明也很简单，任取两个$\tau_4$里面的开集，看一下交和并的封闭性就行。
+\end{example}
+
+
 
 这里还是有必要讲一下度量是什么东西，因为后面有很多东西都是，欧式度量诱导出来的度量拓扑.一个度量就是测量空间中两个点之间距离的一个公式. 当然，为了确保这个公式真的能起到类似距离的作用，它还需要满足一些基本的公理.
 
@@ -255,8 +283,8 @@ interior有一个性质很重要就是interior是其内部所有点的邻域。
 \end{proposition}
 \begin{proof}
 \begin{enumerate}
-	\item 这个性质根据开集的定义很显然。
-	\item 如果$A$的子集是一个开集，这个子集很显然也是属于$A^{\circ}$,所以$A$里面的所有开集含于$A^{\circ}$,如何证明$A^{\circ}$是一个开集呢？任取$A^{\circ}$中一点$x$,$A$是x的邻域，那么一定存在一个包含$x$的基准开邻域，我们最大基准开邻域是一个并集，根据基准开邻域的定义，这个基准邻域肯定也是属于$A^{\circ}$，所以$A^{\circ}$是其每个点$x$的邻域，所以$A^{\circ}$是一个开集，同时也证明了它是所有这样点$x$的基准开邻域的并。再来证明它是$A$内最大的开集，假设如果它不是$A$内最大的开集，那么存在$A^{'}$包含$A^{\circ}$，但是呢$A'$是其所有点的邻域(根据开集定义)，所有$A'$属于$A^{\circ}$，这样产生了矛盾，所以$A^{\circ}$是最大的开集。
+	\item 这个性质根据从邻域出发给出的开集定义很显然。
+	\item 如果$A$的子集是一个开集，这个子集很显然也是属于$A^{\circ}$,所以$A$里面的所有开集含于$A^{\circ}$,如何证明$A^{\circ}$是一个开集呢？任取$A^{\circ}$中一点$x$,$A$是$x$的邻域，那么一定存在一个包含$x$的基准开邻域，我们知道基准开邻域是一个并集，根据基准开邻域的定义，这个基准邻域肯定也是属于$A^{\circ}$，由于$x$的任意性，这样的$x$基准开领域都并起来就是$A^{\circ}$，所以$A^{\circ}$是一个开集。再来证明它是$A$内最大的开集，假设如果它不是$A$内最大的开集，那么存在一个更大的开集$A^{'} \supset A^{\circ}$，$A'$是其所有点的邻域(根据开集定义)，所有$A' \subseteq A^{\circ}$，这样产生了矛盾，所以$A^{\circ}$是最大的开集。
 	\item 根据邻域的最后一条公理，邻域的超集还是邻域,所以B是$A^{\circ}$中所有点的邻域，所以很自然的$A^{\circ} \subseteq B^{\circ}$
 	\item 等式的左边表示，所有集合的交的内部，等式的右边表示，所有集合的内部的交，这里为什么等价呢？这个关系用图来说是非常明显的，怎么用文字呢？应该用数学归纳法来证明，我先证明对两个集合是成立的，首先利用第2个性质，${(A_1 \cap A_2)}^{\circ}=U_1 \cup \ldots \cup U_n $,其中$U_1,\ldots,U_n \in A_1 \cap A_2$,很显然它们也属于$A_1^{\circ}$和$A_2^{\circ}$,即${(A_1 \cap A_2)}^{\circ} \subseteq A_1^{\circ} \cap A_2^{\circ}$,反过来$A_1^{\circ} \cap A_2^{\circ}$是一个开集，并且属于$(A_1 \cap A_2)$,所以$A_1^{\circ} \cap A_2^{\circ} \subseteq {(A_1 \cap A_2)}^{\circ}$,两边一夹所以，${(A_1 \cap A_2)}^{\circ} = A_1^{\circ} \cap A_2^{\circ}$,再用一下数学归纳法，即可。
 	\item 这个也需要数学归纳法来证明，这里只证明两个集合的情况下，$A_1^{\circ} \cup A_2^{\circ} \subseteq {(A_1 \cup A_2)}^{\circ}$这还是显然的，用第三条性质就可以知道。但是反过来不一样成立，$A_1$和$A_2$的"公共边界"上的点,完全有可能变成$A_1 \cup A_2$内部的点。
@@ -298,7 +326,7 @@ $X$的子集族$\sigma$是某个拓扑结构下全体闭集构成的集合当且
 \end{proposition}
 
 \begin{proof}
-这个命题在说明内部和闭包的关系，从右边出发好像简单一点，$A$的闭包的余集，是指那些点$x$的邻域都不包括$A$中的点。换句话说就是指点$x$有一个邻域都只包含$A^c$的点，则这个邻域是含于$A^c$,根据内点的定义，点$x$是$A^c$的内点，所有这样的点，就是$(A^c)^{\circ}$.总结一下就是$A$的闭包和$A^c$的开集互为余集。	
+这个命题在说明内部和闭包的关系，从右边出发好像简单一点，$A$的闭包的余集，是指那些点$x$的邻域不都包括$A$中的点。换句话说就是指点$x$有一个邻域都只包含$A^c$的点，则这个邻域是含于$A^c$,根据内点的定义，点$x$是$A^c$的内点，所有这样的点，就是$(A^c)^{\circ}$.总结一下就是$A$的闭包和$A^c$的开集互为余集。	
 \end{proof}
 
 于是，所有关于内部的性质都可以用De Morgan定律翻译成闭包的性质。
@@ -327,12 +355,18 @@ $X$的子集族$\sigma$是某个拓扑结构下全体闭集构成的集合当且
 \end{example}
 
 \begin{example}
-用$\tau_f$表示$\mathbb{R}$上的余有限拓扑，则$(\mathbb{R},\tau_f)$可分，$\mathbb{N}$就是它的一个可数稠密子集。但是为什么呢？首先$\mathbb{N}$可数就不用说了，那么为什么$\mathbb{N}$是稠密的呢？根据闭包的性质，$\overline{\mathbb{N}}$等于所有包含$\mathbb{N}$闭集的交集。再根据余有限拓扑的定义，其闭集是有限的，但是不存在包含$\mathbb{N}$的有限闭集，那包含$\mathbb{N}$只有$\mathbb{R}$了，所以$\overline{\mathbb{N}}=\mathbb{R}$.
+用$\tau_f$表示$\mathbb{R}$上的余有限拓扑，则$(\mathbb{R},\tau_f)$可分，$\mathbb{N}$就是它的一个可数稠密子集。但是为什么呢？首先$\mathbb{N}$可数，那么为什么$\mathbb{N}$是稠密的呢？根据闭包的性质，$\overline{\mathbb{N}}$等于所有包含$\mathbb{N}$闭集的交集。再根据余有限拓扑的定义，除了$\mathbb{R}$其上闭集是有限的，但是不存在包含$\mathbb{N}$的有限闭集，那包含$\mathbb{N}$的闭集只有$\mathbb{R}$了，所以$\overline{\mathbb{N}}=\mathbb{R}$.
 \end{example}
 
 \begin{example}
 用$\tau_c$表示$\mathbb{R}$上的余可数拓扑，则$(\mathbb{R},\tau_c)$不可分。任意的$\mathbb{R}$的可数子集$U$，在余可数拓扑上都是闭集，而闭集的闭包是自己，$U \neq \mathbb{R}$，所以不存在这样的可数子集。
 \end{example}
+
+下面是一些来自《topology without tears》中的补充性质
+
+\begin{definition}
+如果拓扑空间$(x,\tau)$某一个子集$A$,它同时满足开集和闭集，则称它是\textbf{clopen}.
+\end{definition}
 
 \newpage
 \subsection{Potency of Set and Countable Set}
@@ -340,11 +374,11 @@ $X$的子集族$\sigma$是某个拓扑结构下全体闭集构成的集合当且
 对于一个空间来说，比拓扑性质和概念更基本的是它作为集合的那些性质和概念。
 
 \begin{definition}
-设$A$,$B$是两个集合。如果存在双射$\func{f}{A}{B}$,则称$A$和$B$的基数(cardinality)或者势(potency)相等,记做$\|A\|=\|B\|$.
+设$A$,$B$是两个集合。如果存在双射$\func{f}{A}{B}$,则称$A$和$B$的基数(cardinality)或者势(potency)相等,记做$|A|=|B|$.
 \end{definition}
 
 \begin{lemma}
-如果$A$,$B$是有限集，则$\|A\|=\|B\|$当且仅当它们所含的元素相等.
+如果$A$,$B$是有限集，则$|A|=|B|$当且仅当它们所含的元素相等.
 \end{lemma}
 
 \begin{lemma}
@@ -378,7 +412,7 @@ Cantor-Schroder-Bernstein,if $|A|\leq|B|$ and $|B|\leq |A|$,then $|A|=|B|$.
 	\item 想象一直往左边看，如果某个点$g^{-1}$没有定义，那么其实就是就在某个$x \in A$位置停下了。	
 \end{itemize}
 
-先看后面两种情况，如果在B点停下了，那么我们就让$h(x)$在这点$h^{-1}(x)=g(x)$，即$h(x)=g^{-1}(x)$，现在我们确定了一个点的对应关系，为什么可以这样取呢？因为$g(x)$是单射，确定这点对应的两点之前关系是唯一的，也就是$g(x)$引出的箭头是唯一的(因为$f^(-1)$在这点没有定义了，我们考虑这点的$g^{-1}$.)。对应的如果在A点停下了，我们就让$h(x)=f(x)$.那么是一个循环序列我们怎么吗？那么对应这个循环序列里面连着的两点，统一用$g^(-1)$或者$f$来表示对应关系，即可。下图，做一个形象记忆，采自wiki。
+先看后面两种情况，如果在B点停下了，那么我们就让$h(x)$在这点$h^{-1}(x)=g(x)$，即$h(x)=g^{-1}(x)$，现在我们确定了一个点的对应关系，为什么可以这样取呢？因为$g(x)$是单射，确定这点对应的两点之前关系是唯一的，也就是$g(x)$引出的箭头是唯一的(因为$f^{-1})$在这点没有定义了，我们考虑这点的$g^{-1}$。对应的如果在A点停下了，我们就让$h(x)=f(x)$.那么是一个循环序列我们怎么吗？那么对应这个循环序列里面连着的两点，统一用$g^(-1)$或者$f$来表示对应关系，即可。下图，做一个形象记忆，采自wiki。
 
 \begin{center}
 \includegraphics[width=10cm, height=8cm]{images/Cantor-Bernstein.png}
@@ -920,6 +954,83 @@ $\mathbb{R}\mathbb{P}^2$中每个点$x$的原像集$p^{-1}(x)$恰好由球面上
 如果$f^{-1}(U)$不是$x$的邻域，则它不包含任何邻域基里面的成员，也就是如上图，接着我们可以找到以$x$为极限的点列$\{x_n\}$它不在$f^{-1}(U)$，随之$f(x_n)$ 也不在$U$里面.
 
 注意上面命题的开头都是$x$有可数邻域基，主要是为了取可数点列. 
+
+邻域基是一种挑出一部分邻域来“代表”所有邻域的机制，类似地，也有一种挑出一部分开集来“代表”所有开集的机制，称为拓扑基.
+
+\begin{definition}
+设$\mathscr{B}$是集合$X$上的一个子集族,称子集族\[\Bar{\mathscr{B}}=\Set{U \subseteq X}{U \text{ 是 } \mathscr{B} \text{ 中若干成员的并集 }}\]为$\mathscr{B}$\textsf{生成}(generate)的子集族，若$\bar{\mathscr{B}}$恰好是拓扑空间$(X,\tau)$上的拓扑结构$\tau$,则称$\mathscr{B}$为其\textbf{拓扑基}(topological base).
+\end{definition}
+
+设$\mathcal{N}$是$X$上一个生成拓扑结构$\tau$的基准开领域结构，则$\mathscr{B}=\bigcup\limits_{x \in X}\mathcal{N}(x)$就是一个拓扑基.
+
+\begin{proposition}
+设$\mathscr{B}$是集合$X$上的一个子集族,则$\bar{\mathscr{B}}$是$X$上拓扑结构的充分必要条件是
+\begin{enumerate}
+	\item $\bigcup\limits_{B \in \mathscr{B}}B = X$;
+	\item $\forall B_1,B_2 \in \mathscr{B},B_1 \cap B_2 \in \bar{\mathscr{B}}$
+\end{enumerate}
+\end{proposition}
+
+\begin{definition}
+如果拓扑基$\mathscr{B}$只含可数多个成员，则称之为\textbf{可数拓扑基}(countable topological base).若某拓扑空间上存在可数拓扑基，则称其拓扑空间为\textbf{第二可数空间}(second-countable space)或者满足\textbf{第二可数公理}(second axiom of countability)
+\end{definition}
+
+相比于第一可数公理，第二可数公理是相对于整个拓扑空间来说的。
+
+\begin{example}
+$n$维欧式空间$\mathbb{E}^n$是第二可数空间: 令\[\mathscr{B}=\Set{B_{\frac{1}{k+1}}(x_1,\cdots,x_n)}{k \in \mathbb{N},\text{ 每个 } x_i \in \mathbb{Q}}\]则它是就是一个可数拓扑基(注意这里是$\mathbb{Q}$不是$\mathbb{R}$)
+\end{example}
+
+\begin{example}
+$\mathbb{R}$上的离散拓扑不满足第二可数公理. 对于它的任何拓扑基$\mathscr{B}$来说，每个单点集$\{x\}$因为是开集且它们是含于是$\mathscr{B}$,而这样的单点集有不可数多个(因为$\mathbb{R}$不可数)，则$\mathbb{R}$也有不可数多个成员.
+\end{example}
+
+第二可数空间一定是可数第一空间，但是反过来不一定成立，离散拓扑可以由度量拓扑诱导出来，而度量空间一定是第一可数空间，$R$上离散拓扑就刚好是这个反例.
+
+\begin{proposition}
+第二可数空间可分.
+\end{proposition}
+
+\begin{proof}
+回顾一下可分的概念，就是指$X$上存在可数稠密子集，稠密是指这个子集的闭包等于全空间.那么我们来先构造一个这样的子集,设$\mathscr{B}={U_1,U_2,\cdots}$是一个可数拓扑基，然后分别从其成员$U_n$取一个$x_n$，构成一个子集$A={x_1,x_2,\cdots}$,$X$上的所有开集都要包含$A$中的某个点，这就说明$X$中的每个点都是$A$闭包中的点，即子集$A$是稠密.
+\end{proof}
+
+\begin{proposition}
+可分度量空间是第二可数空间
+\end{proposition}
+
+\begin{proof}
+设$A$是$X$上的一个稠密子集，我们构造一个可数的拓扑基\[\mathscr{B}=\Set{B_{\frac{1}{n+1}}(a)}{a \in A,n \in \mathbb{N}}\]，然后我们来证明$X$上的任意开集$U$都是它们并起来的.
+
+任取$x \in U$，是存在合适的$n$使得$B_{\frac{1}{n}} \subseteq U$,因为$A$是稠密的，所以我们取的到$a \in B_{\frac{1}{n}} \cap A$,也是可以找到合适的$n'$使得$x \in B_{\frac{1}{n'}}(a) \subseteq U$,由于$x$是任意的，把这些$B_{\frac{1}{n'}}(a)$都并起来就是$U$.
+\end{proof}
+
+
+\newpage
+
+\subsection{Distinguishable}
+
+这一章主要刻画的是分离公理，分离公理的原意是指是否可以用拓扑结构分离空间中的两个原本不应该重叠的部分.按照对“不该重叠的两部分”理解不同以及区分方法的不同，有很多种不同判定方法和条件，每一种条件被称为一种\textbf{分离公理}(separation axiom).
+
+前面我们提到过的$\text{T}_0$或者$\text{T}_1$就在这里出现了，数学家意识到这些性质有共同之处，值得放在一起研究之前，每个数学家在需要某种形式的此类性质时，都会根据自己的具体需要去写相关的条件，于是赋予了这些分离公理各种不同的名字. 不过现在人们用T加数字下标来对它们统一命名. 字母T来自于德语的分离公理“	das Trennungsaxiom”. 这些公理相互之间没有谁蕴含谁的关系，不过在假设单点集是闭集的前提下编号越大的公理要求越强. 
+
+回忆一下$T_0$空间，对于任意的两点$x$和$y$,存在一个开集只含有$x$，$y$中的一个点.对于存在开集只含有$x$,$y$中一个点，这种条件下，称$x$和$y$可拓扑区分(topologically distinguishable). $\text{T}_0$公理就可以简化为任意两点都可以拓扑区分，这是一个非常弱的条件，虽然弱就意味着很多空间满足它，但是也有缺点，就是用起来很不方便: 当我们讲一个开集“区分”了$x$和$y$的时候，只看这句话甚至无法推断出$U$到底是包含$x$还是$y$.
+
+\begin{definition}
+任取$x \neq y \in X$，存在开集$U$，$V$使得$x \in U$，$y \in V$，$U \cap V = \emptyset$,简单来说就是不同的点存在不相交的开邻域，这个条件称为$\rm T_2$公理. 满足$\rm T_2$公理称为\rm\textbf{Hausdorff}空间.
+\end{definition}
+
+\begin{proposition}
+\rm Hausdorff空间中的每个单点集$\{x\}$都是闭集。
+\end{proposition}
+
+\begin{proof}
+我们只需要说明$X \smallsetminus \{x\}$是一个开集，即$X \smallsetminus \{x\}$是其中每个点的邻域，任取一个$x \in X$,然后再任取$y \neq x \in X$,由$\rm T_2$公理，$y$必有必有领域包含于$\{x\}^c$,由于$y$是任意的，所以$X \smallsetminus \{x\}$是一个开集，从而$\{x\}$是一个闭集.
+\end{proof}
+
+\begin{example}
+度量空间都是\rm Hausdorff空间，因为任取$x \neq y$,只需要令$\varepsilon = \frac{1}{2}d(x,y)$即可,两个相切的圆.
+\end{example}
 
 
 \end{document}
