@@ -1036,9 +1036,18 @@ $\mathbb{R}$上的离散拓扑不满足第二可数公理. 对于它的任何拓
 \end{proof}
 
 \begin{example}
-度量空间都是\rm Hausdorff空间，因为任取$x \neq y$,只需要令$\varepsilon = \frac{1}{2}d(x,y)$即可,两个相切的圆.
+度量空间都是\rm Hausdorff空间，因为任取$x \neq y$,只需要令$\varepsilon = \frac{1}{2}d(x,y)$即可,想象两个相切的圆.
 \end{example}
 
+\begin{proof}
+严格证明一下上述取法得到的确实是两个不相交的邻域，假设有一点$p$在同时在这两个邻域里面，则\[d(x,p) + d(y,p) <= 2\varepsilon\]这与度量空间中的三角不等式矛盾，所以不存在这样的点.
+\end{proof}
+
+再来一个$\rm T_3$公理
+
+\begin{definition}
+如果对任意的闭集$A$和其外一点$p$,存在不相交的开集$U$和$V$使得$A \subseteq U$，$p \in V$，则该空间也叫\rm \textbf{regular} space.
+\end{definition}
 
 \begin{definition}
 若\rm Hausdorff空间$X$的每个点都有一个邻域同胚于$\mathbb{E}^n$的开子集，则称$X$为一个(不带边界的)\textbf{流形}(manifold)，$n$称为这个流形的\textbf{维数}(\rm dimension).
@@ -1052,9 +1061,28 @@ $\mathbb{R}$上的离散拓扑不满足第二可数公理. 对于它的任何拓
 任取闭集$A$，$B$使得$A \cap B = \emptyset$,存在开集$U$，$V$使得$A \subseteq U$，$B \subseteq V$并且$U \cap V = \emptyset$.简而言之就是不相交的闭集有分别包含它们的不相交的邻域，称为$\rm T_4$公理. 满足$\rm T_4$的空间称为\textsf{正规空间}(\rm normal space).
 \end{definition}
 
+这几个分离公理条件是越来越强，可以用下面一张图来形象的描述
 
+
+\begin{center}
+\includegraphics[width=14cm, height=6cm]{images/separation-axiom.png}
+\end{center}
 
 \end{document}
+
+%http://math.uchicago.edu/~may/REU2013/REUPapers/Clarke.pdf
+\begin{proposition}
+度量空间是正规(normal)空间
+\end{proposition}
+
+\begin{proof}
+设$X$是个度量空间，任取两个不相交的闭集$C_1$，$C_2$,怎么来形象的刻画两个闭集不相交呢？首先定义两个闭集的距离$d(C_1,C_2)=\inf\Set{d(x_1,x_2)}{x_1 \in C_1,x_2 \in C_2}$(可以思考一下这里为什么要取下确界，不能取min呢？),所以$d(C_1,C_2)>0$,我们可以定义两个分别包含它们的开集 
+\begin{align} 
+U_1 = \bigcup\limits_{x \in C_1}\frac{B_{d(C_1,C_2)}}{3}(x) \\ 
+U_2 = \bigcup\limits_{x \in C_2}\frac{B_{d(C_1,C_2)}}{3}(x) 
+\end{align}
+为了说明$U_1 \cap U_2 = \emptyset$,假设它们相交，任取一点$y \in U_1 \cap U_2 $,则肯定存在$x_1 \in C_1$和$x_2 \in C_2$使得\[y \in \frac{B_{d(C_1,C_2)}}{3}(x_1) \cap \frac{B_{d(C_1,C_2)}}{3}(x_2) \],从而可以得到$d(y,x_1) < \frac{B_{d(C_1,C_2)}}{3}(x_1)$ 和 $d(y,x_2) < \frac{B_{d(C_1,C_2)}}{3}(x_2)$,所以有下面连续的不等式\[\frac{2B_{d(C_1,C_2)}}{3} > d(y,x_1) + d(y,x_2) > d(x_1,x_2) >= d(C_1,C_2)\]这里就产生了一个矛盾，所以假设不成立，从而$U_1 \cap U_2 = \emptyset$.
+\end{proof}
 
 
 
