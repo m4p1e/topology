@@ -985,8 +985,12 @@ $\mathbb{R}\mathbb{P}^2$中每个点$x$的原像集$p^{-1}(x)$恰好由球面上
 相比于第一可数公理，第二可数公理是相对于整个拓扑空间来说的。
 
 \begin{example}
-$n$维欧式空间$\mathbb{E}^n$是第二可数空间: 令\[\mathscr{B}=\Set{B_{\frac{1}{k+1}}(x_1,\cdots,x_n)}{k \in \mathbb{N},\text{ 每个 } x_i \in \mathbb{Q}}\]则它是就是一个可数拓扑基(注意这里是$\mathbb{Q}$不是$\mathbb{R}$)
+$n$维欧式空间$\mathbb{R}^n$是第二可数空间: 令\[\mathscr{B}=\Set{B_{\frac{1}{k+1}}(x_1,\cdots,x_n)}{k \in \mathbb{N},\text{ 每个 } x_i \in \mathbb{Q}}\]则它是就是一个可数拓扑基(注意这里是$\mathbb{Q}$不是$\mathbb{R}$)
 \end{example}
+
+\begin{proof}
+每一个的$p \in \mathbb{R}^n$的领域,都可以找到一个$x \in \mathbb{Q}^n$包含这个点$p$,$\mathbb{Q}^n$球形领域是可数的。
+\end{proof}
 
 \begin{example}
 $\mathbb{R}$上的离散拓扑不满足第二可数公理. 对于它的任何拓扑基$\mathscr{B}$来说，每个单点集$\{x\}$因为是开集且它们是含于是$\mathscr{B}$,而这样的单点集有不可数多个(因为$\mathbb{R}$不可数)，则$\mathbb{R}$也有不可数多个成员.
@@ -1068,7 +1072,6 @@ $\mathbb{R}$上的离散拓扑不满足第二可数公理. 对于它的任何拓
 \includegraphics[width=14cm, height=6cm]{images/separation-axiom.png}
 \end{center}
 
-\end{document}
 
 %http://math.uchicago.edu/~may/REU2013/REUPapers/Clarke.pdf
 \begin{proposition}
@@ -1084,6 +1087,17 @@ U_2 = \bigcup\limits_{x \in C_2}\frac{B_{d(C_1,C_2)}}{3}(x)
 为了说明$U_1 \cap U_2 = \emptyset$,假设它们相交，任取一点$y \in U_1 \cap U_2 $,则肯定存在$x_1 \in C_1$和$x_2 \in C_2$使得\[y \in \frac{B_{d(C_1,C_2)}}{3}(x_1) \cap \frac{B_{d(C_1,C_2)}}{3}(x_2) \],从而可以得到$d(y,x_1) < \frac{B_{d(C_1,C_2)}}{3}(x_1)$ 和 $d(y,x_2) < \frac{B_{d(C_1,C_2)}}{3}(x_2)$,所以有下面连续的不等式\[\frac{2B_{d(C_1,C_2)}}{3} > d(y,x_1) + d(y,x_2) > d(x_1,x_2) >= d(C_1,C_2)\]这里就产生了一个矛盾，所以假设不成立，从而$U_1 \cap U_2 = \emptyset$.
 \end{proof}
 
+可以看到度量空间是满足了\rm normal和\rm Hausdorff的性质，还是第一可数公理，那我们反过来想想什么时候可以说一个空间是一个度量空间或者说是可度量的？仅靠上述这些我们已经证明的过的条件是否已经够了呢？
+
+点集拓扑里面一个不那么trivial的定理就要出现了!!! 那就是著名的Urysohn Metrization Theorem.
+
+在证明这个定理之前，首先需要引出Urysohn Lemma,它的存在对Urysohn Metrization Theorem的证明起到至关重要的作用.
+
+\begin{lemma}
+拓扑空间$X$是正规空间(normal)的充分必要条件是任取不相交的闭子集$A$,$B$，存在连续映射$\func{f}{X}{[0,1]}$满足$f|_A \equiv 1$，$f|_B \equiv 1$
+\end{lemma}
+
+\end{document}
 
 
 
