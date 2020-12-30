@@ -264,10 +264,10 @@ $X$和$d$合起来叫一个\textbf{度量空间}(metric space)，记做$(X,d)$.
 \includegraphics[width=5cm, height=4cm]{images/Interior_illustration.png}
 \end{center}
 
-interior有一个性质很重要就是interior是其内部所有点的邻域。
+\textcolor{red}{interior有一个性质很重要就是interior是其内部所有点的邻域，所以interior也是一个开集}。
 
 \begin{proof}
-假设$M$是$x$的邻域，且$M \subseteq A$,那么$M$里面的所有点都有一个邻域含于$M$，也含于$A$,所以$A$是$M$所有点的邻域，自然地$M \subseteq A^{\circ}$,所以$A^{\circ}$是$x$的邻域，这里的$x$是任意地。
+假设$M$是$x$的基准开邻域，且$M \subseteq A$,那么$M$里面的所有点都有一个邻域含于$M$，也含于$A$,所以$A$是$M$中所有点的邻域，自然地$M \subseteq A^{\circ}$,所以$A^{\circ}$是$x$的邻域，这里的$x$是任意地。
 \end{proof}
 
 
@@ -326,10 +326,12 @@ $X$的子集族$\sigma$是某个拓扑结构下全体闭集构成的集合当且
 \end{proposition}
 
 \begin{proof}
-这个命题在说明内部和闭包的关系，从右边出发好像简单一点，$A$的闭包的余集，是指那些点$x$的邻域不都包括$A$中的点。换句话说就是指点$x$有一个邻域都只包含$A^c$的点，则这个邻域是含于$A^c$,根据内点的定义，点$x$是$A^c$的内点，所有这样的点，就是$(A^c)^{\circ}$.总结一下就是$A$的闭包和$A^c$的开集互为余集。	
+这个命题在说明内部和闭包的关系，从右边出发好像简单一点，$A$的闭包的余集，是指那些点$x$的邻域不都包括$A$中的点。换句话说就是指点$x$有一个邻域都只包含$A^c$的点，则这个邻域是含于$A^c$,根据内点的定义，点$x$是$A^c$的内点，所有这样的点，就是$(A^c)^{\circ}$.总结一下就是$A$的闭包和$A^c$的内部互为余集。	
 \end{proof}
 
-于是，所有关于内部的性质都可以用De Morgan定律翻译成闭包的性质。
+\textcolor{red}{我们前面已经证明了每个内部都是一个开集，所以闭包是一个闭集}.
+
+于是，所有关于内部的性质都可以用De Morgan定律翻译成闭包的性质
 
 \begin{itemize}
 	\item $\overline{A} = A$,当且仅当$A$是闭集。
@@ -1036,7 +1038,7 @@ $\mathbb{R}$上的离散拓扑不满足第二可数公理. 对于它的任何拓
 \end{proposition}
 
 \begin{proof}
-我们只需要说明$X \smallsetminus \{x\}$是一个开集，即$X \smallsetminus \{x\}$是其中每个点的邻域，任取一个$x \in X$,然后再任取$y \neq x \in X$,由$\rm T_2$公理，$y$必有必有领域包含于$\{x\}^c$,由于$y$是任意的，所以$X \smallsetminus \{x\}$是一个开集，从而$\{x\}$是一个闭集.
+我们只需要说明$X \setminus \{x\}$是一个开集，即$X \setminus \{x\}$是其中每个点的邻域，任取一个$x \in X$,然后再任取$y \neq x \in X$,由$\rm T_2$公理，$y$必有必有领域包含于$\{x\}^c$,由于$y$是任意的，所以$X \setminus \{x\}$是一个开集，从而$\{x\}$是一个闭集.
 \end{proof}
 
 \begin{example}
@@ -1087,7 +1089,7 @@ U_2 = \bigcup\limits_{x \in C_2}\frac{B_{d(C_1,C_2)}}{3}(x)
 为了说明$U_1 \cap U_2 = \emptyset$,假设它们相交，任取一点$y \in U_1 \cap U_2 $,则肯定存在$x_1 \in C_1$和$x_2 \in C_2$使得\[y \in \frac{B_{d(C_1,C_2)}}{3}(x_1) \cap \frac{B_{d(C_1,C_2)}}{3}(x_2) \],从而可以得到$d(y,x_1) < \frac{B_{d(C_1,C_2)}}{3}(x_1)$ 和 $d(y,x_2) < \frac{B_{d(C_1,C_2)}}{3}(x_2)$,所以有下面连续的不等式\[\frac{2B_{d(C_1,C_2)}}{3} > d(y,x_1) + d(y,x_2) > d(x_1,x_2) >= d(C_1,C_2)\]这里就产生了一个矛盾，所以假设不成立，从而$U_1 \cap U_2 = \emptyset$.
 \end{proof}
 
-可以看到度量空间是满足了\rm normal和\rm Hausdorff的性质，还是第一可数公理，那我们反过来想想什么时候可以说一个空间是一个度量空间或者说是可度量的？仅靠上述这些我们已经证明的过的条件是否已经够了呢？
+可以看到度量空间是满足了\rm normal和\rm Hausdorff的性质，第一可数公理，那我们反过来想想什么时候可以说一个空间是一个度量空间或者说是可度量的？仅靠上述这些我们已经证明的过的条件是否已经够了呢？
 
 点集拓扑里面一个不那么trivial的定理就要出现了!!! 那就是著名的Urysohn Metrization Theorem.
 
@@ -1111,13 +1113,14 @@ U_2 = \bigcup\limits_{x \in C_2}\frac{B_{d(C_1,C_2)}}{3}(x)
 开始证明Urysohn Lemma
 
 \begin{proof}
-$(\Leftarrow)$ $\func{f}{X}{[0,1]}$是一个连续函数，$A$,$B$是两个不相交的闭集，很自然的有$A \subseteq f^{-1}([0,\frac{1}{2}))$和$B \subseteq f^{-1}((\frac{1}{2},1])$，由于$f$是连续的所以$f^{-1}([0,\frac{1}{2}))$和$f^{-1}((\frac{1}{2},1])$都是开集且分别包含$A$和$B$，所以$X$是一个normal space.
+设$(\Leftarrow)$ $\func{f}{X}{[0,1]}$是一个连续函数，$A$,$B$是两个不相交的闭集，很自然的有$A \subseteq f^{-1}([0,\frac{1}{2}))$和$B \subseteq f^{-1}((\frac{1}{2},1])$，由于$f$是连续的，所以$f^{-1}([0,\frac{1}{2}))$和$f^{-1}((\frac{1}{2},1])$都是开集且分别包含$A$和$B$，所以$X$是一个normal space.
 
 $(\Rightarrow)$ 这个方向的难度在于你要构造一个连续函数$f$出来。
 
-假设拓扑空间$X$是一个normal space，给定两个不为空的闭集$A$和$B$，让开集$U_1 = X$, 因为$X \setminus B$开且包含$A$,我们可以再用前面已经证明的命题再找一个开集$U_0$，使得\[A \subseteq U_0 \subseteq \overline{U_0} \subseteq X \setminus B,\]然后继续再找一个开集$U_{\frac{1}{2}}$，$\overline{U_0}$是闭集why？？？？？
+假设拓扑空间$X$是一个normal space，给定两个不为空的闭集$A$和$B$，让开集$U_1 = X$, 因为$X \setminus B$开且包含$A$,我们可以再用前面已经证明的命题再找一个开集$U_0$，使得\[A \subseteq U_0 \subseteq \overline{U_0} \subseteq X \setminus B,\]然后继续再找一个开集$U_{\frac{1}{2}}$，$\overline{U_0}$是闭集why？？？？？\textcolor{red}{每一个闭包都是一个闭集}.
 \end{proof}
-
+%http://homepage.divms.uiowa.edu/~jsimon/COURSES/M132Fall07/UrysohnLemma_v5.pdf
+%http://www.math.toronto.edu/ivan/mat327/docs/notes/13-urysohn.pdf
 \end{document}
 
 
