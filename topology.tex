@@ -1094,8 +1094,29 @@ U_2 = \bigcup\limits_{x \in C_2}\frac{B_{d(C_1,C_2)}}{3}(x)
 在证明这个定理之前，首先需要引出Urysohn Lemma,它的存在对Urysohn Metrization Theorem的证明起到至关重要的作用.
 
 \begin{lemma}
-拓扑空间$X$是正规空间(normal)的充分必要条件是任取不相交的闭子集$A$,$B$，存在连续映射$\func{f}{X}{[0,1]}$满足$f|_A \equiv 1$，$f|_B \equiv 1$
+拓扑空间$X$是正规空间(normal)的充分必要条件是任取不相交的闭子集$A$,$B$，存在连续映射$\func{f}{X}{[0,1]}$满足$f|_A \equiv 1$，$f|_B \equiv 1$.
 \end{lemma}
+
+先试一个关于normal space的命题
+\begin{proposition}
+拓扑空间$X$是正规空间当且仅当对任意的开集$U$,和任意的闭子集$A \subseteq U$,存在一个开集$V$使得$A \subseteq V \subseteq \overline{V} \subseteq U$
+\end{proposition}
+
+\begin{proof}
+当$X$是一个正规空间，给定一个开集$U$和闭子集$A \subseteq U$,再取一个闭集$B = X \setminus U$，根据normal的定义，存在两个不相交的开集$A \subseteq U_A$和$B \subseteq U_B$,我们肯定希望这个$U_A$正好属于$U$,开始我们有$U_A \cap U_B = \emptyset$, 从而我们有$U_A \cap B = \emptyset$,所以$U_A \subseteq X \setminus B = U$,类似的$\overline{U_A} \cap U_B = \emptyset$,如果有一点$p \in \overline{U_A} \cap U_B$那$p$只能是$U_A$的聚点了，但是$U_B$是$p$的邻域，它和$U_A$并没有交点，造成了矛盾。这样$\overline{U_A} \subseteq U$,而$U_A \subseteq \overline{U_A}$是trivial的。
+
+反过来的话，留下以后再证，全力追逐Urysohn Lemma中
+\end{proof}
+
+开始证明Urysohn Lemma
+
+\begin{proof}
+$(\Leftarrow)$ $\func{f}{X}{[0,1]}$是一个连续函数，$A$,$B$是两个不相交的闭集，很自然的有$A \subseteq f^{-1}([0,\frac{1}{2}))$和$B \subseteq f^{-1}((\frac{1}{2},1])$，由于$f$是连续的所以$f^{-1}([0,\frac{1}{2}))$和$f^{-1}((\frac{1}{2},1])$都是开集且分别包含$A$和$B$，所以$X$是一个normal space.
+
+$(\Rightarrow)$ 这个方向的难度在于你要构造一个连续函数$f$出来。
+
+假设拓扑空间$X$是一个normal space，给定两个不为空的闭集$A$和$B$，让开集$U_1 = X$, 因为$X \setminus B$开且包含$A$,我们可以再用前面已经证明的命题再找一个开集$U_0$，使得\[A \subseteq U_0 \subseteq \overline{U_0} \subseteq X \setminus B,\]然后继续再找一个开集$U_{\frac{1}{2}}$，$\overline{U_0}$是闭集why？？？？？
+\end{proof}
 
 \end{document}
 
