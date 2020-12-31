@@ -8,6 +8,7 @@
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{mathtools}
 
 %\usepackage{unicode-math}
 %\usepackage{pgfplots}
@@ -37,6 +38,7 @@
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{exercise}{Exercise}[section]
+\newenvironment{claim}[1]{\par\noindent\underline{Claim:}\space#1}{}
 
 \newcommand*{\xfunc}[4]{{#2}\colon{#3}{#1}{#4}}
 \newcommand*{\func}[3]{\xfunc{\to}{#1}{#2}{#3}}
@@ -1089,11 +1091,11 @@ U_2 = \bigcup\limits_{x \in C_2}\frac{B_{d(C_1,C_2)}}{3}(x)
 为了说明$U_1 \cap U_2 = \emptyset$,假设它们相交，任取一点$y \in U_1 \cap U_2 $,则肯定存在$x_1 \in C_1$和$x_2 \in C_2$使得\[y \in \frac{B_{d(C_1,C_2)}}{3}(x_1) \cap \frac{B_{d(C_1,C_2)}}{3}(x_2) \],从而可以得到$d(y,x_1) < \frac{B_{d(C_1,C_2)}}{3}(x_1)$ 和 $d(y,x_2) < \frac{B_{d(C_1,C_2)}}{3}(x_2)$,所以有下面连续的不等式\[\frac{2B_{d(C_1,C_2)}}{3} > d(y,x_1) + d(y,x_2) > d(x_1,x_2) >= d(C_1,C_2)\]这里就产生了一个矛盾，所以假设不成立，从而$U_1 \cap U_2 = \emptyset$.
 \end{proof}
 
-可以看到度量空间是满足了\rm normal和\rm Hausdorff的性质，第一可数公理，那我们反过来想想什么时候可以说一个空间是一个度量空间或者说是可度量的？仅靠上述这些我们已经证明的过的条件是否已经够了呢？
+我们已经证明了度量空间是满足\rm normal和\rm Hausdorff的性质，同时还有第一可数公理，那我们反过来想想什么时候可以说一个空间是一个度量空间或者说是可度量的？跟直接一点，能不能根据现有的拓扑结构诱导出度量拓扑？仅靠上述这些我们已经证明的过的条件是否已经够了呢？
 
 点集拓扑里面一个不那么trivial的定理就要出现了!!! 那就是著名的Urysohn Metrization Theorem.
 
-在证明这个定理之前，首先需要引出Urysohn Lemma,它的存在对Urysohn Metrization Theorem的证明起到至关重要的作用.
+在证明这个定理之前，首先需要引出Urysohn Lemma,它的存在对Urysohn Metrization Theorem的证明起到至关重要的作用，它的出现说明了我们可以用一个连续函数来区分两个闭子集，来代替用拓扑的信息区分.
 
 \begin{lemma}
 拓扑空间$X$是正规空间(normal)的充分必要条件是任取不相交的闭子集$A$,$B$，存在连续映射$\func{f}{X}{[0,1]}$满足$f|_A \equiv 1$，$f|_B \equiv 1$.
@@ -1117,7 +1119,51 @@ U_2 = \bigcup\limits_{x \in C_2}\frac{B_{d(C_1,C_2)}}{3}(x)
 
 $(\Rightarrow)$ 这个方向的难度在于你要构造一个连续函数$f$出来。
 
-假设拓扑空间$X$是一个normal space，给定两个不为空的闭集$A$和$B$，让开集$U_1 = X$, 因为$X \setminus B$开且包含$A$,我们可以再用前面已经证明的命题再找一个开集$U_0$，使得\[A \subseteq U_0 \subseteq \overline{U_0} \subseteq X \setminus B,\]然后继续再找一个开集$U_{\frac{1}{2}}$，$\overline{U_0}$是闭集why？？？？？\textcolor{red}{每一个闭包都是一个闭集}.
+假设拓扑空间$X$是一个normal space，给定两个不为空的闭集$A$和$B$，让开集$U_1 = X$, 因为$X \setminus B$开且包含$A$,我们可以再用前面已经证明的命题再找一个开集$U_0$，使得\[A \subseteq U_0 \subseteq \overline{U_0} \subseteq X \setminus B,\]然后继续再找一个开集$U_{\frac{1}{2}}$，因为$\overline{U_0}$也是一个闭集，所以我们再用前面的命题\[A \subseteq U_0 \subseteq \overline{U_0} \subseteq U_{\frac{1}{2}} \subseteq \overline{U_{\frac{1}{2}}} \subseteq X \setminus B\].我们构造了三个开集出来: $U_0 \subseteq U_{\frac{1}{2}} \subseteq U_1$,而且我们有\[A \subseteq U_0 \subseteq U_{\frac{1}{2}} \subseteq X \setminus B \subseteq U_1 =X \]现在我们可以尝试用这些开集来定义一个函数，初探一下后面连续函数构造的idea，定义一个函数$\func{g}{X}{[0,1]}$，$g(x)=\min\{p \colon x \in U_p\}$.由于我们只定义了有限三个开集，函数值也只有$0,\frac{1}{2},1$,但是足够我们窥得一丝其中构造的思路，因为$A \subseteq U_0$，所以$\forall x \in A,g(x)=0$,相似地因为$B \subseteq U_1$,所以$\forall x \in B,g(x)=1$.现在这个函数并不是一个连续的，因为如果考虑$(\frac{1}{4},\frac{3}{4})$的原像为$U_{\frac{1}{2}} \setminus U_0$,并不能保证它是$X$里面的一个开集，如果想要让这个函数连续的话，需要定义更多的类似$U_{\frac{1}{2}}$的开集，来满足任意一个$[0,1]$里面的开集的原像都能对应上我们构造出来的开集。
+
+利用上述idea的直觉我们来尝试归纳的构造出一系列开集，这些开集将会indexed by$[0,1]$里面所有的有理数,即$\Set{U_p}{p \in [0,1] \cap \mathbb{Q}}$,将$[0,1]$里面的有理数用集合$Q=[0,1] \cap \mathbb{Q}$表示，所以$Q$是可数的，从而可以把$Q$枚举$Q=\Set{p_n}{n \in \mathbb{N}}$,为了方便起见我们直接让$p_0 = 1$，$p_1 = 0$.
+
+还是和前面一样，让$U_1 = X \setminus B$,然后利用$X$是normal的性质，让$U_0$表示开集\[A \subseteq U_0 \subseteq \overline{U_0} \subseteq U_1\].这是初始条件，然后按照下面性质开始归纳\[p < q \Rightarrow \overline{U_p} \subseteq {U_q}\],初始条件显然是满足上面性质的.现在假设我们定义好了$U_{p_k},\text{for } k=1,2,\cdots,n$满足上述性质，我们来考虑$U_{p_{n+1}}$的定义，设$P={p_1,p_2,\cdots,p_n}$,$r = p_{n+1}$,现在我们要把$U_r$插到已经定义好的$n$个开集里面，把$P$里面的元素按大小线性排列，然后考虑有理数序的关系，总可以把$r$有一个立即前驱$p$和一个立即后继$q$，我们在开始阶段已经把$0$和$1$都扔到$P$里面取了，所以总可以找到这样的一对数.即开集$U_r$表示为\[\overline{U_p} \subseteq U_r \subseteq \overline{U_r} \subseteq U_q\],这样就完成了归纳过程。
+
+我们为什么要取$Q$？,因为$Q$可数才是保证我们的归纳过程，最后我们得到了一族开集$\Set{U_p}{p \in Q}$,现在把它扩展到整个有理数上，如果$p \in (-\infty,0) \cap \mathbb{Q}$,则$U_p=\emptyset$,如果$p \in (1,+\infty) \cap \mathbb{Q}$,则$U_p = X$,扩展得到的$\Set{U_p}{p \in Q}$仍然满足\[p < q \Rightarrow \overline{U_p} \subseteq {U_q}\].
+
+前面一系列的工作已经做完了，现在开始思考我们的连续函数如何定义，我们先定义一个函数$\mathbb{Q}(x) \coloneqq \Set{p \in \mathbb{Q}}{x \in U_p}$，然后思考一下这个函数的函数值，$\mathbb{Q}(x)$的中的最小值只能是$0$,因为如果$p < 0$,则$U_p = \emptyset$,No $x$ for it!同时$\mathbb{Q}$最大值不存在，因为$\forall x \in X=U_p,p>1$，换句话说就是任意的$\mathbb{Q}(x)$都包含所有大于$1$的有理数，现在我们对$\mathbb{Q}$的函数值有了全貌上的了解，所有$\mathbb{Q}(x)$中的元素必有一个下确界，正主来了，我们定义$\func{f}{X}{[0,1]}$如下\[f(x) = \inf(\mathbb{Q}(x)) = \inf\Set{p \in \mathbb{Q}}{x \in U_p}.\]这个函数就是当前proof里面最有趣一分部，我们可以停下来检验一下这个函数是否把$X$映射到了$[0,1]$,然后我们还要继续我们的工作，我们要来证明它是连续的,再证明$f$连续之前，需要说明几个简单的性质，balalalallalalalalalalalallalalalalalala.
+
+\begin{claim}
+$f$ separates $A$和$B$,就是指$\forall a \in A, f(a)=0$和$\forall b \in B, f(b) = 1$
+\end{claim}
+
+\begin{proof}
+任取$a \in A$,有对任意的$p \geq 0$，有$a \in A \subseteq U_0 \subseteq \overline{U_p}$，所以$\mathbb{Q}(x) = [0,+\infty) \cap \mathbb{Q}$,从而$f(x)=0$,同理任取$b \in B$，有对任意的$p \geq 0$，有$b \in B \subseteq U_1 \subseteq U_p$，所以$\mathbb{Q}(x) = [1,+\infty) \cap \mathbb{Q}$,从而$f(x)=1$.
+\end{proof}
+
+\begin{claim}
+\begin{enumerate}
+	\item 如果$x \in \overline{U_p}$，则$f(x) \leq p$.
+	\item 如果$x \notin U_p$，则$f(x) \geq p$.
+\end{enumerate}
+\end{claim}
+
+\begin{proof}
+(1) 如果变成$x \in \overline{U_p}$，这个问题就变得很trivial.根据我们构造开集有$x \in \overline{U_p} \subseteq \overline{U_q}$,是对所有的$q > p$成立，让$q$无限的逼近$p$,所以$(p,+\infty) \cap \mathbb{Q}$是$\mathbb{Q}(x)$的子集,言下之意$f(x) \leq p$.
+
+(2) 若$x \notin U_p$，根据我们构造的开集，有对任意的有理数$q \leq p$，$x \notin U_q$成立，眼下之意就是$(-\infty,p] \cap \mathbb{Q}(x) = \emptyset$,所以$f(x) \geq p$，注意下确界不一定在$\mathbb{Q}(x)$里面.
+\end{proof}
+
+\begin{claim}
+$f$连续.
+\end{claim}
+
+\begin{proof}
+finally! 给定一个$[0,1]$里面一个开集$U=(a,b)$ ($\mathbb{R}^1$上诱导的度量拓扑)，我们需要说明$f^{-1}(U)$是$X$上开集，在这里我们的策略是fixed任意一点$x \in f^{-1}(U)$，找一个包含$x$的开集$V$，使得$f(V) \subseteq U$. 
+
+我们来先来找这个开集$V$，$x \in f^{-1}(U)$，也是指$f(x) \in U=(a，b)$，我们可以在这个开区间上再找到两点$p$和$q$，如下\[a < p < f(x) < q < b,\]其中$p < f(x)$,我们可以知道$x \notin \overline{U_p}$这是上面第二个claim中第一个性质的逆否命题，同理由$q > f(x)$,我们还可以知道$x \in U_q$, 所以$x \in U_q \setminus \overline{U_p}$,它就是我们想要的开集$V$.为什么它是一个开集呢？它可以理解为两个开集的交$U_q \cap \overline{U_p}^c$
+
+然后再来证明$f(V) \subseteq (a,b)$,任取$y \in V$,因为$y \notin \overline{U_p}$，我们有$f(y) \geq p > a$,类似上面第二个claim的证明方式，不累述了，同理$ y \in U_q$,我们还有$f(y) \leq q < b$,两边合起来就是\[  a < p \leq f(y) \leq q < b\]，即$f(V) \subseteq (a,b)$
+
+最后的最后，we did it!
+\end{proof}
+
 \end{proof}
 %http://homepage.divms.uiowa.edu/~jsimon/COURSES/M132Fall07/UrysohnLemma_v5.pdf
 %http://www.math.toronto.edu/ivan/mat327/docs/notes/13-urysohn.pdf
