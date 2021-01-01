@@ -184,8 +184,31 @@ $\text{T}_1$-space 一定是 $\text{T}_0$-space，反过来就不一定。
 \end{example}
 
 
+在介绍度量空间之前，还是有必要先讲一下欧式空间，度量空间是欧式空间下的一般情况推广，欧式空间上的拓扑结构怎么表示呢？我先看一维欧式空间$\mathbb{R}$
 
-这里还是有必要讲一下度量是什么东西，因为后面有很多东西都是，欧式度量诱导出来的度量拓扑.一个度量就是测量空间中两个点之间距离的一个公式. 当然，为了确保这个公式真的能起到类似距离的作用，它还需要满足一些基本的公理.
+\begin{definition}
+给定$\mathbb{R}$上的子集$S$,若$\forall x \in S$,存在$a \in \mathbb{R}$和$b \in \mathbb{R}$，规定$a < b$,使得$x \in (a,b) \subseteq S$,则$S$是$\mathbb{R}$上欧式拓扑中的开集.
+\end{definition}
+
+验证上述定义是否满足拓扑结构还是比较简单的，但是这个定义还是比较抽象的，我们也可以更直接一点找出一些开集，例如$R$上的所有形如$(r,s)$，$(-\infty,r)$,$(r,+\infty)$,其中$r,s \in \mathbb{R}$它们是很显然满足欧式拓扑下开集定义的，所以$\mathbb{R}$上的所有\textbf{开区间都是开集}，但是反过来就不一定了，因为你可以把两个不相交的开区间并起来.
+
+\begin{proposition}
+给定$\mathbb{R}$上的子集$S$,$S$是开集当且仅当$S$是若干开区间的并。
+\end{proposition}
+
+很自然地，所有闭区间$[a,b]$都不是开集，因为两端点，并不满足上述定义，但是它们都是闭集，因为你取它的余集$(-\infty,a) \cup (b,+\infty)$是一个开集.还有一些特殊的闭集，例如单点集$\{a\}$和整数集$\mathbb{Z}$.
+
+\begin{proposition}
+有理数集$\mathbb{Q}$既不是开集也不是闭集。
+\end{proposition}
+
+\begin{proof}
+对于任意$q \in \mathbb{Q}$,可以找到两个实数$a$和$b$,使得$q \in (a,b)$,但是这样的$(a,b)$并不属于$\mathbb{Q}$,因为两个实数中间存在无数个实数，并不是有理数，这其中就包括无理数.
+
+为了证明$\mathbb{Q}$同样不是一个闭集，只需要证明$\mathbb{R} \setminus \mathbb{Q}$不是一个开集，取任意的一个开区间$x \in (a,b) \subseteq \mathbb{R} \setminus \mathbb{Q}$,由实数的稠密性，任意两个实数是可以确定一个有理数的，但是$\mathbb{R} \setminus \mathbb{Q}$并不包含有理数，所以不存在这样的开区间，证毕.
+\end{proof}
+
+接着我们再来了解一下度量空间.一个度量就是测量空间中两个点之间距离的一个公式. 当然，为了确保这个公式真的能起到类似距离的作用，它还需要满足一些基本的公理.
 
 \begin{definition}
 $X$上的一个度量(metric)是一个映射\[\func{d}{X \times X}{\mathbb{R}}\]满足
@@ -974,6 +997,8 @@ $\mathbb{R}\mathbb{P}^2$中每个点$x$的原像集$p^{-1}(x)$恰好由球面上
 
 设$\mathcal{N}$是$X$上一个生成拓扑结构$\tau$的基准开领域结构，则$\mathscr{B}=\bigcup\limits_{x \in X}\mathcal{N}(x)$就是一个拓扑基.
 
+那么问题来了，如果我们给定$X$上的一个子集族，如何判定这个子集族是不是一个拓扑基？
+
 \begin{proposition}
 设$\mathscr{B}$是集合$X$上的一个子集族,则$\bar{\mathscr{B}}$是$X$上拓扑结构的充分必要条件是
 \begin{enumerate}
@@ -981,6 +1006,12 @@ $\mathbb{R}\mathbb{P}^2$中每个点$x$的原像集$p^{-1}(x)$恰好由球面上
 	\item $\forall B_1,B_2 \in \mathscr{B},B_1 \cap B_2 \in \bar{\mathscr{B}}$
 \end{enumerate}
 \end{proposition}
+
+想想$\overline{\mathscr{B}}$本身的性质，其中$\emptyset$肯定在里面，因为empty union，任意的并也是封闭，所以只需要保证$X \in \tau$且$\overline{\mathscr{B}}$在交运算下封闭，这就是上述的命题主要刻画的剩余条件.这个命题很有作用，能帮我们快速的判定一些拓扑基.
+
+\begin{example}
+给定$\mathbb{R}^2$上一块不带边的长方形$a < x < b, c < y < d$,让$\mathscr{B} = \Set{<x,y>}{<x,y> \in \mathbb{R}^2, a<x<b,c <y <d}$表示所有$(x,y)$和$(a,c)$确定"open rectangles"，则$\mathscr{B}$是这块长方形的一个欧式拓扑,用上面命题检验一下.
+\end{example}
 
 \begin{definition}
 如果拓扑基$\mathscr{B}$只含可数多个成员，则称之为\textbf{可数拓扑基}(countable topological base).若某拓扑空间上存在可数拓扑基，则称其拓扑空间为\textbf{第二可数空间}(second-countable space)或者满足\textbf{第二可数公理}(second axiom of countability)
@@ -1020,6 +1051,35 @@ $\mathbb{R}$上的离散拓扑不满足第二可数公理. 对于它的任何拓
 任取$x \in U$，是存在合适的$n$使得$B_{\frac{1}{n}} \subseteq U$,因为$A$是稠密的，所以我们取的到$a \in B_{\frac{1}{n}} \cap A$,也是可以找到合适的$n'$使得$x \in B_{\frac{1}{n'}}(a) \subseteq U$,由于$x$是任意的，把这些$B_{\frac{1}{n'}}(a)$都并起来就是$U$.
 \end{proof}
 
+延伸一下拓扑基相关概念，前面我们知道了怎么去判定一个子集族是不是拓扑基，也就是去检验这个子集族能不能构造出某个拓扑结构，这种情况下有可能不同的拓扑基对应不同拓扑结构. 那么现在我如果给定一个先给定$X$上的一个拓扑结构$\tau$,让你取找$\tau$的拓扑基，这个时候应该怎么找呢？或者换句话说，我们构造了一个拓扑基，我们怎么判定这个拓扑基生成的拓扑是不是恰好$\tau$？
+
+\begin{proposition}
+给定一个拓扑空间$(X,\tau)$,如果$X$上\textbf{开子集}族$\mathscr{B}$是$\tau$的拓扑基当且仅当任取$\tau$的任意一个开集$U$,再任取$x \in U$，总存在$B \in \mathscr{B}$使得$x \in B \subseteq U$.
+\end{proposition}
+
+\begin{proof}
+若$\mathscr{B}$是$\tau$的一个拓扑基，则对于任意$U \in \tau$，有$U = \bigcup\limits_k B_k$,其中$B_k \in \mathscr{B}$,若取$x \in U$，则能找到某个$x \in B_k$，所以$x \in B_k \subseteq U$.
+
+若任取$\tau$中开集$U$，$x \in U$,总有$B \in \mathscr{B}$使得$x \in B \subseteq U$，取遍$U$里面的所有元素，则$U = \bigcup\limits_k B_k$，则$\mathscr{B}$是一个拓扑基.
+\end{proof}
+
+还有一个用拓扑基来判定开集的一个命题:
+
+\begin{proposition}
+定义$\mathscr{B}$为$(X,\tau)$的一个拓扑基，若$X$上某个子集$U$开当且仅当$\forall x \in U$，总存在一个$B \in \mathscr{B}$,使得$x \in B \subseteq U$.
+\end{proposition}
+
+我们再考虑一种非常特殊的情况，我们知道拓扑基是不唯一，若$\mathscr{B}$是$(X,\tau)$上的拓扑基，往$\mathscr{B}$里面再加几个开集，它还是一个拓扑基，这个很显然。那么现在我有两个拓扑基$\mathscr{B}_1$和$\mathscr{B}_2$，如何判定它们生成是同一个拓扑结构还是不同的拓扑结构?
+
+\begin{proposition}
+定义拓扑基$\mathscr{B}_1$和$\mathscr{B}_2$分别是拓扑结构$\tau_1$和$\tau_2$的拓扑基,若$\tau_1 = \tau_2$当且仅当
+\begin{enumerate}
+	\item $\forall B_1 \in \mathscr{B}_1$和$\forall x \in B_1$,总是存在$B_2 \in \mathscr{B}_2$,使得$x \in B_2 \subseteq B_1$;
+	\item $\forall B_2 \in \mathscr{B}_2$和$\forall x \in B_2$,总是存在$B_1 \in \mathscr{B}_1$,使得$x \in B_1 \subseteq B_2$
+\end{enumerate}
+\end{proposition}
+
+经典的两边相互包含证相等，这个命题非常有趣，例如$n$维欧式空间上的开等边三角形(open equilateral triangle)拓扑基和开长方形(open  rectangle)拓扑基都可以生成欧式拓扑.就可以用上述的命题来刻画它们分别定义的拓扑结构关系,非常有趣.
 
 \newpage
 
@@ -1098,7 +1158,7 @@ U_2 = \bigcup\limits_{x \in C_2}\frac{B_{d(C_1,C_2)}}{3}(x)
 在证明这个定理之前，首先需要引出Urysohn Lemma,它的存在对Urysohn Metrization Theorem的证明起到至关重要的作用，它的出现说明了我们可以用一个连续函数来区分两个闭子集，来代替用拓扑的信息区分.
 
 \begin{lemma}
-拓扑空间$X$是正规空间(normal)的充分必要条件是任取不相交的闭子集$A$,$B$，存在连续映射$\func{f}{X}{[0,1]}$满足$f|_A \equiv 1$，$f|_B \equiv 1$.
+拓扑空间$X$是正规空间(normal)的充分必要条件是任取不相交的闭子集$A$,$B$，存在连续映射$\func{f}{X}{[0,1]}$满足$f|_A \equiv 0$，$f|_B \equiv 1$.
 \end{lemma}
 
 先试一个关于normal space的命题
