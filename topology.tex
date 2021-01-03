@@ -323,7 +323,7 @@ $X$和$d$合起来叫一个\textbf{度量空间}(metric space)，记做$(X,d)$.
 如果在拓扑空间$(X,\tau)$中，子集$A$的余集$A^{c}$是开集，则称$A$为\textbf{闭集}(closed set)
 \end{definition}
 
-其中余集$A^{c}= X \smallsetminus A$,在平凡拓扑中，闭集就是$\emptyset$和$X$;在离散拓扑中，任何子集都是闭集;闭集和开集互为余集，也可以从闭集出发定义拓扑结构:
+其中余集$A^{c}= X \setminus A$,在平凡拓扑中，闭集就是$\emptyset$和$X$;在离散拓扑中，任何子集都是闭集;闭集和开集互为余集，也可以从闭集出发定义拓扑结构:
 
 \begin{definition}
 $X$的子集族$\sigma$是某个拓扑结构下全体闭集构成的集合当且仅当它满足下述三条公理：
@@ -337,14 +337,27 @@ $X$的子集族$\sigma$是某个拓扑结构下全体闭集构成的集合当且
 我们尝试来推一下开集公理，第一个公理很显然，主要看第二个和第三个，开集和闭集互为余集，如果$A$和$B$为闭集,则$A^c$和$B^c$为开集，根据De Morgan定律\[A^c \cup B^c = (A \cap B)^c , A^c \cap B^c = (A \cup B)^c\]，根据闭集公理，上面两个等式结果都是开集。
 
 \begin{definition}
-如果$x$每个邻域中都含有$A \smallsetminus \{x\}$中的点，则称$x$为$A$的聚点或者极限点(limit point 或 cluster point 或 point of accumulation)，全体聚点构成的集合$A'$称之为$A$的导集(derived set),$\overline{A}=A \cup A'$称为$A$的闭包(closure).换言之，$x \in \overline{A}$当且仅当$x$的每个邻域中都含有$A$中的点。
+如果$x$每个邻域中都含有$A \setminus \{x\}$中的点，则称$x$为$A$的聚点或者极限点(limit point 或 cluster point 或 point of accumulation)，全体聚点构成的集合$A'$称之为$A$的导集(derived set),$\overline{A}=A \cup A'$称为$A$的闭包(closure).换言之，$x \in \overline{A}$当且仅当$x$的每个邻域中都含有$A$中的点。
 \end{definition}
 
-突然多了很多定义，让人触不及防，因为一开始不知道它们的深刻含义。这个定义感觉很模糊，因为没有给$A$到底是什么东西，$x$和$A$关系是什么？
+聚点的概念对理解闭集有帮助.
 
-假设$A$是任意给定一个$X$的子集，那么$x$也是任意取的，所以两者并没有直接关系，而是靠上面刻画的几个关系，首先把用聚点的定义，把$x$和$A$联系起来，然后把这样的$x$都找出来，于是就有全体聚点这个概念，再给它一个定义为导集，把导集和$A$本身并起来，再给一个定义就是闭包。
+\begin{proposition}
+拓扑空间$X$中子集$A$闭当且仅当$A$的聚点都含于它本身
+\end{proposition}
 
-上面重新解读了一下定义，那么再研究一下这个闭包有什么性质？闭包$\overline{A}$中任意一点$x$,如果$x \in A'$,则$x$的每个邻域都含有$A$中的点。如果$x \in A$，怎么推出和前面一样的结论呢？注意这样好像只需要含有就行，不需要全含，所以$x$本身在$A$里面这个条件是天然成立的。
+
+\begin{proof}
+当$A$是闭集，假设存在$A$的聚点$p \in X \setminus A$,$X \setminus A$开且于$A$无交点，与假设矛盾.
+
+当$A$所有聚点含于$A$本身，则$\forall z \in X \setminus A, \exists U_z \cap A = \emptyset$,取遍所有这样的$z$，$X \setminus A=\bigcup\limits_{z \in X \setminus A } U_z$,所以$X \setminus A$,从而$A$是闭集.
+\end{proof}
+
+%突然多了很多定义，让人触不及防，因为一开始不知道它们的深刻含义。这个定义感觉很模糊，因为没有给$A$到底是什么东西，$x$和$A$关系是什么？
+
+%假设$A$是任意给定一个$X$的子集，那么$x$也是任意取的，所以两者并没有直接关系，而是靠上面刻画的几个关系，首先把用聚点的定义，把$x$和$A$联系起来，然后把这样的$x$都找出来，于是就有全体聚点这个概念，再给它一个定义为导集，把导集和$A$本身并起来，再给一个定义就是闭包。
+
+%上面重新解读了一下定义，那么再研究一下这个闭包有什么性质？闭包$\overline{A}$中任意一点$x$,如果$x \in A'$,则$x$的每个邻域都含有$A$中的点。如果$x \in A$，怎么推出和前面一样的结论呢？注意这样好像只需要含有就行，不需要全含，所以$x$本身在$A$里面这个条件是天然成立的。
 
 \begin{proposition}
 设$A$是$X$的一个子集，则$(A^{c})^{\circ}=(\overline{A})^c$.
@@ -377,8 +390,19 @@ $X$的子集族$\sigma$是某个拓扑结构下全体闭集构成的集合当且
 
 这个定义有点抽象，第一个话是指，定义$X$某个子集$A$，如果对$X$中任意的点$x$，要么属于$A$或者是$A$的一个聚点，则称$A$在$X$中是稠密的。非正式说法是，对于$X$中任意的点$x$,要么属于$A$或者“任意接近”$A$中的某个点。
 
+如何去判定一个子集是不是稠密子集呢？
+\begin{proposition}
+定义拓扑空间$X$下子集$A$,$A$稠密当且仅当对于任意非空开集与$A$的交集非空.
+\end{proposition}
+
+\begin{proof}
+若$A$稠密子集，其实也就是说$X \setminus A$都是$A$的聚点，所以$X$上任意点的开集都和$A$有交点.
+
+若任意非空开集与$A$都非空，也就是说任意$x \in X$点的开集都与$A$非空，则$X \setminus A$都是$A$上的聚点.
+\end{proof}
+
 \begin{example}
-有理数集是实数集一个稠密集，因为每一个实数，可能是一个有理数或者存在一个任意接近它的有理数(丢番图近似)。
+有理数集是实数集一个稠密集，因为每一个实数，可能是一个有理数或者存在一个任意接近它的有理数(丢番图近似),严格证明: 假设$\overline{\mathbb{Q}} \neq \mathbb{R}$，则有一点$p \in \overline{\mathbb{Q}} \setminus \mathbb{R}$,$p \notin \mathbb{Q}$,只有可能$q$不是$\mathbb{Q}$的聚点，所以存在一个$q$开区间$(a,b)$与$\mathbb{Q}$没有交点，但根据实数的稠密性$a$和$b$之间是可以确定一个有理数的，这与假设矛盾.
 \end{example}
 
 \begin{example}
@@ -1232,6 +1256,77 @@ finally! 给定一个$[0,1]$里面一个开集$U=(a,b) \cap [0,1]$,其中$(a,b)$
 \end{proof}
 %http://homepage.divms.uiowa.edu/~jsimon/COURSES/M132Fall07/UrysohnLemma_v5.pdf
 %http://www.math.toronto.edu/ivan/mat327/docs/notes/13-urysohn.pdf
+
+\newpage
+\subsection{Connectedness}
+%http://www.math.lsa.umich.edu/~kesmith/oct26notes.pdf
+
+\begin{definition}
+如果拓扑空间$X$不能被分解为两个非空不相交开子集的并集，则称$X$\textbf{连通}(connected).
+
+\rm In other words, connected means that the space can’t be separated into two open sets in a non-trivial way.
+\end{definition}
+
+
+\begin{example}
+\rm $R$ is connected.
+
+假设$R$不是连通的，则存在两个非空开集$A \cup B = X$且$A \cap B = \emptyset$.分别取一点$a \in A$和$b \in B$，不妨设$a < b$,然后再取定一个$A$中的子集$C=\Set{x \in \mathbb{R}}{[a,x] \subseteq A}$.$C$肯定有上界,因为$x < b$,所以根据实数完备性公理，$C$有上确界$\mu$,自然地$\mu$要么在$A$里面，那么在$B$里面.
+
+若$\mu$在$A$里面，根据欧式拓扑的定义，$\mu$可以找一个开集$U \subseteq A$,即$(\mu-\varepsilon,\mu+\varepsilon)$,这显然与$\mu$是$C$的上确界矛盾，因为还可以把$[\mu,\mu+\varepsilon)$扔到$C$里面.
+
+同理，若$\mu$在$A$，则可以找到一个比$\mu$更小的上确界.所以这个$\mu$并不在$A$和$B$其中一个.与假设矛盾,最后$R$ is connected.
+\end{example}
+
+
+
+\newpage
+\subsection{Compactdness}
+
+\rm H-Borel定理还是引理？已经不重要了都是唯一属于他的,紧致性是它的一般性推广.
+
+\begin{definition}
+若集合族$\mathcal{U}$满足$\bigcup\mathcal{U} \supseteq X$，则称之为$X$的一个\textbf{覆盖}(\rm cover). 仅含有限多个元素的覆盖称为\textbf{有限覆盖}(finite cover).若$X$的覆盖$\mathcal{U}$有子族$\mathcal{V} \subseteq \mathcal{U}$，使得$\mathcal{V}$也构成$X$的覆盖，则称$\mathcal{V}$是$\mathcal{U}$的\textbf{子覆盖}(subcover).
+\end{definition}
+
+
+\begin{definition}
+若拓扑空间$X$的任意开覆盖有有限子覆盖，则称$X$\textbf{紧致}(\rm compact).
+\end{definition}
+
+同样这里也可以用闭集来判定连通性.
+
+\begin{proposition}
+下面几个关于$X$连通的命题都是等价的：
+\begin{enumerate}
+	\item $X$不能分解为两个不相交闭集的交集的并集.
+	\item $X$里面既开又闭的子集的只有$\emptyset$和$X$.
+\end{enumerate}
+\end{proposition}
+
+这几个命题都很显然,用反证法来说明即可，偷懒就不证了.
+
+
+\begin{proposition}
+连续映射保留紧致性. 定义$\func{f}{X}{Y}$是一个连续函数,若$A \subseteq X$紧致，则$f(A)$紧致.
+\end{proposition}
+
+\begin{proof}
+取$Y$上一组开覆盖$\bigcup\limits_{\alpha \in A}V_\alpha=Y$,这样$f(A) \subseteq \bigcup\limits_{\alpha \in A}V_\alpha$.然后我们有\[A \subseteq f^{-1}(f(A)) \subseteq \bigcup\limits_{\alpha \in A}V_\alpha = \bigcup\limits_{\alpha \in A} f^{-1}(V_\alpha).\]其中$f^{-1}(V_\alpha)$开，所以就表示$A$可以被一堆开集盖住，由因为$A$紧致，所以$A \subseteq \bigcup\limits_{\alpha \in S} f^{-1}(V_\alpha)$,附带地说明了$f(A) \subseteq f(\bigcup\limits_{\alpha \in S} f^{-1}(V_\alpha) = \subseteq \bigcup\limits_{\alpha \in S} V_\alpha $.所以$f(A)$紧致.
+\end{proof}
+
+
+
+\begin{example}
+$X$是一个度量空间，若子集$A$紧致则$A$是一个闭集.
+\end{example}
+
+\begin{proof}
+其实就是要说明$X \setminus A$开，我们的证明策略是在$X \setminus A$中固定一点$x$，然后再任取$y \in A$，分别取它们不相交的开集$x \in U_x$和$y \in U_y$(Hausdorff)，最后我们只需要说明这些$\bigcap U_x$与$K$之间没有交点就行了.
+
+开始正式证明\[A = \bigcup\limits_{y \in A} \{y\} = \bigcup\limits_{y \in A}U_y \],如果我们有$A$紧致，则$ A \subseteq \bigcup\limits_{y \in S} U_y$. 按照我们前面的策略，我们需要取任意多对$(U_x,U_y)$,其中$U_x$和$U_y$都是不相交的开集，我们肯定想要是每个$x$都只对应一个开集就好了，这样$X \setminus A$就是任意多个开集的并，它就是一个开集，我们现在就这样做.把所有这样的$U_x$取交集，而现在$A$是紧致的，所以我们也只需要取有限多个$U_x$交也就够了，记$V = \bigcap\limits_{y \in S} V_y$,其中$x \in V_y$代表$U_x$和$y$对应,这里$V$也是开集.我们现在只需要说明这个$V \cap K = \emptyset$就行了\[V \cap K \subseteq \bigcap\limits_{y \in S} V_y \cap \bigcup\limits_{z \in S} U_z = \bigcup\limits_{z \in S}(\bigcap\limits_{y \in S} V_y \cap U_z) \subseteq \bigcup\limits_{z \in S}(V_z \cap U_z) = \emptyset. \],最后取遍所有$x$都有这样的一个开集$V$，$X \setminus A = \bigcup V$，所以$A$是一个闭集.
+\end{proof}
+
 \end{document}
 
 
