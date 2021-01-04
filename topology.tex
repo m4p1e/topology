@@ -353,6 +353,27 @@ $X$的子集族$\sigma$是某个拓扑结构下全体闭集构成的集合当且
 当$A$所有聚点含于$A$本身，则$\forall z \in X \setminus A, \exists U_z \cap A = \emptyset$,取遍所有这样的$z$，$X \setminus A=\bigcup\limits_{z \in X \setminus A } U_z$,所以$X \setminus A$,从而$A$是闭集.
 \end{proof}
 
+\begin{definition}
+设$A$是$X$的一个子集，$A$的边界(\rm boundary)为\[ \partial A:={\bar {A}}\setminus A^{\circ }\].简而言之就是在$A$的闭集但是不在$A$的内部这样的点构成的集合.
+\end{definition}
+
+\begin{proposition}
+闭包的定义也有几个等价的命题:
+	\begin{enumerate}
+		\item 所有包含$A$的闭集的交. $\overline A = \bigcap\{C \subseteq X | C \text{ is closed }, A
+\subseteq C\}.$
+		\item $A$和$A$的边界的交.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) 这种证明应该经典的两边包含，取任意闭集$C$，使得$A \subseteq C$,假设存在$x \ in X \setminus C$，使得$x \in \overline{A}$,矛盾来了$X \setminus C$开，但是$X \setminus C \cap A = \emptyset$,所以不存在这样的$x$,从而$\overline{A} \subseteq C$. 由于$C$是任意的，所以取交集还是成立\[\overline{A} \subseteq \bigcap C\].
+
+反过来$\overline{A}$本身是闭集(后面一点红色的字)，同时它还包含$A$,所以所有包含$A$的闭集的交集肯定是它的一个子集，从而\[\bigcap C \subseteq \overline{A}\].
+
+(2)未来用到boundary的时候，再回过头来证吧...
+\end{proof}
+
 %突然多了很多定义，让人触不及防，因为一开始不知道它们的深刻含义。这个定义感觉很模糊，因为没有给$A$到底是什么东西，$x$和$A$关系是什么？
 
 %假设$A$是任意给定一个$X$的子集，那么$x$也是任意取的，所以两者并没有直接关系，而是靠上面刻画的几个关系，首先把用聚点的定义，把$x$和$A$联系起来，然后把这样的$x$都找出来，于是就有全体聚点这个概念，再给它一个定义为导集，把导集和$A$本身并起来，再给一个定义就是闭包。
@@ -550,10 +571,22 @@ König's definition of a bijection h:A → B from given example injections f:A �
 设$\func{f}{X}{Y}$是一个双射，然后我取$X$上的拓扑结构为离散拓扑，$Y$上的拓扑结构为平凡拓扑。显然在$f$上是连续的，因为不管$f(x)$取什么，其原像对应的子集都是开集,但是反过来$f^{-1}$，就可能不是连续了，因为$Y$上拓扑就两个元素，我大可以找很多$X$上的邻域，对应到$Y$上，并不在这样拓扑里面.
 \end{example}
 
+\begin{example}
+$\mathbb{R}$任意两个开区间$(a,b)$和$(c,d)$同胚. 把$(a,b)$放到$x$轴上，$(c,d)$放到$y$轴上，$(a,c)$和$(b,d)$那条直线就是$f$. 
+\end{example}
+
+\begin{example}
+$\mathbb{R}$和开区间$(-1,1)$同胚，构造一个$\func{f}((-1,1))(R)$\[f(x)=\frac{x}{1-|x|}.\]
+\end{example}
+
+\begin{example}
+更一般地，$\mathbb{R}$和任意的开区间$(a,b)$同胚. 我们直接用上面的$f$来构造.直接移动和放缩定义域就行\[f((\frac{b-a}{2})(x-\frac{(b+a)}{2}))=f((\frac{b-a}{2}x-\frac{b^2-a^2}{4}))=\frac{(\frac{b-a}{2}x-\frac{b^2-a^2}{4})}{1-|(\frac{b-a}{2}x-\frac{b^2-a^2}{4})|}\]
+\end{example}
+
 这样看来同胚，其实就是我们在给定一一对应的集合映射上，需要再去关注拓扑结构之间的关系，也就是所谓的连续.
 
 \begin{theorem}
-同胚是拓扑空间之间的等价关系.我们称一个关系$\cong$是\textbf{等价关系}(equivalence relation)，如果它满足:并且对于每个指标$\lambda in \Lambda$,取定一个拓扑空间$(Y_\lambda,\tau_\lambda)$以及一个映射$\func{\lambda}{X}{Y_\lambda}$
+同胚是拓扑空间之间的等价关系.我们称一个关系$\cong$是\textbf{等价关系}(equivalence relation)，如果它满足:并且对于每个指标$\lambda \in \Lambda$,取定一个拓扑空间$(Y_\lambda,\tau_\lambda)$以及一个映射$\func{\lambda}{X}{Y_\lambda}$
 \begin{enumerate}
 	\item 自反性(reflexivity) $X \cong X$
 	\item 对称性(symmetry) 如果$X \cong Y$,则$Y \cong X$ 
@@ -712,6 +745,11 @@ $A$是邻域的充分必要条件是: 分别存在$X$中的开集$U$和$Y$中的
 \end{proposition}
 
 这里需要非常注意一个东西，无论是开集还是闭集，一定要讲清楚是相对哪个拓扑而言的,这一点非常重要.
+
+\begin{example}
+定义$\mathbb{Z}$表示$\mathbb{R}$欧式拓扑空间上的包含所有整数的子空间，则$\mathbb{Z}$是一个离散拓扑. 这个还是比较显然，只要说明$\mathbb{Z}$上所有的单点集都是开集就行，任取一个整数$n$，你都可以找到一个$\mathbb{R}$上开区间$(n-1,n+1)$包含只包含它.
+\end{example}
+
 
 \begin{example}
 我们来思考一个度量空间上的自然的子空间是什么呢？设$(X,d)$是一个度量空间，度量拓扑为$\tau$.$A$是$X$的子集，则可以在$A$上规定一个自然的度量$d_A$,使得任取$x,y \in A$,$d_A(x,y)=d(x,y)$.任取$a \in A$,考察它在$X$中的一个$\varepsilon$球型邻域$B_\varepsilon=\Set{x \in X}{d(a,x) < \varepsilon}$,你会发现\[B_\varepsilon \cap A = \Set{x \in A}{d(x,y) < \varepsilon}.\]恰好就是$a$在$A$中关于度量$d_A$的$\varepsilon$球形邻域.	
@@ -1267,6 +1305,17 @@ finally! 给定一个$[0,1]$里面一个开集$U=(a,b) \cap [0,1]$,其中$(a,b)$
 \rm In other words, connected means that the space can’t be separated into two open sets in a non-trivial way.
 \end{definition}
 
+同样这里也可以用闭集来判定连通性.
+
+\begin{proposition}
+下面几个关于$X$连通的命题都是等价的：
+\begin{enumerate}
+	\item $X$不能分解为两个不相交闭集的交集的并集.
+	\item $X$里面既开又闭的子集的只有$\emptyset$和$X$.
+\end{enumerate}
+\end{proposition}
+
+这几个命题都很显然,用反证法来说明即可，偷懒就不证了.
 
 \begin{example}
 \rm $R$ is connected.
@@ -1293,18 +1342,6 @@ finally! 给定一个$[0,1]$里面一个开集$U=(a,b) \cap [0,1]$,其中$(a,b)$
 \begin{definition}
 若拓扑空间$X$的任意开覆盖有有限子覆盖，则称$X$\textbf{紧致}(\rm compact).
 \end{definition}
-
-同样这里也可以用闭集来判定连通性.
-
-\begin{proposition}
-下面几个关于$X$连通的命题都是等价的：
-\begin{enumerate}
-	\item $X$不能分解为两个不相交闭集的交集的并集.
-	\item $X$里面既开又闭的子集的只有$\emptyset$和$X$.
-\end{enumerate}
-\end{proposition}
-
-这几个命题都很显然,用反证法来说明即可，偷懒就不证了.
 
 
 \begin{proposition}
