@@ -610,6 +610,16 @@ $\mathbb{R}$和开区间$(-1,1)$同胚，构造一个$\func{f}((-1,1))(R)$\[f(x)
 
 对各种类型的拓扑空间进行同胚分类，是拓扑学最基本的研究课题之一。证明两个空间同胚，只要想办法把同胚映射构造出来就行了。而要区分两个空间不同胚，只需要证明一个空间满足某种性质，而另一空间不满足该性质，或者证明对两个空间算某种拓扑不变量的时候，计算结果不同。
 
+\newpage
+\subsection{Weaker and Stronger}
+
+\begin{definition}
+定义集合$X$上的两个拓扑结构$\tau$和$\tau'$,我们说$\tau$比$\tau'$更弱(coarser or weaker)，则$\tau \subseteq \tau'$，反过来说就是$\tau'$比$\tau$更强(finer or stronger).
+
+换句话说就是，$\tau$比$\tau'$更弱当且仅当在恒同映射下 \[ (X,\tau') \rightarrow (X,\tau).\]连续.
+\end{definition}
+
+
 
 \newpage
 \subsection{Product Topology}
@@ -947,8 +957,41 @@ $\mathbb{R}\mathbb{P}^2$中每个点$x$的原像集$p^{-1}(x)$恰好由球面上
 \end{proof}
 \end{example}
 
-\newpage
 
+\newpage
+\subsection{Misc}
+
+\begin{proposition}
+给定集合$X$，子集族$S \subseteq P(x)$， 包含$S$的最小拓扑为$\tau_S = \Set{U \subseteq X}{\bigcup\limits_{V \in \mathcal{F}} V, \mathcal{F} \subseteq S'}$,其中$S' = \Set{S_1 \cap \cdots \cap S_k}{S_1,\cdots,S_k \in S, k \in \mathbb{N}} \cup \{X\}$.
+\end{proposition}
+
+用文字来说就是包$S$的最小拓扑是任意并上$S$里面元素有限的交所构成的. 证明经典两边包含.
+
+\begin{definition}
+若拓扑空间上$(X,\tau)$中的拓扑结构$\tau = \tau_S$，也就是说$\tau$是由$S$导出的，则称$S$为拓扑空间$(X,\tau)$的一个\rm subbasis(准基).
+\end{definition}
+
+如果我们能只做$S$里面元素的任意交集就能构成一个拓扑那就太好了，哈哈，这个时候$S$其实就是一个basis（拓扑基）.
+
+basis 有一个比较好的性质,在证明连续的时候，只需要check basis里面的元素的原像是否开就行，不用check所有的开集.
+
+\begin{proposition}
+给定两个拓扑空间$(X,\tau_S)$，$Y$和它们之间的映射$\func{f}{Y}{X}$，$f$连续当且仅当$\forall s \in S$，$f^{-1}(s)$是$Y$上的开集.
+\end{proposition}
+
+英文definition表示我自己翻译有点难看 ((
+
+\begin{definition}
+\rm $\mathcal{B}$ is a local base for $(X,\tau)$ at $x$ iff all $B \in \mathcal{B}$ are open ($\mathcal{B} \in \tau$)and also contain $x$, and moreover for all $U \in \tau$ with $x \in U$ there exists some $B \in \mathcal{B}$ such that $B \subseteq U$.
+\end{definition}
+
+
+\begin{proposition}
+给定$X$上的子集族$B$，$B$是$X$的一个basis 当且仅当$\forall x \in X$，$B_x$是$X$上$x$的一个local basis.
+\end{proposition}
+
+
+\newpage
 \section{General Topology}
 \subsection{Countability}
 
@@ -1327,6 +1370,17 @@ finally! 给定一个$[0,1]$里面一个开集$U=(a,b) \cap [0,1]$,其中$(a,b)$
 同理，若$\mu$在$A$，则可以找到一个比$\mu$更小的上确界.所以这个$\mu$并不在$A$和$B$其中一个.与假设矛盾,最后$R$ is connected.
 \end{example}
 
+连通性有一个比较好的性质就是可以用来判定说明一些两个拓扑空间不同胚.
+
+\begin{proposition}
+连通性在同胚关系上保留.
+\end{proposition}
+
+\begin{example}
+$X=[0,2]$和$Y=[0,1] \cup [2,3]$不同胚，在$Y$上可以$[0,1]$是一个clopen($[0,1] = [0,1] \cap Y$，$[0,1] = (-1,-\frac{3}{2}) \cap Y$)，如果$X$和$Y$同胚，则$f^{-1}([0,1])$也应该在$X$上是个clopen，但是$X$连通，所以这样的$f$不存在.
+\end{example}
+
+这里可以引出$\mathbb{R}$上哪样的子空间是连通的一般性的性质.
 
 
 \newpage
