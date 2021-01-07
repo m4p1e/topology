@@ -756,6 +756,20 @@ $A$是邻域的充分必要条件是: 分别存在$X$中的开集$U$和$Y$中的
 
 这里需要非常注意一个东西，无论是开集还是闭集，一定要讲清楚是相对哪个拓扑而言的,这一点非常重要.
 
+\begin{definition}
+子空间上的万有性质是指对于任意的连续映射$\func{g}{Z}{Y}$,如果$g(Z) \subseteq X$,其中$X$表示$Y$的一个子空间，则存在唯一的连续映射$\func{f}{Z}{X}$.
+
+\begin{center}
+% https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoBGAXVJADcBDAGwFcYkQAtEAX1PU1z5CKAEyli1Ok1bsAmjz4gM2PASJiRkhizaIQADR6SYUAObwioAGYAnCAFskZEDghJyNbTL2mF1u46Izq5IYlI67FZ+ILYO7jQhiGFeuiBYAHrAALTk3EbcQA
+\begin{tikzcd}
+                                    &  & Y \arrow[dd, "i^{-1}"] \\
+Z \arrow[rru, "g"] \arrow[rrd, "f"] &  &                        \\
+                                    &  & X                     
+\end{tikzcd}
+\end{center}
+\end{definition}
+
+
 \begin{example}
 定义$\mathbb{Z}$表示$\mathbb{R}$欧式拓扑空间上的包含所有整数的子空间，则$\mathbb{Z}$是一个离散拓扑. 这个还是比较显然，只要说明$\mathbb{Z}$上所有的单点集都是开集就行，任取一个整数$n$，你都可以找到一个$\mathbb{R}$上开区间$(n-1,n+1)$包含只包含它.
 \end{example}
@@ -1382,6 +1396,18 @@ finally! 给定一个$[0,1]$里面一个开集$U=(a,b) \cap [0,1]$,其中$(a,b)$
 连通性在同胚关系上保留.
 \end{proposition}
 
+条件可以更弱一点.
+
+\begin{proposition}
+给定两个拓扑空间$(X,\tau)$，$(Y,\tau')$和它们的一个映射$\func{f}{(X,\tau)}{(Y,\tau')}$,且$f$满足连续满射.若$(X,\tau)$连通，则$(X,\tau')$连通.
+\end{proposition}
+
+\begin{proof}
+\rm 假设$(Y,\tau')$不连通，则其上存在一个非空clopen子集$U$且$U \neq Y$，考虑$f^{-1}(U)$，由于$f$连续，所以$f^{-1}(U)$也是clopen,$U$非空且$U \neq Y$，再由满射的性质,$f^{-1}(U)$也是非空且$f^{-1}(U) \neq X$，这就和$(X,\tau)$产生了矛盾，所以假设条件不成立.
+\end{proof}
+
+如果我们再把上面的满射这个条件拿掉，上面命题可能就不成立了，但是我们依然有: \textbf{连通空间的连续映射的像空间是连通的}.
+
 \begin{example}
 \rm $X=[0,2]$和$Y=[0,1] \cup [2,3]$不同胚，在$Y$上$[0,1]$是一个clopen($[0,1] = [0,1] \cap Y$，$[0,1] = (-1,-\frac{3}{2}) \cap Y$)，如果$X$和$Y$同胚，则$f^{-1}([0,1])$也应该在$X$上是个clopen，但是$X$连通，所以这样的$f$不存在.
 \end{example}
@@ -1400,6 +1426,27 @@ $\mathbb{R}$上的子空间连通当且仅当它是$\mathbb{R}$上的区间.
 $\mathbb{R}$上的区间都是连通的，证明方法类似上面证明$\mathbb{R}$的连通性一样.
 
 \rm 反过来，如果$\mathbb{R}$上的某个子集$A$连通，假设$A$不是区间，则存在一点$y$,使得$x< y < z$($x \in A,z \in A$), 但是$y \notin A$.那么我们可以找到一个clopen子集$U = (-\infty,y) \cap A = (-\infty,y] \cap A $，这个clopen子集肯定是非空的，因为它是包含$x$的，同时它也是一个真子集，因为不包含$z$,于是这样的clopen是存在的，这里就产生矛盾了，所以假设不成立，$A$是一个区间.
+\end{proof}
+
+\newpage
+\subsection{Pathwise Connected}
+
+从上面看到其实连通性的刻画通常是通过“不连通”来反着定义的，这就使得证明连通一般要比证明不连通要困难多，比如上面连续映射下的连通性相互联系，给定$X$连通，你要证明$Y$不连通，你需要证明$X$和$Y$之间没有连续满射的函数存在，你需要说明对所有映射都不满足这样的性质是比较的难的，下面我们引入连通性的另一种刻画方式. 它刻画方式恰恰相反，它是通过什么叫“能连在一起”来定义的.
+
+\begin{definition}
+\rm 称一个从区间$[0,1]$到拓扑空间$X$的连续映射$\func{a}{[0,1]}{X}$为$X$中的一条从$a(0)$到$a(1)$的道路(path)，称$a(0)$为其\textbf{起点}(initial point)，称$a(1)$为其\textbf{终点}(terminal point).
+\end{definition}
+
+\begin{definition}
+\rm 如果一个非空拓扑空间满足任取不相交的两点$x,y \in X$，$X$中存在从$x$到$y$的道路，则称$X$\textbf{道路连通}(path-connected).
+\end{definition}
+
+\begin{proposition}
+道路连通空间是连通的.
+\end{proposition}
+
+\begin{proof}
+如果$X$道路连通，假设它不是连通，则$X$存在一个非空且不为$X$的clopen子集$U$,我们取两点$a \in U$和$b \in X \setminus U$，再给定一个道路$\func{a}{[0,1]}{X}$使得$f(0)=a,f(1)=b$. 由$a$连续，我们知道$f^{-1}(U)$也是一个clopen子集，然后我们接着考虑它的成员，它肯定非空，因为$a \in f^{-1}(U)$,同时它不等于$[0,1]$因为$b \in U$，这就说明$[0,1]$不连通，产生矛盾了，假设条件不成立.
 \end{proof}
 
 \newpage
