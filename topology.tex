@@ -1505,11 +1505,27 @@ $\mathbb{R}$上的区间都是连通的，证明方法类似上面证明$\mathbb
 \end{definition}
 
 \begin{proposition}
+道路连通空间在连续映射下的像集道路连通
+\end{proposition}
+
+\begin{proof}
+设$X$道路连通，任取$x,y \in f(X)$，设$g$是$X$中$f^{-1}(x)$到$f^{-1}(y)$的一条道路，则$g(0)=f^{-1}(x),g(1)=f^{-1}(y)$，两边再取$f$，有$f \circ g(0) = x,f \circ g(1) = y$，所以$f \circ g$就是$x$到$y$的一条道路.
+\end{proof}
+
+\begin{proposition}
 道路连通空间是连通的.
 \end{proposition}
 
 \begin{proof}
 如果$X$道路连通，假设它不是连通，则$X$存在一个非空且不为$X$的clopen子集$U$,我们取两点$a \in U$和$b \in X \setminus U$，再给定一个道路$\func{a}{[0,1]}{X}$使得$f(0)=a,f(1)=b$. 由$a$连续，我们知道$f^{-1}(U)$也是一个clopen子集，然后我们接着考虑它的成员，它肯定非空，因为$a \in f^{-1}(U)$,同时它不等于$[0,1]$因为$b \in U$，这就说明$[0,1]$不连通，产生矛盾了，假设条件不成立.
+\end{proof}
+
+\begin{theorem}
+定义连续映射$\func{f}{[a,b]}{\mathbb{R}}$且$f(a) \neq f(b)$，则对于任何$f(a)$和$f(b)$之间的数$p$，存在一个点$c \in [a,b]$，使得$f(c) = p$.
+\end{theorem}
+
+\begin{proof}
+因为$[a,b]$连通，在连续映射下$f([a,b])$也是连通的，所以$f([a,b])$是一个区间，现在$f(a)$和$f(b)$都是这个区间上的点，所以$p \in f([a,b])$也在这个区间里面，所以存在$c$使得$f(c) = p$.
 \end{proof}
 
 \begin{example}
@@ -1525,10 +1541,40 @@ $X$是一个连通但是不是道路连通的拓扑空间。
 
 %为什么$X$不是道路连通的呢？固定一点$T=(t,\sin\frac{1}{t})\ (t\in (0,1]))$,在定义$O=(0,0)$,假设$X$道路连通，则存在一个连续映射$\func{f}{[0,1]}{X}$,使得$f(0)=O$，$f(1) = T$. 再取$[0,1]$上的一个极限为$0$的点列$\{t_n\}$，按照连续函数的性质$\{f(t_n)\}$的极限为$f(0)$，但是实际上这个极限是不存在的，图像在趋于$0$时，在剧烈上下振荡，这个极限并不趋于$(0,0)$.
 
-假设$X$道路连通，取两点$O=(0,0)$，$T=(\frac{1}{\pi},0)$和则存在连续映射$f(t)=(a(t),b(t))$,使得$f(0)=O$，$f(1)=T$.根据中值定理存在$0<t_1<1$使得$a(t_1)=\frac{2}{3\pi}$，接着做induction，存在$0<t_2<t_1$使得$a(t_2) = \frac{2}{5\pi}$，最后可以得到一个递减有界点列$\{t_n\} \ \lim t_n = 0$，$a(t_n) = \frac{2}{(2n+1)\pi}$，对应的$b(t_n)=(-1)^n$. 根据连续函数的性质${f(t_n)}$极限也应该存在，但是$\lim b_n$并不存在，所以$f$并不连续. 
+假设$X$道路连通，取两点$O=(0,0)$，$T=(\frac{1}{\pi},0)$和则存在连续映射$f(t)=(a(t),b(t))$,使得$f(0)=O$，$f(1)=T$.根据中值定理存在$0<t_1<1$使得$a(t_1)=\frac{2}{3\pi}$，接着做induction，存在$0<t_2<t_1$使得$a(t_2) = \frac{2}{5\pi}$，最后可以得到一个递减有界点列$\{t_n\} \ \lim t_n = 0$，$a(t_n) = \frac{2}{(2n+1)\pi}$，对应的$b(t_n)=(-1)^n$. 根据连续函数的性质${f(t_n)}$极限也应该存在，但是$\lim b_n$并不存在，所以$f$并不连续. （这里也可以不用中值定理，$a$是连续则$a((0,t))$也是连通的，根据我们之前的证明的性质$a((0,t))$是一个区间\rm(interval)，所以我们肯定是可以找到$t' \in (0,t)$使得$a(t')$刚好位于波峰的位置，然后再induction构造$\{t_n\}$，再在每两个波峰之间取一个波谷$\{s_n\}$，它们两个都是极限都是相同的，但是$\lim b(t_n) \neq b(s_n)$（可数拓扑基下$f$连续当且仅当所有以$x$为极限的数列的像集的极限都是$f(x)$）.
 
 
 最后我们知道连通子集的闭包也是连通的$\overline{X} = \left\{  \left( x, \sin \tfrac{1}{x}  \right ) :  x \in (0,1] \right\} \cup \{(0,y) : y \in [-1,1]\}$，但是同样不是道路连通的.
+
+%http://uregina.ca/~franklam/Math535/Math535_1022.pdf
+\begin{proposition}
+\rm 在$X$上定义一个关系$\sim$，使得$x \sim y$当且仅当$X$上存在一条从$x$到$y$的道路. 则$\sim$是一个等价关系. 每个点$x$所在的等价类$\left<x \right>$称为$x$所在的道路分支(path component).
+\end{proposition}
+
+\begin{proof}
+反身性: 任取$x \in X$，有\textbf{点道路}(constant path)$f(t) = x,t \in [0,1]$.$f$连续是比较显然的，所以$x \sim x$.
+
+对称性: 若$x \sim y$，则存在一条$x$到$y$的道路$f$，有\textbf{逆道路}(inverse path)$\overline{f}(t)=f(1-t)$. $f$是连续的，因为$t \mapsto (1-t)$是一个$[0,1]$自身的同胚，所以$y \sim x$.
+
+传递性: 若$x \sim y, y \sim z$，则存在$x$到$y$的道路$f$和$y$到$z$的道路$g$，其中$f(1) = g(0)$，有\textbf{乘积道路}(product path or concatenation)$ab$ \[[0,1]\rightarrow X, \ t \mapsto \begin{cases} f(2t) & t \in [0,\frac{1}{2}] \\ g(2t-1) & t \in [\frac{1}{2},1] \end{cases}\]，$ab$是连续的，因为在两个闭集上的限制映射都是连续的.所以$x \sim z$.
+\end{proof}
+
+下面这个定理非常有意思
+
+\begin{theorem}
+设$X$有一个道路连通覆盖(cover of path-connected subsets)$\mathscr{B}$，即$\mathscr{B}$是由道路连通子集构成的子集族，并且满足$\bigcup \mathscr{B} = X$. 如果此时$X$还有另外一个道路连通子集$A$与每一个$B \in \mathscr{B}$均相交非空，则$X$道路连通.
+
+\begin{center}
+\includegraphics[width=7cm, height=4cm]{images/cover_of_path_connected_subsets.png}
+\end{center}
+
+\end{theorem}
+
+\begin{proof}
+任取$x,y \in X$，不妨设$x \in B_x \in \mathscr{B},y \in B_y \in \mathscr{B}$，则存在从$x$到某个$z_x \in B_x \cap A$的道路$f$，也存在$y$到某个$z_y \in B_y \cap A$的道路$g$，进而还存在$z_x$到$z_y$的道路，根据道路分支下的等价关系，存在$x$到$y$的道路$fc\overline{g}$.所以$X$道路连通.
+\end{proof}
+
+
 \newpage
 \subsection{Compactdness}
 
