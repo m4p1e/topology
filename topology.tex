@@ -1,5 +1,6 @@
-\documentclass{article}
-
+\input{setup/MAIN.tex}
+%\documentclass{article}
+%\usepackage{package/color-env}
 \usepackage{ctex}
 \usepackage{tikz}
 \usetikzlibrary{cd}
@@ -14,7 +15,7 @@
 %\usepackage{pgfplots}
 
 
-\usepackage[textwidth=18cm]{geometry} % 设置页宽=18
+%\usepackage[textwidth=18cm]{geometry} % 设置页宽=18
 
 \usepackage{blindtext}
 \usepackage{bm}
@@ -26,18 +27,18 @@
 
 \usepackage{xcolor}
 \usepackage{titlesec}
-\titleformat{\section}[block]{\color{blue}\Large\bfseries\filcenter}{}{1em}{}
-\titleformat{\subsection}[hang]{\color{red}\bfseries\Large}{}{0em}{}
+%\titleformat{\section}[block]{\color{blue}\Large\bfseries\filcenter}{}{1em}{}
+%\titleformat{\subsection}[hang]{\color{red}\bfseries\Large}{}{0em}{}
 %\setcounter{secnumdepth}{1} %section 序号
 
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{remark}[theorem]{Remark}
-\newtheorem{exercise}{Exercise}[section]
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{example}[theorem]{Example}
+%\newtheorem{definition}[theorem]{Definition}
+%\newtheorem{remark}[theorem]{Remark}
+%\newtheorem{exercise}{Exercise}[section]
 \newenvironment{claim}[1]{\par\noindent\underline{Claim:}\space#1}{}
 
 \newcommand*{\xfunc}[4]{{#2}\colon{#3}{#1}{#4}}
@@ -54,6 +55,7 @@
 \tableofcontents
 
 \newpage
+
 \section{写在最前面}
 
 拓扑对我来说是新名字，我对它几乎一无所知，虽然我嘴上总是吵吵着代数拓扑是我的终极目标\verb|(～ o ～)~zZ|，终于今天抱着巨大的勇气翻开了包志强老师的《点集拓扑和代数拓扑引论》，被文中老师幽默的行文，深深折服了，似乎拓扑也并没有想象中那么难，我想这是还不错的开始，我的第一直观感受拓扑也是给定一堆对象，在上面用一些公理弄些不一样的结构，似乎和代数一样，但是我暂时还不知道这堆结构要拿来干什么？有什么有趣的性质？
@@ -1415,6 +1417,7 @@ finally! 给定一个$[0,1]$里面一个开集$U=(a,b) \cap [0,1]$,其中$(a,b)$
 \newpage
 \subsection{Connectedness}
 %http://www.math.lsa.umich.edu/~kesmith/oct26notes.pdf
+%http://www.math.toronto.edu/ivan/mat327/docs/notes/18-connected.pdf
 
 \begin{definition}
 如果拓扑空间$X$不能被分解为两个非空不相交开子集的并集，则称$X$\textbf{连通}(connected).
@@ -1612,7 +1615,6 @@ $X$是一个度量空间，若子集$A$紧致则$A$是一个闭集.
 
 开始正式证明\[A = \bigcup\limits_{y \in A} \{y\} = \bigcup\limits_{y \in A}U_y \],如果我们有$A$紧致，则$ A \subseteq \bigcup\limits_{y \in S} U_y$. 按照我们前面的策略，我们需要取任意多对$(U_x,U_y)$,其中$U_x$和$U_y$都是不相交的开集，我们肯定想要是每个$x$都只对应一个开集就好了，这样$X \setminus A$就是任意多个开集的并，它就是一个开集，我们现在就这样做.把所有这样的$U_x$取交集，而现在$A$是紧致的，所以我们也只需要取有限多个$U_x$交也就够了，记$V = \bigcap\limits_{y \in S} V_y$,其中$x \in V_y$代表$U_x$和$y$对应,这里$V$也是开集.我们现在只需要说明这个$V \cap K = \emptyset$就行了\[V \cap K \subseteq \bigcap\limits_{y \in S} V_y \cap \bigcup\limits_{z \in S} U_z = \bigcup\limits_{z \in S}(\bigcap\limits_{y \in S} V_y \cap U_z) \subseteq \bigcup\limits_{z \in S}(V_z \cap U_z) = \emptyset. \],最后取遍所有$x$都有这样的一个开集$V$，$X \setminus A = \bigcup V$，所以$A$是一个闭集.
 \end{proof}
-
 \end{document}
 
 
