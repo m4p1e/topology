@@ -43,7 +43,7 @@
 
 \newcommand*{\xfunc}[4]{{#2}\colon{#3}{#1}{#4}}
 \newcommand*{\func}[3]{\xfunc{\to}{#1}{#2}{#3}}
-
+\newcommand\tpl{\mathcal{T}}
 
 \newcommand\Set[2]{\{\,#1\mid#2\,\}} %集合
 \newcommand\SET[2]{\Set{#1}{\text{#2}}} %
@@ -184,68 +184,6 @@ $\text{T}_1$-space 一定是 $\text{T}_0$-space，反过来就不一定。
 
 但是，我们接着定义$\tau_4 = \tau_1 \cap \tau_2$,现在$\tau_4$就是一个拓扑结构了，证明也很简单，任取两个$\tau_4$里面的开集，看一下交和并的封闭性就行。
 \end{example}
-
-
-在介绍度量空间之前，还是有必要先讲一下欧式空间，度量空间是欧式空间下的一般情况推广，欧式空间上的拓扑结构怎么表示呢？我先看一维欧式空间$\mathbb{R}$
-
-\begin{definition}
-给定$\mathbb{R}$上的子集$S$,若$\forall x \in S$,存在$a \in \mathbb{R}$和$b \in \mathbb{R}$，规定$a < b$,使得$x \in (a,b) \subseteq S$,则$S$是$\mathbb{R}$上欧式拓扑中的开集.
-\end{definition}
-
-验证上述定义是否满足拓扑结构还是比较简单的，但是这个定义还是比较抽象的，我们也可以更直接一点找出一些开集，例如$R$上的所有形如$(r,s)$，$(-\infty,r)$,$(r,+\infty)$,其中$r,s \in \mathbb{R}$它们是很显然满足欧式拓扑下开集定义的，所以$\mathbb{R}$上的所有\textbf{开区间都是开集}，但是反过来就不一定了，因为你可以把两个不相交的开区间并起来.
-
-\begin{proposition}
-给定$\mathbb{R}$上的子集$S$,$S$是开集当且仅当$S$是若干开区间的并。
-\end{proposition}
-
-很自然地，所有闭区间$[a,b]$都不是开集，因为两端点，并不满足上述定义，但是它们都是闭集，因为你取它的余集$(-\infty,a) \cup (b,+\infty)$是一个开集.还有一些特殊的闭集，例如单点集$\{a\}$和整数集$\mathbb{Z}$.
-
-\begin{proposition}
-有理数集$\mathbb{Q}$既不是开集也不是闭集。
-\end{proposition}
-
-\begin{proof}
-对于任意$q \in \mathbb{Q}$,可以找到两个实数$a$和$b$,使得$q \in (a,b)$,但是这样的$(a,b)$并不属于$\mathbb{Q}$,因为两个实数中间存在无数个实数，并不是有理数，这其中就包括无理数.
-
-为了证明$\mathbb{Q}$同样不是一个闭集，只需要证明$\mathbb{R} \setminus \mathbb{Q}$不是一个开集，取任意的一个开区间$x \in (a,b) \subseteq \mathbb{R} \setminus \mathbb{Q}$,由实数的稠密性，任意两个实数是可以确定一个有理数的，但是$\mathbb{R} \setminus \mathbb{Q}$并不包含有理数，所以不存在这样的开区间，证毕.
-\end{proof}
-
-接着我们再来了解一下度量空间.一个度量就是测量空间中两个点之间距离的一个公式. 当然，为了确保这个公式真的能起到类似距离的作用，它还需要满足一些基本的公理.
-
-\begin{definition}
-$X$上的一个度量(metric)是一个映射\[\func{d}{X \times X}{\mathbb{R}}\]满足
-\begin{enumerate}
-	\item \textbf{正定性}(positive definite) $\forall x,y \in X,d(x,y) \geq$，并且$d(x,y)=0$当且仅当$x=y$;
-	\item \textbf{对称性}(symmetry) $\forall x,y \in X,d(x,y)=d(y,x)$;
-	\item \textbf{三角不等式}(triangle inequality) \[\forall x,y,z \in X,d(x,z) \leq d(x,y)+d(y,z)\].
-\end{enumerate}
-$X$和$d$合起来叫一个\textbf{度量空间}(metric space)，记做$(X,d)$.
-\end{definition}
-
-然后呢，在度量空间中可以定义一个自然的基准开邻域结构如下: 考虑那些$B_{\varepsilon}(x)=\Set{y \in X}{d(x,y) < \varepsilon}$.我们称之为$x$的$\varepsilon$-球心邻域($\varepsilon$-ball).取$\mathcal{N}_d(x)=\Set{B_{\varepsilon}(x)}{\varepsilon \> 0}$.
-
-\begin{proposition}
-其中$\mathcal{N}_d$确实是$X$上的一个基准开邻域结构.由$\mathcal{N}_d$生成的拓扑$\tau_d$称为度量空间$(X,d)$上的度量拓扑(metric topology).
-\end{proposition}
-
-\begin{proof}
-需要证明$N_d$满足基准开邻域结构的三条公理:
-\begin{enumerate}
-	\item $x \in B_\varepsilon(x)$，显然地;
-	\item $B_{min(\varepsilon,\delta)}(x)=B_{\varepsilon}(x) \cap B_{\delta}$
-	\item 任取$y \in B_{\varepsilon}(x)$,要给它也找一个基准开邻域$B_{\delta}(y)$包含于$B_{\varepsilon}(x)$,那么$B_{\delta}(y)$里面的点也应该是属于$B_{\varepsilon}(x)$，我们不妨再设一点$z \in B_{\delta}(y)$,即$d(y,z) < \delta$,确定合适的$\delta$要求$d(x,z) < \varepsilon$,由三角不等式我们有下面不等式 \[\left\{
-		\begin{array}{l}
-			d(x,z)\leq d(x,y) + d(y,z) \\ 
-			d(y,z) < \delta  \\ 
-			d(x,z) < \varepsilon 
-		\end{array}
-	\right.\]由(1)和(2)可得$d(x,z) < \delta + d(x,y)$,所以我们只需要取$\delta = \varepsilon - d(x,y)$即可.
-\end{enumerate}
-\end{proof}
-
-\begin{definition}
-设$\tau_\varepsilon$是$\mathbb{R}^n$上欧式度量所决定的拓扑,则拓扑空间$(\mathbb{R}^n,\tau_\varepsilon)$为一个$n$维\textbf{欧式空间}(Euclidean space),记为$\mathbb{E}^n$.
-\end{definition}
 
 \newpage
 %https://math.stackexchange.com/questions/157735/definition-of-neighborhood-and-open-set-in-topology
@@ -442,6 +380,126 @@ $X$的子集族$\sigma$是某个拓扑结构下全体闭集构成的集合当且
 如果拓扑空间$(x,\tau)$某一个子集$A$,它同时满足开集和闭集，则称它是\textbf{clopen}.
 \end{definition}
 
+
+\newpage
+\subsection{Metric Space}
+
+在介绍度量空间之前，还是有必要先讲一下欧式空间，度量空间是欧式空间下的一般情况推广，欧式空间上的拓扑结构怎么表示呢？我先看一维欧式空间$\mathbb{R}$
+
+\begin{definition}
+给定$\mathbb{R}$上的子集$S$,若$\forall x \in S$,存在$a \in \mathbb{R}$和$b \in \mathbb{R}$，规定$a < b$,使得$x \in (a,b) \subseteq S$,则$S$是$\mathbb{R}$上标准拓扑中的开集.
+\end{definition}
+
+验证上述定义是否满足拓扑结构还是比较简单的，但是这个定义还是比较抽象的，我们也可以更直接一点找出一些开集，例如$R$上的所有形如$(r,s)$，$(-\infty,r)$,$(r,+\infty)$,其中$r,s \in \mathbb{R}$它们是很显然满足欧式拓扑下开集定义的，所以$\mathbb{R}$上的所有\textbf{开区间都是开集}，但是反过来就不一定了，因为你可以把两个不相交的开区间并起来.
+
+\begin{proposition}
+给定$\mathbb{R}$上的子集$S$,$S$是开集当且仅当$S$是若干开区间的并。
+\end{proposition}
+
+很自然地，所有闭区间$[a,b]$都不是开集，因为两端点，并不满足上述定义，但是它们都是闭集，因为你取它的余集$(-\infty,a) \cup (b,+\infty)$是一个开集.还有一些特殊的闭集，例如单点集$\{a\}$和整数集$\mathbb{Z}$.
+
+\begin{proposition}
+有理数集$\mathbb{Q}$既不是开集也不是闭集。
+\end{proposition}
+
+\begin{proof}
+对于任意$q \in \mathbb{Q}$,可以找到两个实数$a$和$b$,使得$q \in (a,b)$,但是这样的$(a,b)$并不属于$\mathbb{Q}$,因为两个实数中间存在无数个实数，并不是有理数，这其中就包括无理数.
+
+为了证明$\mathbb{Q}$同样不是一个闭集，只需要证明$\mathbb{R} \setminus \mathbb{Q}$不是一个开集，取任意的一个开区间$x \in (a,b) \subseteq \mathbb{R} \setminus \mathbb{Q}$,由实数的稠密性，任意两个实数是可以确定一个有理数的，但是$\mathbb{R} \setminus \mathbb{Q}$并不包含有理数，所以不存在这样的开区间，证毕.
+\end{proof}
+
+在介绍了$R$上的标准拓扑以后，你可能会想这东西最初是怎么构造出来？其实它可以由某个度量诱导出来，首先我们得了解什么是度量？一个度量就是测量空间中两个点之间距离的一个公式. 当然，为了确保这个公式真的能起到类似距离的作用，它还需要满足一些基本的公理.
+
+\begin{definition}
+$X$上的一个度量(metric)是一个映射\[\func{d}{X \times X}{\mathbb{R}}\]满足
+\begin{enumerate}
+	\item \textbf{正定性}(positive definite) $\forall x,y \in X,d(x,y) \geq 0$，并且$d(x,y)=0$当且仅当$x=y$;
+	\item \textbf{对称性}(symmetry) $\forall x,y \in X,d(x,y)=d(y,x)$;
+	\item \textbf{三角不等式}(triangle inequality) \[\forall x,y,z \in X,d(x,z) \leq d(x,y)+d(y,z)\].
+\end{enumerate}
+$X$和$d$合起来叫一个\textbf{度量空间}(metric space)，记做$(X,d)$.
+\end{definition}
+
+然后呢，在度量空间中可以定义一个自然的基准开邻域结构如下: 考虑那些$B_{\varepsilon}(x)=\Set{y \in X}{d(x,y) < \varepsilon}$.我们称之为$x$的$\varepsilon$-球心邻域($\varepsilon$-ball).取$\mathcal{N}_d(x)=\Set{B_{\varepsilon}(x)}{\varepsilon \> 0}$.
+
+\begin{proposition}
+其中$\mathcal{N}_d$确实是$X$上的一个基准开邻域结构.由$\mathcal{N}_d$生成的拓扑$\tau_d$称为度量空间$(X,d)$上的度量拓扑(metric topology).
+\end{proposition}
+
+\begin{proof}
+需要证明$N_d$满足基准开邻域结构的三条公理:
+\begin{enumerate}
+	\item $x \in B_\varepsilon(x)$，显然地;
+	\item $B_{min(\varepsilon,\delta)}(x)=B_{\varepsilon}(x) \cap B_{\delta}$
+	\item 任取$y \in B_{\varepsilon}(x)$,要给它也找一个基准开邻域$B_{\delta}(y)$包含于$B_{\varepsilon}(x)$,那么$B_{\delta}(y)$里面的点也应该是属于$B_{\varepsilon}(x)$，我们不妨再设一点$z \in B_{\delta}(y)$,即$d(y,z) < \delta$,确定合适的$\delta$要求$d(x,z) < \varepsilon$,由三角不等式我们有下面不等式 \[\left\{
+		\begin{array}{l}
+			d(x,z)\leq d(x,y) + d(y,z) \\ 
+			d(y,z) < \delta  \\ 
+			d(x,z) < \varepsilon 
+		\end{array}
+	\right.\]由(1)和(2)可得$d(x,z) < \delta + d(x,y)$,所以我们只需要取$\delta = \varepsilon - d(x,y)$即可.
+\end{enumerate}
+\end{proof}
+
+
+\begin{definition}[$\mathbb{R}$上的欧式度量]
+$\func{d}{\mathbb{R} \times \mathbb{R}}{\mathbb{R}}$ given by \[d(x,y) = |x-y|, \ \  x,y \in \mathbb{R}.\]
+\end{definition}
+
+更一般$\mathbb{R}^n$上的欧式度量表示为$d(x,y) = \sqrt{\sum_{i = 1}^n (x_i-y_i)^2}$.
+
+为了回答前面的标准拓扑和度量空间之间的关系，我们还需定义一下什么是开球.
+
+\begin{definition}
+给定度量空间$(X,d)$和一个正实数$r$，取$a \in X$，则以$a$为中心，半径为$r$的开球表示集合$B_r(a)=\Set{x \in X}{d(x,a) < r}.$
+\end{definition}
+
+
+\begin{proposition}
+给定度量空间$(X,d)$，$(X,d)$上所有的开球是$X$上某个拓扑$\mathcal{T}$的一组拓扑基. 
+\end{proposition}
+
+这里的proof可能要往后翻一下，看一下basis的判定方法. 这个拓扑$\mathcal{T}$就被称为是由度量$d$诱导(induced)出来的拓扑或者topology generated by d. $(X,\tpl)$被称为\textbf{the induced topological space} or \textbf{the corrpesponding topological space} or \textbf{the associated topological space}.
+
+
+standard topology其实就是由euclidean metric诱导出来的，你可以发现standard topology上的每一个open set都可以由开球覆盖. 而且每一个开球都是standard topology里面的open set, 所以 standard topology generated by euclidean metric. 
+
+反过来也可以说standard topology所在拓扑空间是一个度量空间.
+\begin{definition}
+设$\tpl_\varepsilon$是$\mathbb{R}^n$上欧式度量所决定的拓扑,则拓扑空间$(\mathbb{R}^n,\tpl_\varepsilon)$为一个$n$维\textbf{欧式空间}(Euclidean space),记为$\mathbb{E}^n$.
+\end{definition}
+
+
+不同的度量作用在同一个集合上可能生成的拓扑结构是相同的.
+
+\begin{definition}
+在$X$上的两个度量等价当且仅当它们诱导出的拓扑相同.
+\end{definition}
+
+
+如何判定度量空间上的一个子集是否开（其拓扑是由其度量诱导出来的）？
+
+\begin{proposition}
+给定一个度量空间$(X,d)$和由度量$d$诱导出的拓扑$\tpl$，$X$上的子集$U$开当且仅当对任意$x \ in U$，存在一个开球$B_\varepsilon(x) \subseteq U$，其中$\varepsilon>0$.
+\end{proposition}
+
+\begin{definition}[bounded]
+给定一个度量空间$(X,d)$，若对任意的$x,y \in X$，存在一个正实数$M$使得$d(x,y) < M$，则称度量空间$(X,d)$是bounded，度量$d$是一个bounded metric.
+\end{definition}
+
+\begin{definition}[metrizable]
+给定拓扑空间$(X,\tpl)$，若存在$X$上某个度量$d$可以诱导出拓扑$\tpl$，则称$(X,\tpl)$是metrizable.
+\end{definition}
+
+\begin{definition}[isometry]
+给定两个度量空间$(X,d)$和$(Y,d_1)$，若存在满射$\func{f}{(X,d)}{(Y,d_1)}$，使得对任意的$x_1,x_2 \in X$有\[d(x_1,x_2)=d_1(f(x_1),f_(x_2)).\]则称$f$是一个isometry，$(X,d)$是isometric于$(Y,d_1)$.
+\end{definition}
+
+\begin{definition}[Totol Boundedness]
+给定度量空间$(X,d)$和其上子集$A$，若对任意的$\varepsilon > 0$，都存在一组$x_1,\cdots,x_n \in X$，使得$A \subseteq \bigcup\limits_{i=1}^{n} B_\varepsilon(x_i)$.也就是说$A$可以被有限个半径为$\varepsilon$的开球盖住， 则称$A$ is totally bounded(完全有界).
+\end{definition}
+
+
 \newpage
 \subsection{Potency of Set and Countable Set}
 
@@ -565,7 +623,7 @@ König's definition of a bijection h:A → B from given example injections f:A �
 如果$\func{f}{X}{Y}$是一个双射，并且$f$和$f^{-1}$都连续，则称$f$为\textbf{同胚}(homeomorphism)，并且称$X$与$Y$\textbf{同胚}(homeomorphic)或者\textbf{拓扑等价}，记为$X \cong Y$.
 \end{definition}
 
-同胚的空间具有本质上一样的连续性.仔细想想这个定义可能在刚开始，会有一并且对于每个指标$\lambda in \Lambda$,取定一个拓扑空间$(Y_\lambda,\tau_\lambda)$以及一个映射$\func{\lambda}{X}{Y_\lambda}$些疑惑，在$\mathbb{R}$上，如果一个$f$是双射，且$f$连续，那为什么还要保证$f^{-1}$连续呢？直觉上前两个条件似乎可以直接保证$f$的逆映射是连续的。
+同胚的空间具有本质上一样的连续性.仔细想想这个定义可能在刚开始，会有一并且对于每个指标$\lambda in \Lambda$,取定一个拓扑空间$(Y_\lambda,\tpl_\lambda)$以及一个映射$\func{\lambda}{X}{Y_\lambda}$些疑惑，在$\mathbb{R}$上，如果一个$f$是双射，且$f$连续，那为什么还要保证$f^{-1}$连续呢？直觉上前两个条件似乎可以直接保证$f$的逆映射是连续的。
 
 注意这里是连续是拓扑结构上的概念，两个集合之前的一一对应，再确定分别确定两个集合上的拓扑结构之前，啥也保证不了。只有再两个对应的拓扑结构确定以后，我们再来讨论这里的连续到底是什么.举个很显然的例子，说明$f$是双射，$f$是连续的，但是$f$的逆并不连续。
 
@@ -588,7 +646,7 @@ $\mathbb{R}$和开区间$(-1,1)$同胚，构造一个$\func{f}((-1,1))(R)$\[f(x)
 这样看来同胚，其实就是我们在给定一一对应的集合映射上，需要再去关注拓扑结构之间的关系，也就是所谓的连续.
 
 \begin{theorem}
-同胚是拓扑空间之间的等价关系.我们称一个关系$\cong$是\textbf{等价关系}(equivalence relation)，如果它满足:并且对于每个指标$\lambda \in \Lambda$,取定一个拓扑空间$(Y_\lambda,\tau_\lambda)$以及一个映射$\func{\lambda}{X}{Y_\lambda}$
+同胚是拓扑空间之间的等价关系.我们称一个关系$\cong$是\textbf{等价关系}(equivalence relation)，如果它满足:并且对于每个指标$\lambda \in \Lambda$,取定一个拓扑空间$(Y_\lambda,\tpl_\lambda)$以及一个映射$\func{\lambda}{X}{Y_\lambda}$
 \begin{enumerate}
 	\item 自反性(reflexivity) $X \cong X$
 	\item 对称性(symmetry) 如果$X \cong Y$,则$Y \cong X$ 
@@ -616,16 +674,16 @@ $\mathbb{R}$和开区间$(-1,1)$同胚，构造一个$\func{f}((-1,1))(R)$\[f(x)
 \subsection{Weaker and Stronger}
 
 \begin{definition}
-定义集合$X$上的两个拓扑结构$\tau$和$\tau'$,我们说$\tau$比$\tau'$更弱(coarser or weaker)，则$\tau \subseteq \tau'$，反过来说就是$\tau'$比$\tau$更强(finer or stronger).
+定义集合$X$上的两个拓扑结构$\tpl$和$\tpl'$,我们说$\tpl$比$\tpl'$更弱(coarser or weaker)，则$\tpl \subseteq \tpl'$，反过来说就是$\tpl'$比$\tpl$更强(finer or stronger).
 
-换句话说就是，$\tau$比$\tau'$更弱当且仅当在恒同映射下 \[ (X,\tau') \rightarrow (X,\tau).\]连续.
+换句话说就是，$\tau$比$\tau'$更弱当且仅当在恒同映射下 \[ (X,\tpl') \rightarrow (X,\tpl).\]连续.
 \end{definition}
 
 
 
 \newpage
 \subsection{Product Topology}
-这章主要讲如何构造一个拓扑结构？这里有一种非常有趣的定义拓扑结构的方法.设有一个映射$\func{f}{X}{Y}$，集合$X$上尚未确定具体的拓扑结构，而集合$Y$上有个拓扑结构$\mu$,则可以利用$f$把这个拓扑"向左转移"到$X$上，即取$\tau$为$X$上使得$\func{f}{(X,\tau)}{(Y,u)}$连续的最小拓扑(最小的概念是指最小的$X$的子集族).
+这章主要讲如何构造一个拓扑结构？这里有一种非常有趣的定义拓扑结构的方法.设有一个映射$\func{f}{X}{Y}$，集合$X$上尚未确定具体的拓扑结构，而集合$Y$上有个拓扑结构$\mu$,则可以利用$f$把这个拓扑"向左转移"到$X$上，即取$\tpl$为$X$上使得$\func{f}{(X,\tpl)}{(Y,u)}$连续的最小拓扑(最小的概念是指最小的$X$的子集族).
 
 这个方法可以推广到一族映射$\func{f_\lambda}{X}{Y_\lambda}$上，相应地得到的拓扑就是$X$上所谓的"弱拓扑".类似地，也有一套利用映射"向右转移"拓扑结构的方法，相应地得到的拓扑就是$Y$上的"强拓扑".弱拓扑和强拓扑作用，都是利用映射把一个空间上的拓扑结构以最能充分利用该映射的方式转移到另一个空间上去.
 
@@ -633,24 +691,24 @@ $\mathbb{R}$和开区间$(-1,1)$同胚，构造一个$\func{f}((-1,1))(R)$\[f(x)
 
 
 \begin{definition}
-考虑一个集合$X$.设$\Lambda$是一个指标集，并且对于每个指标$\lambda \in \Lambda$,取定一个拓扑空间$(Y_\lambda,\tau_\lambda)$以及一个映射$\func{f_\lambda}{X}{Y_\lambda}$.则$X$上满足条件每个$\func{\lambda}{X}{Y_\lambda}$都连续的最小拓扑$\tau$称为由这些$f_\lambda$决定的\textbf{弱拓扑}(weak topology).
+考虑一个集合$X$.设$\Lambda$是一个指标集，并且对于每个指标$\lambda \in \Lambda$,取定一个拓扑空间$(Y_\lambda,\tpl_\lambda)$以及一个映射$\func{f_\lambda}{X}{Y_\lambda}$.则$X$上满足条件每个$\func{\lambda}{X}{Y_\lambda}$都连续的最小拓扑$\tpl$称为由这些$f_\lambda$决定的\textbf{弱拓扑}(weak topology).
 \end{definition}
 
-注意前面已经提到过的最小的含义，如果更形式化的理解是:如果有其他拓扑$\mu$也满足上述条件,则$\tau \subseteq \mu$.
+注意前面已经提到过的最小的含义，如果更形式化的理解是:如果有其他拓扑$\mu$也满足上述条件,则$\tpl \subseteq \mu$.
 
-那么如何构造这个弱拓扑呢？很显然有一个拓扑是天然满足的上述条件的，那就是离散拓扑.但是我们寻找是符合这样条件的一个最小的拓扑。上述条件也可以理解为要求每个$Y_\lambda$中开集的原像都是开集,所以$\tau$是包含这些原像的，但是只包含这些原像是不够的，因为我们并不能保证这些原像的交或者并是满足开集公理的，解决办法是把这些有限原像的交和任意的原像的并也取做开集。
+那么如何构造这个弱拓扑呢？很显然有一个拓扑是天然满足的上述条件的，那就是离散拓扑.但是我们寻找是符合这样条件的一个最小的拓扑。上述条件也可以理解为要求每个$Y_\lambda$中开集的原像都是开集,所以$\tpl$是包含这些原像的，但是只包含这些原像是不够的，因为我们并不能保证这些原像的交或者并是满足开集公理的，解决办法是把这些有限原像的交和任意的原像的并也取做开集。
 
 \begin{proposition}
-设$\Lambda$是一个指标集，并且对于每个指标$\lambda \in \Lambda$,取定一个拓扑空间$(Y_\lambda,\tau_\lambda)$以及一个映射$\func{f_\lambda}{X}{Y_\lambda}$.取 \[\mathcal{U}(x)=\Set{f_{\lambda}^{-1}(U_\lambda)}{\lambda \in \Lambda,f_\lambda(x) \in U_\lambda \in \tau_\lambda}\],然后取\[\mathcal{N}(x)=\{\mathcal{U}(x)\text{ 中有限个元素的交集}\}\],这样得到的$\mathcal{N}$是一个基准开邻域结构。并且由它生产的拓扑就是$X$上由这些$f_\lambda$决定的弱拓扑
+设$\Lambda$是一个指标集，并且对于每个指标$\lambda \in \Lambda$,取定一个拓扑空间$(Y_\lambda,\tpl_\lambda)$以及一个映射$\func{f_\lambda}{X}{Y_\lambda}$.取 \[\mathcal{U}(x)=\Set{f_{\lambda}^{-1}(U_\lambda)}{\lambda \in \Lambda,f_\lambda(x) \in U_\lambda \in \tpl_\lambda}\],然后取\[\mathcal{N}(x)=\{\mathcal{U}(x)\text{ 中有限个元素的交集}\}\],这样得到的$\mathcal{N}$是一个基准开邻域结构。并且由它生产的拓扑就是$X$上由这些$f_\lambda$决定的弱拓扑
 \end{proposition}
 
 \begin{proof}
 这里命题言下之意其实就直接把$Y_\lambda$中开集原像直接拿来当基准开邻域用,基准开邻域结构的公理是显然满足的.
 
-然后我们来说明它是最小的拓扑,只需要证明它是含于$X$上的任意拓扑，任意$X$上的拓扑$\tau$,则当去$U_\lambda \in \tau_\lambda$,则$f^{-1}(U_\lambda) \in \tau$,因此$\mathcal{N}(x)$中基准开邻域均属于$\tau$,而由$\mathbb{N}$生成的拓扑中的开集都是若干基准开邻域的并，所以也是属于$\tau$，这说明$\mathcal{N}$生成的拓扑是$\tau$的子族.
+然后我们来说明它是最小的拓扑,只需要证明它是含于$X$上的任意拓扑，任意$X$上的拓扑$\tpl$,则当去$U_\lambda \in \tpl_\lambda$,则$f^{-1}(U_\lambda) \in \tpl$,因此$\mathcal{N}(x)$中基准开邻域均属于$\tpl$,而由$\mathbb{N}$生成的拓扑中的开集都是若干基准开邻域的并，所以也是属于$\tpl$，这说明$\mathcal{N}$生成的拓扑是$\tpl$的子族.
 \end{proof}
 
-生成弱拓扑的过程简而言之就是\[\{U_\lambda\}\stackrel{\cap_{finite}}\longrightarrow \mathcal{N}\stackrel{\cup_{arbitrary}}\longrightarrow \tau\].
+生成弱拓扑的过程简而言之就是\[\{U_\lambda\}\stackrel{\cap_{finite}}\longrightarrow \mathcal{N}\stackrel{\cup_{arbitrary}}\longrightarrow \tpl\].
 
 
 \begin{example}
@@ -661,7 +719,7 @@ $\mathbb{R}$和开区间$(-1,1)$同胚，构造一个$\func{f}((-1,1))(R)$\[f(x)
 
 
 \begin{definition}
-设$(X,\tau_X)$，$(Y,\tau_Y)$是两个拓扑空间.令\[\tau = \Set{\bigcup\limits_{\lambda \in \Lambda}(U_\lambda \times V_\lambda)}{\forall U_\lambda \in \tau_X, \forall V_\lambda \in \tau_Y},\]则$\tau$是$X \times Y$上的一个拓扑结构，称为$\tau_X$和$\tau_Y$的\textbf{乘积拓扑}(product topology).拓扑空间$(X \times Y,\tau)$称为这两个空间的\textbf{乘积空间}(product space),记为$(X,\tau_X) \times (Y,\tau_Y)$.
+设$(X,\tpl_X)$，$(Y,\tpl_Y)$是两个拓扑空间.令\[\tpl = \Set{\bigcup\limits_{\lambda \in \Lambda}(U_\lambda \times V_\lambda)}{\forall U_\lambda \in \tpl_X, \forall V_\lambda \in \tpl_Y},\]则$\tpl$是$X \times Y$上的一个拓扑结构，称为$\tpl_X$和$\tpl_Y$的\textbf{乘积拓扑}(product topology).拓扑空间$(X \times Y,\tpl)$称为这两个空间的\textbf{乘积空间}(product space),记为$(X,\tpl_X) \times (Y,\tpl_Y)$.
 \end{definition}
 
 %简而言之,$X \times Y$中的子集开当且仅当它是形如$(U \times V)$的子集的并集，这里要求$U$,$V$分别是$X$和$Y$上开集，但是为什么要这样定义？
@@ -669,7 +727,7 @@ $\mathbb{R}$和开区间$(-1,1)$同胚，构造一个$\func{f}((-1,1))(R)$\[f(x)
 这里的乘号定义如下:
 
 \begin{proposition}
-设$(X,\tau_X)$，$(Y,\tau_Y)$是两个拓扑空间.考虑集合$X$和$Y$的直积$X \times Y=\Set{(x,y)}{x \in X,y \in Y}$,在其上定义\textbf{投影}(canonical  projection)\[\begin{aligned}
+设$(X,\tpl_X)$，$(Y,\tpl_Y)$是两个拓扑空间.考虑集合$X$和$Y$的直积$X \times Y=\Set{(x,y)}{x \in X,y \in Y}$,在其上定义\textbf{投影}(canonical  projection)\[\begin{aligned}
 			\func{j_X}{X \times Y}{X} ,& (x,y) \mapsto x;\\
 			\func{j_Y}{X \times Y}{Y} ,& (x,y) \mapsto y; 
 			\end{aligned}
@@ -679,7 +737,7 @@ $\mathbb{R}$和开区间$(-1,1)$同胚，构造一个$\func{f}((-1,1))(R)$\[f(x)
 有点小疑问，这里的一组映射值域和前面提到的似乎有点不同啊？弱拓扑并没有要求映射的值域是相同的，定义域是相同的即可.
 
 \begin{proof}
-分别取$X$和$Y$的开集$U$和$V$,注意到$j_X^{-1}(U) \cap j_Y^{-1}(V)=(U \times V)$，并且\[(U_1 \times V_1) \cap (U_2 \times V_1)=(U_1 \cap U_1)\times (V_1 \cap V_2).\]后面性质为了进一步保证我们交出来的结果没问题。这个按照用基准开邻域刻画刻画的弱拓扑，我们有\[\mathcal{N}(x)=\Set{(p_x,p_y)}{p_x \in U \in \tau_X,p_y \in V \in \tau_Y}.\]
+分别取$X$和$Y$的开集$U$和$V$,注意到$j_X^{-1}(U) \cap j_Y^{-1}(V)=(U \times V)$，并且\[(U_1 \times V_1) \cap (U_2 \times V_1)=(U_1 \cap U_1)\times (V_1 \cap V_2).\]后面性质为了进一步保证我们交出来的结果没问题。这个按照用基准开邻域刻画刻画的弱拓扑，我们有\[\mathcal{N}(x)=\Set{(p_x,p_y)}{p_x \in U \in \tpl_X,p_y \in V \in \tpl_Y}.\]
 \end{proof}
 
 \begin{definition}
@@ -711,7 +769,7 @@ Z \arrow[rr, "g"] \arrow[rrdd, "f_\alpha"] &  & \prod Y_\alpha \arrow[dd, "q_\al
 \begin{proof}
 先写一下我们的证明思路，要证明上述度量诱导出来的拓扑是乘积拓扑:(1)在乘积拓扑中找邻域，这个邻域在$d$度量诱导的拓扑里面(2)在$d$度量诱导的拓扑里面找邻域，这个邻域在乘积拓扑里面.
 
-(1)在乘积拓扑下，如果一个子集$A \subseteq X \times Y$是$p(p_x,p_y)$邻域，那么存在一个开集含于它，所以我们必须找到这样一个$X \times Y$乘积拓扑里面的开集，乘积拓扑上的开集为$\bigcup(U,V)$，其中$U \in \tau_X$,$V \in \tau_Y$.这样不好操作啊，怎么把前面个bigcup去掉呢？其实可以比较从容的去掉，因为点$p$肯定属于某个$X$开集,开集自包含，同样是$p$的一个邻域.那么我们的命题可以变成下面的样子：
+(1)在乘积拓扑下，如果一个子集$A \subseteq X \times Y$是$p(p_x,p_y)$邻域，那么存在一个开集含于它，所以我们必须找到这样一个$X \times Y$乘积拓扑里面的开集，乘积拓扑上的开集为$\bigcup(U,V)$，其中$U \in \tpl_X$,$V \in \tpl_Y$.这样不好操作啊，怎么把前面个bigcup去掉呢？其实可以比较从容的去掉，因为点$p$肯定属于某个$X$开集,开集自包含，同样是$p$的一个邻域.那么我们的命题可以变成下面的样子：
 
 $A$是邻域的充分必要条件是: 分别存在$X$中的开集$U$和$Y$中的开集$V$,使得$p \in U \times V \subseteq A$.如果我们能找到这样的$U$，$V$，进一步我们可以分别找到它们里面分别关于$p_x$的邻域$B_\zeta(p_x)$和$p_y$的邻域$B_\delta(p_y)$。然后我们知道\[B_{min(\zeta,\delta)}(p) \subseteq B_\zeta(p_x) \times B_\delta(p_y)\]其中$B_{min(\zeta,\delta)}(p)$就是一个$d$度量下的邻域，$A$包含它，所以$A$也是$d$度量诱导的拓扑下的邻域.
 
@@ -751,11 +809,11 @@ Z \arrow[rr, "f"] &  & Y_1 \times Y_2 \arrow[rru, "p_1"] \arrow[rrd, "p_2"'] &  
 拓扑空间$X$的一个子集$A$上可以很简单地定义一种非常自然的拓扑结构，称为子空间拓扑.子空间拓扑也是使得含入映射$i \colon A \hookrightarrow X$连续的最弱拓扑.
 
 \begin{definition}
-设$(X,\tau)$是个拓扑空间,$A \subseteq X$，令\[\tau|_A=\Set{U \cap A}{U \in \tau}\],则$\tau|_A$是$A$上的一个拓扑，称为$A$上的\textbf{子空间拓扑}(subspace topology)，而拓扑空间$(A,\tau|_A)$称为$(X,\tau)$的子空间(subspace).
+设$(X,\tpl)$是个拓扑空间,$A \subseteq X$，令\[\tpl|_A=\Set{U \cap A}{U \in \tpl}\],则$\tpl|_A$是$A$上的一个拓扑，称为$A$上的\textbf{子空间拓扑}(subspace topology)，而拓扑空间$(A,\tpl|_A)$称为$(X,\tpl)$的子空间(subspace).
 \end{definition}
 
 \begin{proposition}
-设$A$是拓扑空间$(X,\tau)$上的子集,$\func{i}{A}{X}$是一个含入映射，则$A$上由$i$决定的弱拓扑就是子空间拓扑.
+设$A$是拓扑空间$(X,\tpl)$上的子集,$\func{i}{A}{X}$是一个含入映射，则$A$上由$i$决定的弱拓扑就是子空间拓扑.
 \end{proposition}
 
 \begin{proof}
@@ -773,9 +831,9 @@ Z \arrow[rr, "f"] &  & Y_1 \times Y_2 \arrow[rru, "p_1"] \arrow[rrd, "p_2"'] &  
 
 \begin{proposition}
 \begin{enumerate}
-	\item 如果$B \subseteq A \subseteq X$,则$\tau|_B = (\tau|_A)|_B.$
-	\item $U$是$(A,\tau|_A)$里的开集当且仅当存在$(X,\tau)$中的开集$V$使得$U = V \cap A.$
-	\item $U$是$(A,\tau|_A)$里的闭集当且仅当存在$(X,\tau)$中的闭集$V$使得$U = V \cap A.$
+	\item 如果$B \subseteq A \subseteq X$,则$\tpl|_B = (\tpl|_A)|_B.$
+	\item $U$是$(A,\tpl|_A)$里的开集当且仅当存在$(X,\tpl)$中的开集$V$使得$U = V \cap A.$
+	\item $U$是$(A,\tpl|_A)$里的闭集当且仅当存在$(X,\tpl)$中的闭集$V$使得$U = V \cap A.$
 \end{enumerate}
 \end{proposition}
 
@@ -801,7 +859,7 @@ Z \arrow[rru, "g"] \arrow[rrd, "f"] &  &                        \\
 
 
 \begin{example}
-我们来思考一个度量空间上的自然的子空间是什么呢？设$(X,d)$是一个度量空间，度量拓扑为$\tau$.$A$是$X$的子集，则可以在$A$上规定一个自然的度量$d_A$,使得任取$x,y \in A$,$d_A(x,y)=d(x,y)$.任取$a \in A$,考察它在$X$中的一个$\varepsilon$球型邻域$B_\varepsilon=\Set{x \in X}{d(a,x) < \varepsilon}$,你会发现\[B_\varepsilon \cap A = \Set{x \in A}{d(x,y) < \varepsilon}.\]恰好就是$a$在$A$中关于度量$d_A$的$\varepsilon$球形邻域.	
+我们来思考一个度量空间上的自然的子空间是什么呢？设$(X,d)$是一个度量空间，度量拓扑为$\tpl$.$A$是$X$的子集，则可以在$A$上规定一个自然的度量$d_A$,使得任取$x,y \in A$,$d_A(x,y)=d(x,y)$.任取$a \in A$,考察它在$X$中的一个$\varepsilon$球型邻域$B_\varepsilon=\Set{x \in X}{d(a,x) < \varepsilon}$,你会发现\[B_\varepsilon \cap A = \Set{x \in A}{d(x,y) < \varepsilon}.\]恰好就是$a$在$A$中关于度量$d_A$的$\varepsilon$球形邻域.	
 \end{example}
 
 
@@ -828,27 +886,27 @@ Z \arrow[rru, "g"] \arrow[rrd, "f"] &  &                        \\
 
 \newpage
 \subsection{Quotient Map and Quotient Space}
-和弱拓扑相对应地，有另外一种非常自然的定义拓扑结构的方法叫“强拓扑”，就是利用映射$\func{f}{X}{Y}$把集合$X$上的拓扑结构$\tau$“向右转移”到集合$Y$上去.那么这里为什么叫强拓扑呢？因为使得$f$连续的$Y$上的最小拓扑是平凡拓扑$\{Y,\emptyset\}$.与弱拓扑相反的是取使得$f$连续的$Y$上最强的拓扑(即在对于集合族中是最大的).
+和弱拓扑相对应地，有另外一种非常自然的定义拓扑结构的方法叫“强拓扑”，就是利用映射$\func{f}{X}{Y}$把集合$X$上的拓扑结构$\tpl$“向右转移”到集合$Y$上去.那么这里为什么叫强拓扑呢？因为使得$f$连续的$Y$上的最小拓扑是平凡拓扑$\{Y,\emptyset\}$.与弱拓扑相反的是取使得$f$连续的$Y$上最强的拓扑(即在对于集合族中是最大的).
 
 
 \begin{definition}
-设有一族拓扑空间$(X_\lambda,\tau_\lambda)$及映射$\func{f_\lambda}{X_\lambda}{Y}$.则$Y$上满足条件使得每个$f_\lambda$都连续的最大拓扑$\tau$称为由这些$f_\lambda$决定的强拓扑(strong topology).
+设有一族拓扑空间$(X_\lambda,\tpl_\lambda)$及映射$\func{f_\lambda}{X_\lambda}{Y}$.则$Y$上满足条件使得每个$f_\lambda$都连续的最大拓扑$\tpl$称为由这些$f_\lambda$决定的强拓扑(strong topology).
 \end{definition}
 
-最大的意思是: 如果有其他拓扑$\mu$也满足上述条件，则$\tau \supseteq \mu$.那么如何构造最强拓扑？
+最大的意思是: 如果有其他拓扑$\mu$也满足上述条件，则$\tpl \supseteq \mu$.那么如何构造最强拓扑？
 
 \begin{definition}
-设有一族拓扑空间$(X_\lambda,\tau_\lambda)$及映射$\func{f_\lambda}{X_\lambda}{Y}$.则$Y$上使得所有$f_\lambda$都连续的最强拓扑为\[\tau = \Set{U \subseteq Y}{\forall f_\lambda^{-1}(U) \in \tau_\lambda}\].
+设有一族拓扑空间$(X_\lambda,\tpl_\lambda)$及映射$\func{f_\lambda}{X_\lambda}{Y}$.则$Y$上使得所有$f_\lambda$都连续的最强拓扑为\[\tpl = \Set{U \subseteq Y}{\forall f_\lambda^{-1}(U) \in \tpl_\lambda}\].
 \end{definition}
 
 上面的命题就说把$Y$里面在所有$f_\lambda$下原像都是开集的子集搞到一块就是最强拓扑.
 
 \begin{proof}
-现在来证明这个$\tau$确实是个拓扑结构，很明显$\emptyset \in \tau$和$X \in \tau$.有\[f^{-1}_\lambda(\bigcup\limits_{\alpha} U_\alpha)=\bigcup\limits_\alpha f_\lambda^{-1}(U_\alpha).\]所以当$U_\alpha \in \tau$,则$f^{-1}_\lambda(\bigcup\limits_{\alpha} U_\alpha) \in \tau$.同理，有\[f^{-1}_\lambda(\bigcap\limits_{\alpha} U_\alpha)=\bigcap\limits_\alpha f_\lambda^{-1}(U_\alpha).\]所以当$U_\alpha \in \tau$,则$f^{-1}_\lambda(\bigcap\limits_{\alpha} U_\alpha) \in \tau$.然后再说明这个拓扑是最强的，取满足上述条件任意拓扑$\mu$，任取$U \in \mu$,则每个$f_\lambda^{-1}(U) \in \tau_\lambda$,所以$U \in \tau$，由于$U$是任意的，所以$\mu \subseteq \tau$.
+现在来证明这个$\tpl$确实是个拓扑结构，很明显$\emptyset \in \tpl$和$X \in \tpl$.有\[f^{-1}_\lambda(\bigcup\limits_{\alpha} U_\alpha)=\bigcup\limits_\alpha f_\lambda^{-1}(U_\alpha).\]所以当$U_\alpha \in \tpl$,则$f^{-1}_\lambda(\bigcup\limits_{\alpha} U_\alpha) \in \tpl$.同理，有\[f^{-1}_\lambda(\bigcap\limits_{\alpha} U_\alpha)=\bigcap\limits_\alpha f_\lambda^{-1}(U_\alpha).\]所以当$U_\alpha \in \tpl$,则$f^{-1}_\lambda(\bigcap\limits_{\alpha} U_\alpha) \in \tpl$.然后再说明这个拓扑是最强的，取满足上述条件任意拓扑$\mu$，任取$U \in \mu$,则每个$f_\lambda^{-1}(U) \in \tpl_\lambda$,所以$U \in \tpl$，由于$U$是任意的，所以$\mu \subseteq \tpl$.
 \end{proof}
 
 \begin{definition}
-设$(X,\tau_X)$,$(Y,\tau_Y)$是两个拓扑空间,$\func{f}{X}{Y}$是一个满射，并且$\tau_Y$恰好是$f$所决定的强拓扑，即$U \subseteq Y$是开集当且仅当$f^{-1}(U) \subseteq \tau_X$,则称$f$为商空间.
+设$(X,\tpl_X)$,$(Y,\tpl_Y)$是两个拓扑空间,$\func{f}{X}{Y}$是一个满射，并且$\tpl_Y$恰好是$f$所决定的强拓扑，即$U \subseteq Y$是开集当且仅当$f^{-1}(U) \subseteq \tpl_X$,则称$f$为商空间.
 \end{definition}
 
 \begin{proposition}
@@ -868,7 +926,7 @@ Z \arrow[rru, "g"] \arrow[rrd, "f"] &  &                        \\
 \end{proposition}
 
 \begin{proof}
-当$f$是一个满射时，$U=f(f^{-1}(U))$,其中$U \in Y$,在开映射的条件下若$f^{-1}(U)$是一个开集，那么$U$也是一个开集，同时$f$连续，所以$U$开，那么$f^{-1}(U)$开，证毕。为什么这是充分条件呢？因为商映射的定义是我们在$Y$里面挑子集，如果它的原像是开集，就把它放到$\tau_Y$里面，当我们挑完$Y$所有子集的时候，可能也只对应了一部分$X$中的开集，现在如果要求$X$所有开集都映射到$Y$上，毫无疑问这时候我们只需要把$X$上的开集的像放到$\tau_Y$就行了，这个过程就完全确定了.
+当$f$是一个满射时，$U=f(f^{-1}(U))$,其中$U \in Y$,在开映射的条件下若$f^{-1}(U)$是一个开集，那么$U$也是一个开集，同时$f$连续，所以$U$开，那么$f^{-1}(U)$开，证毕。为什么这是充分条件呢？因为商映射的定义是我们在$Y$里面挑子集，如果它的原像是开集，就把它放到$\tpl_Y$里面，当我们挑完$Y$所有子集的时候，可能也只对应了一部分$X$中的开集，现在如果要求$X$所有开集都映射到$Y$上，毫无疑问这时候我们只需要把$X$上的开集的像放到$\tpl_Y$就行了，这个过程就完全确定了.
 \end{proof}
 
 显然同胚是一个商映射。那么如何形象的理解商映射呢？在代数里面有商群和商环，但是它们都有一个比较特殊的性质就是构造了很多的等价类，相当于把两个在某种等价关系的刻画下放到了一个等价类里面，如果把这个性质类比到商映射，其实也有类似的性质，商映射带来了一种“拓扑粘合”的观点: 我们可以把被$f$映射到同一个像上的$X$中的点理解成是被粘在了一起，然后把$f(X)$整体理解称是用$f$把$X$粘起来的空间.
@@ -928,7 +986,7 @@ Y \arrow[rr, "f"] &                                    & Z
 现在我用前面提到的等价关系来看待"粘合"即商空间,集合上等价关系的定义在这里不想再累述了,我们直接用等价关系来刻画“粘合规则”，那就是: 两个点粘在一起当且仅当它们在同一个等价类里面. 
 
 \begin{definition}
-设$\sim$是集合$X$上的一个等价关系，则所有等价类构成的集合称为$X$关于$\sim$的\textbf{商集}(quotient set),记做$X / \sim$. 称映射\[\func{p}{X}{X / \sim},\ x \mapsto \left<x\right>\]为\textbf{粘合映射}(gluing map).若$X$上有拓扑$\tau$,则称$p$在$X / \sim$上决定的相应的强拓扑为\textbf{商拓扑}(quotient topology)，记做$\tau / \sim$.称拓扑空间$(X / \sim, \tau /\sim)$为$(X,\tau)$的\textbf{商空间}(quotient space)，记做$(X,\tau) / \sim$.
+设$\sim$是集合$X$上的一个等价关系，则所有等价类构成的集合称为$X$关于$\sim$的\textbf{商集}(quotient set),记做$X / \sim$. 称映射\[\func{p}{X}{X / \sim},\ x \mapsto \left<x\right>\]为\textbf{粘合映射}(gluing map).若$X$上有拓扑$\tpl$,则称$p$在$X / \sim$上决定的相应的强拓扑为\textbf{商拓扑}(quotient topology)，记做$\tpl / \sim$.称拓扑空间$(X / \sim, \tpl /\sim)$为$(X,\tpl)$的\textbf{商空间}(quotient space)，记做$(X,\tpl) / \sim$.
 \end{definition}
 
 \begin{example}
@@ -1001,13 +1059,13 @@ $\mathbb{R}\mathbb{P}^2$中每个点$x$的原像集$p^{-1}(x)$恰好由球面上
 \subsection{Misc}
 
 \begin{proposition}
-给定集合$X$，子集族$S \subseteq P(x)$， 包含$S$的最小拓扑为$\tau_S = \Set{U \subseteq X}{\bigcup\limits_{V \in \mathcal{F}} V, \mathcal{F} \subseteq S'}$,其中$S' = \Set{S_1 \cap \cdots \cap S_k}{S_1,\cdots,S_k \in S, k \in \mathbb{N}} \cup \{X\}$.
+给定集合$X$，子集族$S \subseteq P(x)$， 包含$S$的最小拓扑为$\tpl_S = \Set{U \subseteq X}{\bigcup\limits_{V \in \mathcal{F}} V, \mathcal{F} \subseteq S'}$,其中$S' = \Set{S_1 \cap \cdots \cap S_k}{S_1,\cdots,S_k \in S, k \in \mathbb{N}} \cup \{X\}$.
 \end{proposition}
 
 用文字来说就是包$S$的最小拓扑是任意并上$S$里面元素有限的交所构成的. 证明经典两边包含.
 
 \begin{definition}
-若拓扑空间上$(X,\tau)$中的拓扑结构$\tau = \tau_S$，也就是说$\tau$是由$S$导出的，则称$S$为拓扑空间$(X,\tau)$的一个\rm subbasis(准基).
+若拓扑空间上$(X,\tpl)$中的拓扑结构$\tpl = \tpl_S$，也就是说$\tpl$是由$S$导出的，则称$S$为拓扑空间$(X,\tpl)$的一个\rm subbasis(准基).
 \end{definition}
 
 如果我们能只做$S$里面元素的任意交集就能构成一个拓扑那就太好了，哈哈，这个时候$S$其实就是一个basis（拓扑基）.
@@ -1015,13 +1073,13 @@ $\mathbb{R}\mathbb{P}^2$中每个点$x$的原像集$p^{-1}(x)$恰好由球面上
 basis 有一个比较好的性质,在证明连续的时候，只需要check basis里面的元素的原像是否开就行，不用check所有的开集.
 
 \begin{proposition}
-给定两个拓扑空间$(X,\tau_S)$，$Y$和它们之间的映射$\func{f}{Y}{X}$，$f$连续当且仅当$\forall s \in S$，$f^{-1}(s)$是$Y$上的开集.
+给定两个拓扑空间$(X,\tpl_S)$，$Y$和它们之间的映射$\func{f}{Y}{X}$，$f$连续当且仅当$\forall s \in S$，$f^{-1}(s)$是$Y$上的开集.
 \end{proposition}
 
 英文definition表示我自己翻译有点难看 ((
 
 \begin{definition}
-\rm $\mathcal{B}$ is a local base for $(X,\tau)$ at $x$ iff all $B \in \mathcal{B}$ are open ($\mathcal{B} \in \tau$)and also contain $x$, and moreover for all $U \in \tau$ with $x \in U$ there exists some $B \in \mathcal{B}$ such that $B \subseteq U$.
+\rm $\mathcal{B}$ is a local base for $(X,\tpl)$ at $x$ iff all $B \in \mathcal{B}$ are open ($\mathcal{B} \in \tpl$)and also contain $x$, and moreover for all $U \in \tpl$ with $x \in U$ there exists some $B \in \mathcal{B}$ such that $B \subseteq U$.
 \end{definition}
 
 
@@ -1069,7 +1127,7 @@ $\mathbb{R}^n$上序列用$(x_i)i\in\mathbb{N}$表示一连串$\mathbb{R}^n$上�
 
 \newpage
 \section{General Topology}
-\subsection{Countability}
+\subsection{Basis and Countable Axiom}
 
 \begin{definition}
 拓扑空间$X$中点$x$的一个\textbf{邻域基}(neighborhood base)指由$x$的邻域构造成的子集族$\mathcal{N}_x$，使得$x$的任何邻域均包含$\mathcal{N}$中的某个邻域.
@@ -1173,10 +1231,10 @@ $\mathbb{R}^n$上序列用$(x_i)i\in\mathbb{N}$表示一连串$\mathbb{R}^n$上�
 邻域基是一种挑出一部分邻域来“代表”所有邻域的机制，类似地，也有一种挑出一部分开集来“代表”所有开集的机制，称为拓扑基.
 
 \begin{definition}
-设$\mathscr{B}$是集合$X$上的一个子集族,称子集族\[\overline{\mathscr{B}}=\Set{U \subseteq X}{U \text{ 是 } \mathscr{B} \text{ 中若干成员的并集 }}\]为$\mathscr{B}$\textsf{生成}(generate)的子集族，若$\bar{\mathscr{B}}$恰好是拓扑空间$(X,\tau)$上的拓扑结构$\tau$,则称$\mathscr{B}$为其\textbf{拓扑基}(topological base).
+设$\mathscr{B}$是集合$X$上的一个子集族,称子集族\[\overline{\mathscr{B}}=\Set{U \subseteq X}{U \text{ 是 } \mathscr{B} \text{ 中若干成员的并集 }}\]为$\mathscr{B}$\textsf{生成}(generate)的子集族，若$\bar{\mathscr{B}}$恰好是拓扑空间$(X,\tpl)$上的拓扑结构$\tpl$,则称$\mathscr{B}$为其\textbf{拓扑基}(topological base).
 \end{definition}
 
-设$\mathcal{N}$是$X$上一个生成拓扑结构$\tau$的基准开领域结构，则$\mathscr{B}=\bigcup\limits_{x \in X}\mathcal{N}(x)$就是一个拓扑基.
+设$\mathcal{N}$是$X$上一个生成拓扑结构$\tpl$的基准开领域结构，则$\mathscr{B}=\bigcup\limits_{x \in X}\mathcal{N}(x)$就是一个拓扑基.
 
 拓扑基另一个定义是它是一个开集族，这个定义更强调了拓扑基一定是相对于某个拓扑结构.生成是什么意思呢？是只取其中一部分元素来生成还是要取到所有的元素？若要和前面拓扑基的另一个定义对应上，这里要取到所有元素来生成. the collection of all unions of members of $\overline{\mathscr{B}}$.
 
@@ -1235,28 +1293,28 @@ $\mathbb{R}$上的离散拓扑不满足第二可数公理. 对于它的任何拓
 任取$x \in U$，是存在合适的$n$使得$B_{\frac{1}{n}} \subseteq U$,因为$A$是稠密的，所以我们取的到$a \in B_{\frac{1}{n}} \cap A$,也是可以找到合适的$n'$使得$x \in B_{\frac{1}{n'}}(a) \subseteq U$,由于$x$是任意的，把这些$B_{\frac{1}{n'}}(a)$都并起来就是$U$.
 \end{proof}
 
-延伸一下拓扑基相关概念，前面我们知道了怎么去判定一个子集族是不是拓扑基，也就是去检验这个子集族能不能构造出某个拓扑结构，这种情况下有可能不同的拓扑基对应不同拓扑结构. 那么现在我如果给定一个先给定$X$上的一个拓扑结构$\tau$,让你取找$\tau$的拓扑基，这个时候应该怎么找呢？或者换句话说，我们构造了一个拓扑基，我们怎么判定这个拓扑基生成的拓扑是不是恰好$\tau$？
+延伸一下拓扑基相关概念，前面我们知道了怎么去判定一个子集族是不是拓扑基，也就是去检验这个子集族能不能构造出某个拓扑结构，这种情况下有可能不同的拓扑基对应不同拓扑结构. 那么现在我如果给定一个先给定$X$上的一个拓扑结构$\tpl$,让你取找$\tpl$的拓扑基，这个时候应该怎么找呢？或者换句话说，我们构造了一个拓扑基，我们怎么判定这个拓扑基生成的拓扑是不是恰好$\tpl$？
 
 \begin{proposition}
-给定一个拓扑空间$(X,\tau)$,如果$X$上\textbf{开子集}族$\mathscr{B}$是$\tau$的拓扑基当且仅当任取$\tau$的任意一个开集$U$,再任取$x \in U$，总存在$B \in \mathscr{B}$使得$x \in B \subseteq U$.
+给定一个拓扑空间$(X,\tpl)$,如果$X$上\textbf{开子集}族$\mathscr{B}$是$\tpl$的拓扑基当且仅当任取$\tpl$的任意一个开集$U$,再任取$x \in U$，总存在$B \in \mathscr{B}$使得$x \in B \subseteq U$.
 \end{proposition}
 
 \begin{proof}
-若$\mathscr{B}$是$\tau$的一个拓扑基，则对于任意$U \in \tau$，有$U = \bigcup\limits_k B_k$,其中$B_k \in \mathscr{B}$,若取$x \in U$，则能找到某个$x \in B_k$，所以$x \in B_k \subseteq U$.
+若$\mathscr{B}$是$\tpl$的一个拓扑基，则对于任意$U \in \tpl$，有$U = \bigcup\limits_k B_k$,其中$B_k \in \mathscr{B}$,若取$x \in U$，则能找到某个$x \in B_k$，所以$x \in B_k \subseteq U$.
 
-若任取$\tau$中开集$U$，$x \in U$,总有$B \in \mathscr{B}$使得$x \in B \subseteq U$，取遍$U$里面的所有元素，则$U = \bigcup\limits_k B_k$，则$\mathscr{B}$是一个拓扑基.
+若任取$\tpl$中开集$U$，$x \in U$,总有$B \in \mathscr{B}$使得$x \in B \subseteq U$，取遍$U$里面的所有元素，则$U = \bigcup\limits_k B_k$，则$\mathscr{B}$是一个拓扑基.
 \end{proof}
 
 还有一个用拓扑基来判定开集的一个命题:
 
 \begin{proposition}
-定义$\mathscr{B}$为$(X,\tau)$的一个拓扑基，若$X$上某个子集$U$开当且仅当$\forall x \in U$，总存在一个$B \in \mathscr{B}$,使得$x \in B \subseteq U$.
+定义$\mathscr{B}$为$(X,\tpl)$的一个拓扑基，若$X$上某个子集$U$开当且仅当$\forall x \in U$，总存在一个$B \in \mathscr{B}$,使得$x \in B \subseteq U$.
 \end{proposition}
 
-我们再考虑一种非常特殊的情况，我们知道拓扑基是不唯一，若$\mathscr{B}$是$(X,\tau)$上的拓扑基，往$\mathscr{B}$里面再加几个开集，它还是一个拓扑基，这个很显然。那么现在我有两个拓扑基$\mathscr{B}_1$和$\mathscr{B}_2$，如何判定它们生成是同一个拓扑结构还是不同的拓扑结构?
+我们再考虑一种非常特殊的情况，我们知道拓扑基是不唯一，若$\mathscr{B}$是$(X,\tpl)$上的拓扑基，往$\mathscr{B}$里面再加几个开集，它还是一个拓扑基，这个很显然。那么现在我有两个拓扑基$\mathscr{B}_1$和$\mathscr{B}_2$，如何判定它们生成是同一个拓扑结构还是不同的拓扑结构?
 
 \begin{proposition}
-定义拓扑基$\mathscr{B}_1$和$\mathscr{B}_2$分别是拓扑结构$\tau_1$和$\tau_2$的拓扑基,若$\tau_1 = \tau_2$当且仅当
+定义拓扑基$\mathscr{B}_1$和$\mathscr{B}_2$分别是拓扑结构$\tpl_1$和$\tpl_2$的拓扑基,若$\tpl_1 = \tpl_2$当且仅当
 \begin{enumerate}
 	\item $\forall B_1 \in \mathscr{B}_1$和$\forall x \in B_1$,总是存在$B_2 \in \mathscr{B}_2$,使得$x \in B_2 \subseteq B_1$;
 	\item $\forall B_2 \in \mathscr{B}_2$和$\forall x \in B_2$,总是存在$B_1 \in \mathscr{B}_1$,使得$x \in B_1 \subseteq B_2$
@@ -1267,7 +1325,7 @@ $\mathbb{R}$上的离散拓扑不满足第二可数公理. 对于它的任何拓
 
 \newpage
 
-\subsection{Distinguishable}
+\subsection{Separation Axiom}
 
 这一章主要刻画的是分离公理，分离公理的原意是指是否可以用拓扑结构分离空间中的两个原本不应该重叠的部分.按照对“不该重叠的两部分”理解不同以及区分方法的不同，有很多种不同判定方法和条件，每一种条件被称为一种\textbf{分离公理}(separation axiom).
 
@@ -1456,11 +1514,11 @@ finally! 给定一个$[0,1]$里面一个开集$U=(a,b) \cap [0,1]$,其中$(a,b)$
 条件可以更弱一点.
 
 \begin{proposition}
-给定两个拓扑空间$(X,\tau)$，$(Y,\tau')$和它们的一个映射$\func{f}{(X,\tau)}{(Y,\tau')}$,且$f$满足连续满射.若$(X,\tau)$连通，则$(X,\tau')$连通.
+给定两个拓扑空间$(X,\tpl)$，$(Y,\tpl')$和它们的一个映射$\func{f}{(X,\tpl)}{(Y,\tpl')}$,且$f$满足连续满射.若$(X,\tpl)$连通，则$(X,\tpl')$连通.
 \end{proposition}
 
 \begin{proof}
-\rm 假设$(Y,\tau')$不连通，则其上存在一个非空clopen子集$U$且$U \neq Y$，考虑$f^{-1}(U)$，由于$f$连续，所以$f^{-1}(U)$也是clopen,$U$非空且$U \neq Y$，再由满射的性质,$f^{-1}(U)$也是非空且$f^{-1}(U) \neq X$，这就和$(X,\tau)$产生了矛盾，所以假设条件不成立.
+\rm 假设$(Y,\tpl')$不连通，则其上存在一个非空clopen子集$U$且$U \neq Y$，考虑$f^{-1}(U)$，由于$f$连续，所以$f^{-1}(U)$也是clopen,$U$非空且$U \neq Y$，再由满射的性质,$f^{-1}(U)$也是非空且$f^{-1}(U) \neq X$，这就和$(X,\tpl)$产生了矛盾，所以假设条件不成立.
 \end{proof}
 
 如果我们再把上面的满射这个条件拿掉，上面命题可能就不成立了，但是我们依然有: \textbf{连通空间的连续映射的像空间是连通的}.
@@ -1579,7 +1637,7 @@ $X$是一个连通但是不是道路连通的拓扑空间。
 
 
 \newpage
-\subsection{Compactdness}
+\subsection{Compactness}
 
 \rm H-Borel定理还是引理？已经不重要了都是唯一属于他的,紧致性是它的一般性推广.
 
