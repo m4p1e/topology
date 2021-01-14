@@ -499,6 +499,19 @@ standard topology其实就是由euclidean metric诱导出来的，你可以发�
 给定度量空间$(X,d)$和其上子集$A$，若对任意的$\varepsilon > 0$，都存在一组$x_1,\cdots,x_n \in X$，使得$A \subseteq \bigcup\limits_{i=1}^{n} B_\varepsilon(x_i)$.也就是说$A$可以被有限个半径为$\varepsilon$的开球盖住， 则称$A$ is totally bounded(完全有界).
 \end{definition}
 
+可以利用下面的方法去判定度量空间上的闭集.
+
+\begin{proposition}
+给定度量空间$(X,d)$，若$X$上的子集$A$是闭的，当且仅当对任意$A$里面的收敛点列都收敛于$A$中一点，换句话说就是$\forall x \in X，a_n \in A$，若$a_n \rightarrow x$，则$x \in A$.
+\end{proposition}
+
+\begin{proof}
+($\Rightarrow.$)若$A$是一个闭集，假设存在$A$中一个点列$\{a_n\}$收敛于$x \in X \setminus A$. 可以在$X \setminus A$中找到$x$的一个开球$B_\varepsilon(x) \subseteq X \setminus A$，此时对于任意的$a_n$都有$d(a_n,x) > \varepsilon$，这显然是和收敛的定义矛盾的，所以不存在这样的$x$.
+
+($\Leftarrow.$)若$A$中所有收敛点列$\{a_n\}$都收敛于$x \in A$，假设$A$不是一个闭集，我们总可以找到$A$的一个聚点$x \in X \setminus A$(不然$A = \overline{A}$，那么$A$就是一个闭集了). 使得对任意$\varepsilon > 0$，都有$B_\varepsilon(x) \cap A \neq \emptyset$. 现在来构造一个点列$\{a_n\}$，使得这个点列是收敛于$x$. 让$a_n = B_{\frac{1}{n}}(x)$，现在这个点列是收敛于$x$的，因为对应任意的$\varepsilon > 0$，我们取$n_0 > \frac{1}{\varepsilon}$ \[x \in B_{\frac{1}{n}}(x) \subseteq B_{\frac{1}{n_0}}(x) \subseteq B_\varepsilon(x).\]这和前提条件矛盾了，所以不存在这样的$x$.
+\end{proof}
+
+
 
 \newpage
 \subsection{Potency of Set and Countable Set}
@@ -886,7 +899,7 @@ Z \arrow[rru, "g"] \arrow[rrd, "f"] &  &                        \\
 
 \newpage
 \subsection{Quotient Map and Quotient Space}
-和弱拓扑相对应地，有另外一种非常自然的定义拓扑结构的方法叫“强拓扑”，就是利用映射$\func{f}{X}{Y}$把集合$X$上的拓扑结构$\tpl$“向右转移”到集合$Y$上去.那么这里为什么叫强拓扑呢？因为使得$f$连续的$Y$上的最小拓扑是平凡拓扑$\{Y,\emptyset\}$.与弱拓扑相反的是取使得$f$连续的$Y$上最强的拓扑(即在对于集合族中是最大的).
+和弱拓扑相对应地，有另外一种非常自然的定义拓扑结构的方法叫“强拓扑”，就是利用映射$\func{f}{X}{Y}$把集合$X$上的拓扑结构$\tpl$“向右转移”到集合$Y$上去.那么这里为什么叫强拓扑呢？因为使得$f$连续的$Y$上的最小拓扑是平凡拓扑$\{Y,\emptyset\}$，现在要取使得$f$连续的$Y$上最强的拓扑(即在对于集合族中是最大的).
 
 
 \begin{definition}
@@ -906,16 +919,44 @@ Z \arrow[rru, "g"] \arrow[rrd, "f"] &  &                        \\
 \end{proof}
 
 \begin{definition}
-设$(X,\tpl_X)$,$(Y,\tpl_Y)$是两个拓扑空间,$\func{f}{X}{Y}$是一个满射，并且$\tpl_Y$恰好是$f$所决定的强拓扑，即$U \subseteq Y$是开集当且仅当$f^{-1}(U) \subseteq \tpl_X$,则称$f$为商空间.
+设$(X,\tpl_X)$,$(Y,\tpl_Y)$是两个拓扑空间,$\func{f}{X}{Y}$是一个满射，并且$\tpl_Y$恰好是$f$所决定的强拓扑，即$U \subseteq Y$是开集当且仅当$f^{-1}(U) \subseteq \tpl_X$,则称$f$为商映射(quotient map).
 \end{definition}
 
+注意在这里区分开映射，开映射肯定是一个商拓扑，但是商拓扑并不一定是一个开映射.在给定单个$f$下，把所有$U \subseteq Y$的原像是开的这样的子集$U$都拿过来当开集，形象地描述"最大拓扑"，也可以说是"最细拓扑"，这个拿法确实能构造一个拓扑前面已经证明了.
+
+下面是另一定义商映射的方法:
 \begin{proposition}
-设$\func{f}{X}{Y}$是一个满射，则$f$是商映射的充分必要条件是: $U$是闭集当且仅当$f^{-1}(U)$是闭集.
+设$\func{f}{X}{Y}$是一个满射，则$f$是商映射的充分必要条件是: $U$是开集(闭集)当且仅当$f^{-1}(U)$是开集(闭集).
 \end{proposition}
+
+\begin{proposition}[the universal property of quotient maps]
+给定一个商映射$\func{p}{X}{Y}$，则对任意使得$\forall x,x' \in X$，当$p(x)=p(x')$有$g(x)=g(x')$的连续映射$\func{g}{X}{Z}$，存在唯一连续映射$\func{h}{Y}{Z}$使得$h \circ p =g$.
+\begin{center}
+% https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAA0QBfU9TXfIRQAmclVqMWbAFrdeIDNjwEiARlKrx9Zq0QgAmt3EwoAc3hFQAMwBOEALZIyIHBCTqJOtqbnW7jxGdXJFEQBjoAIxgGAAV+ZSEQGyxTAAscEGptKT00XxBbBxDqYMQPcKjY+ME2ZLSMrMldEFSjLiA
+\begin{tikzcd}
+X \arrow[rr, "g"] \arrow[rd, "p"'] &                    & Z \\
+                                   & Y \arrow[ru, "h"'] &  
+\end{tikzcd}
+\end{center}
+\end{proposition}
+
+\begin{proof}
+首先我们得知道上述命题中的条件在刻画什么东西？
+\begin{center}
+\includegraphics[width=10cm, height=8cm]{images/universal_property_of_quotient_map.JPG}
+\end{center}
+上面的条件换句话说就是$g$在$p^{-1}(y)$(对任意的$y \in Y$)上是一个constant map,很显然在$p$是一个满射且满足上述条件的情况下，这个映射$h$是唯一存在的即$h(y)=h(p(x))=g(x)$，对任意$x \in p^{-1}(y)$. 我们可以来检验一下$h$是不是well-defined，也就是说它不会随着$x$的选择而改变. 对于每一个$y \in Y$, 我们有$\forall x,x' \in p^{-1}(y),\ p(x)=p(x')$，所以$g(x)=g(x')$，即$h(y)=g(x)$是唯一的. 在$y = y'$时，我们有$p^{-1}(y) = p^{-1}(y')$，所以对于$x \in p^{-1}(y),x' \in p^{-1}(y')$,也有$p(x)=p(x')$,即$g(x)=g(x')$,对于单个$y$原像有相同的函数值这很显然的，所以整体上$h(y)=h(y')$.
+
+再来看$h$为什么连续，则任取$Z$里面的开集$U$，因为$p$是商映射，所以想要看$h^{-1}(U)$是不是开的，就是要看$p^{-1}(h^{-1}{U})$是不是开的，有$p^{-1}(h^{-1}{U}) = g^{-1}(U)$，因为$g$是一个连续映射，所以$p^{-1}(h^{-1}{U})$是开的，所以$h^{-1}(U)$也是开的，即$h$是一个连续映射.
+\end{proof}
+
 
 \begin{proposition}
 两个商映射的复合映射还是商映射.
 \end{proposition}
+
+
+下面这个性质会经常的用到.
 
 \begin{proposition}
 设$\func{f}{X}{Y}$是个连续满射，则下列两个条件都是$f$是商映射的充分非必要条件:
@@ -929,7 +970,7 @@ Z \arrow[rru, "g"] \arrow[rrd, "f"] &  &                        \\
 当$f$是一个满射时，$U=f(f^{-1}(U))$,其中$U \in Y$,在开映射的条件下若$f^{-1}(U)$是一个开集，那么$U$也是一个开集，同时$f$连续，所以$U$开，那么$f^{-1}(U)$开，证毕。为什么这是充分条件呢？因为商映射的定义是我们在$Y$里面挑子集，如果它的原像是开集，就把它放到$\tpl_Y$里面，当我们挑完$Y$所有子集的时候，可能也只对应了一部分$X$中的开集，现在如果要求$X$所有开集都映射到$Y$上，毫无疑问这时候我们只需要把$X$上的开集的像放到$\tpl_Y$就行了，这个过程就完全确定了.
 \end{proof}
 
-显然同胚是一个商映射。那么如何形象的理解商映射呢？在代数里面有商群和商环，但是它们都有一个比较特殊的性质就是构造了很多的等价类，相当于把两个在某种等价关系的刻画下放到了一个等价类里面，如果把这个性质类比到商映射，其实也有类似的性质，商映射带来了一种“拓扑粘合”的观点: 我们可以把被$f$映射到同一个像上的$X$中的点理解成是被粘在了一起，然后把$f(X)$整体理解称是用$f$把$X$粘起来的空间.
+显然同胚是一个商映射。那么如何形象的理解商映射呢？在代数里面有商群和商环，但是它们都有一个比较特殊的性质就是构造了很多的等价类，相当于把两个在某种等价关系的刻画下放到了一个等价类里面，在拓扑上的商映射不仅仅是一个满射(满射描述是元素到等价类的映射)，还需要附加连续的存在. 商映射带来了一种“拓扑粘合”的观点: 我们可以把被$f$映射到同一个像上的$X$中的点理解成是被粘在了一起，然后把$f(X)$整体理解称是用$f$把$X$粘起来的空间. 
 
 生活中我们可以用一些小纸片涂上胶水粘出复杂的手工艺品，或者把积木插在一起搭出复杂的大模型.商映射就是拓扑空间的胶水，它让我们可以去刻画以前无法想象的复杂空间，把它们分解成简单直观的小块，并为分解和重新组装等操作提供严禁可靠的拓扑解释.
 
@@ -1054,6 +1095,9 @@ $\mathbb{R}\mathbb{P}^2$中每个点$x$的原像集$p^{-1}(x)$恰好由球面上
 \end{proof}
 \end{example}
 
+\begin{definition}
+若拓扑空间$X$上的某个子集$A$，它是某个开集的交集，则称$A$是饱和的(saturated).
+\end{definition}
 
 \newpage
 \subsection{Misc}
@@ -1124,6 +1168,12 @@ $\mathbb{R}^n$上序列用$(x_i)i\in\mathbb{N}$表示一连串$\mathbb{R}^n$上�
 \begin{proposition}
 序列$(x_i)$ 收敛于$x$,则其所有的子序列都收敛于$x$.
 \end{proposition}
+
+\begin{definition}[R-saturated]
+$X$是一个集合，$R$是$X$上的一个等价关系，若子集$X$上的子集$A$满足$\forall x \in X, a \in A$，如果$xRa \Rightarrow x \in A$，则称$A$是一个饱和子集(R-saturated)
+\end{definition}
+
+saturated有点像环里面的ideal，它可以吸收与它里面元素等价的其他元素.
 
 \newpage
 \section{General Topology}
