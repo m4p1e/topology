@@ -1700,6 +1700,15 @@ $X$是一个连通但是不是道路连通的拓扑空间。
 若拓扑空间$X$的任意开覆盖有有限子覆盖，则称$X$\textbf{紧致}(\rm compact).
 \end{definition}
 
+\begin{example}
+If $(X,\tpl) = \mathbb{R}$ and $A = (0,\infty)$, then $A$ is not compact.
+\begin{proof}
+For each positive integer $i$, let $O_i$ be the open interval $(0,1)$. Then, clearly, $A \subseteq \bigcup\limits_{i=1}^{\infty} O_i$.
+
+But there do not exist $i_1,i_2,\cdots,i_n$ such that $A \subseteq (0,i_1) \cup (0, i_2) \cup \cdots \cup (0,i_n)$. Therefore $A$ is not compact.
+\end{proof}
+\end{example}
+
 \begin{definition}
 若拓扑空间$X$的任意开覆盖都有一个\textbf{可数}子覆盖，则称$X$为一个\rm \textbf{Lindelöf space}.
 \end{definition}
