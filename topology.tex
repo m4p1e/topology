@@ -1709,6 +1709,25 @@ But there do not exist $i_1,i_2,\cdots,i_n$ such that $A \subseteq (0,i_1) \cup 
 \end{proof}
 \end{example}
 
+在数学分析里面E.Borel告诉我们有界闭区间是紧致的，在那个里面我似乎是用H.lebesgue的方法证明，例如给定一个闭区间$[a,b]$，去找形如$[a,x^*]$且能被有限覆盖的子集，确定$\sup(x^*)=b$，来证明整个$[a,b]$可以被有限覆盖. 这里我们用纯拓扑的方法来试着在来证一下闭区间$[0,1]$是紧致的.
+
+\begin{proposition}
+闭区间$[0,1]$是紧致的.
+\end{proposition}
+
+\begin{proof}
+让$O_i,i \in I$是$[0,1]$的开覆盖. 则对任意的$x \in [0,1]$，都有一个$O_i$包含它. 由于$O_i$是开的，所以存在一个开区间$U_x \subseteq O_i$使得$x \in U_x$.
+
+现在定义一个$[0,1]$上的子集$S$如下\[S = \Set{z}{[0,z]\ \text{可以被有限} U_x \text{所覆盖}}.\]这样如果我取$x \in S$，再取$y \in U_x$. $U_x$同时包含$x$和$y$，不妨设$x <= y$所以$[x,y] \subseteq U_x$. 我们已经有$[0,x] \subseteq \bigcup U_{x_i}$，所以$[0,y] \subseteq \bigcup U_{x_i} \cup U_x$. 这样$y \in S$.
+
+上面这个性质告诉我们$U_x$里面的元素其实都是属于$S$的，这就意味着\[S = \bigcup\limits_{x \in S} U_x\]，但是这里还是有点不太好处理，因为等式两边都有$S$. 我们在取$S$的complement:\[[0,1] \setminus S = \bigcup\limits_{x \notin S} U_x\]，两者结合起来看$S$应该是一个clopen，$S$不为空，所以$S$只能是$[0,1]$.
+\end{proof}
+
+\begin{theorem}[Alexander Subbasis Theorem]
+a topological space $(X,\tpl)$ is compact if and only if every subbasis cover has a finite subcoover. in other wors, if $S$ is a subbasis of topology $\tpl$, and $O_i \colon i \in I$, $I$ is an index set, is such that echo $O_i \in S$ and $X \subseteq \bigcup\limits_{i \in I} O_i$, then there is a finite subcover of $X$ by mermbers of $O_i \in I$.
+\end{theorem}
+
+
 \begin{definition}
 若拓扑空间$X$的任意开覆盖都有一个\textbf{可数}子覆盖，则称$X$为一个\rm \textbf{Lindelöf space}.
 \end{definition}
@@ -1718,7 +1737,9 @@ But there do not exist $i_1,i_2,\cdots,i_n$ such that $A \subseteq (0,i_1) \cup 
 \end{proposition}
 
 \begin{proof}
-取$Y$上一组开覆盖$\bigcup\limits_{\alpha \in A}V_\alpha=Y$,这样$f(A) \subseteq \bigcup\limits_{\alpha \in A}V_\alpha$.然后我们有\[A \subseteq f^{-1}(f(A)) \subseteq \bigcup\limits_{\alpha \in A}V_\alpha = \bigcup\limits_{\alpha \in A} f^{-1}(V_\alpha).\]其中$f^{-1}(V_\alpha)$开，所以就表示$A$可以被一堆开集盖住，由因为$A$紧致，所以$A \subseteq \bigcup\limits_{\alpha \in S} f^{-1}(V_\alpha)$,附带地说明了$f(A) \subseteq f(\bigcup\limits_{\alpha \in S} f^{-1}(V_\alpha) = \subseteq \bigcup\limits_{\alpha \in S} V_\alpha $.所以$f(A)$紧致.
+取$Y$上一组开覆盖$\bigcup\limits_{\alpha \in A}V_\alpha=Y$,这样$f(A) \subseteq \bigcup\limits_{\alpha \in A}V_\alpha$.然后我们有\[A \subseteq f^{-1}(f(A)) \subseteq f^{-1}(\bigcup\limits_{\alpha \in A}V_\alpha) = \bigcup\limits_{\alpha \in A} f^{-1}(V_\alpha).\]其中$f^{-1}(V_\alpha)$开，所以就表示$A$可以被一堆开集盖住，由因为$A$紧致，所以$A \subseteq \bigcup\limits_{\alpha \in S} f^{-1}(V_\alpha)$,附带地说明了$f(A) \subseteq f(\bigcup\limits_{\alpha \in S} f^{-1}(V_\alpha) = \subseteq \bigcup\limits_{\alpha \in S} V_\alpha $.所以$f(A)$紧致.
+
+这个证明的技巧$f(A)$的一组开覆盖的preimage，构造了一个$A$的一组开覆盖，反过来用$A$的compact性质，挑出了有限的开覆盖，再做$f$的image.
 \end{proof}
 
 
@@ -1728,10 +1749,22 @@ $X$是一个度量空间，若子集$A$紧致则$A$是一个闭集.
 \end{example}
 
 \begin{proof}
-其实就是要说明$X \setminus A$开，我们的证明策略是在$X \setminus A$中固定一点$x$，然后再任取$y \in A$，分别取它们不相交的开集$x \in U_x$和$y \in U_y$(Hausdorff)，最后我们只需要说明这些$\bigcap U_x$与$K$之间没有交点就行了.
+换句话说$A$紧致则$X \setminus A$开，我们的证明策略是在$X \setminus A$中固定一点$x$，然后再任取$y \in A$，分别取它们不相交的开集$x \in U_x$和$y \in U_y$(Hausdorff)，最后我们只需要说明这些$\bigcap U_x$与$K$之间没有交点就行了.
 
-开始正式证明\[A = \bigcup\limits_{y \in A} \{y\} = \bigcup\limits_{y \in A}U_y \],如果我们有$A$紧致，则$ A \subseteq \bigcup\limits_{y \in S} U_y$. 按照我们前面的策略，我们需要取任意多对$(U_x,U_y)$,其中$U_x$和$U_y$都是不相交的开集，我们肯定想要是每个$x$都只对应一个开集就好了，这样$X \setminus A$就是任意多个开集的并，它就是一个开集，我们现在就这样做.把所有这样的$U_x$取交集，而现在$A$是紧致的，所以我们也只需要取有限多个$U_x$交也就够了，记$V = \bigcap\limits_{y \in S} V_y$,其中$x \in V_y$代表$U_x$和$y$对应,这里$V$也是开集.我们现在只需要说明这个$V \cap K = \emptyset$就行了\[V \cap K \subseteq \bigcap\limits_{y \in S} V_y \cap \bigcup\limits_{z \in S} U_z = \bigcup\limits_{z \in S}(\bigcap\limits_{y \in S} V_y \cap U_z) \subseteq \bigcup\limits_{z \in S}(V_z \cap U_z) = \emptyset. \],最后取遍所有$x$都有这样的一个开集$V$，$X \setminus A = \bigcup V$，所以$A$是一个闭集.
+开始正式证明，取$A$的一组开覆盖\[A = \bigcup\limits_{y \in A} \{y\} = \bigcup\limits_{y \in A}U_y.\]如果我们有$A$紧致，则$A \subseteq \bigcup\limits_{y \in S} U_y$. 按照我们前面的策略，我们需要取任意多对$(U_{x_y},U_y)$,其中$U_{x_y}$和$U_y$都是不相交的开集，然后我们再考虑对所有的$x \in X \setminus A$都去做这样的操作. 对于每个$x$我们都有一堆开集，但是我们肯定想要是每个$x$都只对应一个开集就好了，所以我们考虑取这堆开集的交集，但是这堆开集看起来似乎有无限对多个，如果它是有限就好了. 进一步再把所有的这样的交集并起来，它和$A$没有交点就更好了，这样这堆交集的并也就是$X \setminus A$，这就是后面我们操作的基本想法.
+
+按照我们的基本想法来做一下. 现在$A$是紧致的,所以我们只需要关注有限个$U_y$就够了，也就是说我们也只需要取有限多个$U_{x_y}$交也就够了，记$V = \bigcap\limits_{y \in S} V_y$,其中$x \in V_y$代表$U_x$和$y$对应,这里$V$也是开集.我们现在只需要说明这个$V \cap A = \emptyset$就行了\[V \cap A \subseteq \left( \bigcap\limits_{y \in S} V_y \right) \cap \left(\bigcup\limits_{z \in S} U_z \right) = \bigcup\limits_{z \in S}\left(\bigcap\limits_{y \in S} V_y \cap U_z \right) \subseteq \bigcup\limits_{z \in S}(V_z \cap U_z) = \emptyset. \]注意最后的$V_z$这里是集合论手法$\bigcap\limits_{y \in S} V_y \subseteq V_z, z \in S$. 最后取遍所有$x$都有这样的一个开集$V$，$X \setminus A = \bigcup V$，所以$A$是一个闭集.
 \end{proof}
+
+\begin{proposition}
+紧致空间的闭集都是紧致的.
+\end{proposition}
+
+\begin{proof}
+给定$X$紧致，$A$是$X$上的一个闭集，证明还是用集合论的手法:\[X = A \cup X \setminus A.\]取$A$上的一组开覆盖$O_i,i \in I$，所以$X = \left( \bigcup\limits_{i \in I} O_i \right) \cup X \setminus A$，其中$X \setminus A$开，所以整体上是$X$的一组开覆盖，我们可以从这组开覆盖里面来调一组有限开覆盖. 首先$X \setminus A \cap \left( \bigcup\limits_{i \in I} O_i \right)= \emptyset$，所以$X \setminus A$得先挑出来，也就是说我们可以从$O_i,i \in I$里面挑有限多个出来覆盖$A$，即$A$紧致.
+\end{proof}
+
+
 \end{document}
 
 
