@@ -27,6 +27,13 @@
 
 \usepackage{xcolor}
 \usepackage{titlesec}
+
+\usepackage{tocloft}
+%\renewcommand{\cftchapfont}{\color{red}\large\bfseries}
+\renewcommand{\cftsecfont}{\color{blue}\bfseries\large}
+\renewcommand{\cftsubsecfont}{\color{blue}}
+%\renewcommand{\cftsubsubsecfont}{\color{DarkGreen}}
+
 %\titleformat{\section}[block]{\color{blue}\Large\bfseries\filcenter}{}{1em}{}
 %\titleformat{\subsection}[hang]{\color{red}\bfseries\Large}{}{0em}{}
 %\setcounter{secnumdepth}{1} %section 序号
@@ -48,7 +55,7 @@
 \newcommand\Set[2]{\{\,#1\mid#2\,\}} %集合
 \newcommand\SET[2]{\Set{#1}{\text{#2}}} %
 \begin{document}
-\title{Topology}
+\title{TopOlOgy WiTh TeArs}
 \author{枫聆}
 \maketitle
 
@@ -56,7 +63,7 @@
 
 \newpage
 
-\section{写在最前面}
+\section{Preface}
 
 拓扑对我来说是新名字，我对它几乎一无所知，虽然我嘴上总是吵吵着代数拓扑是我的终极目标\verb|(～ o ～)~zZ|，终于今天抱着巨大的勇气翻开了包志强老师的《点集拓扑和代数拓扑引论》，被文中老师幽默的行文，深深折服了，似乎拓扑也并没有想象中那么难，我想这是还不错的开始，我的第一直观感受拓扑也是给定一堆对象，在上面用一些公理弄些不一样的结构，似乎和代数一样，但是我暂时还不知道这堆结构要拿来干什么？有什么有趣的性质？
 
@@ -89,7 +96,10 @@
 
 完美的略掉了度量关系，在这里$B_{\delta}(x_0)$表示$\{x \in \mathbb{R} |\ |x-x_0| < \delta \}$,最后那个包含关系是指$f(x_0)$的任何$\varepsilon$程度下的原像包含$x_0$的某个$\delta$邻域.
 
-是否我们可以通过上面这种定义邻域的方式去把度量空间变成一般拓扑空间呢？当然是可以的，但是我们现在还没有给出邻域的一般定义。那邻域是什么？在邻域之前，应该先理解基准开邻域结构(base open neighborhood),像定义代数结构一样，基准开邻域结构是一个映射(算子)$\func{\mathcal{N}}{X}{2^(2^X)}$,把每一个点$x \in X$对应到一个子集族$\mathcal{N}(x)$上，满足下面几条公理
+是否我们可以通过上面这种定义邻域的方式去把度量空间变成一般拓扑空间呢？当然是可以的，但是我们现在还没有给出邻域的一般定义。那邻域是什么？在邻域之前，应该先理解基准开邻域结构(base open neighborhood).
+
+\begin{definition}[subbasis]
+像定义代数结构一样，基准开邻域结构是一个映射(算子)$\func{\mathcal{N}}{X}{2^(2^X)}$,把每一个点$x \in X$对应到一个子集族$\mathcal{N}(x)$上，满足下面几条公理
 		\begin{itemize}
 			\item $\forall x \in X,\mathcal{N}(x) \neq \emptyset,$并且$\forall U \in \mathcal{N}(x),x \in U$
 			\item 若$U,V \in \mathcal{N}(x),$则存在$W \in \mathcal{N}(x)$,使得$W = U \cap V$
@@ -101,44 +111,46 @@
 	\item $x$的任意两个基准开邻域的交是$x$的邻域
 	\item 任意基准开邻域是其所含每个元素$y$的邻域
 \end{itemize}
+\end{definition}
 
-这个邻域的定义非常的奇特，那它奇特在什么地方呢？其他地方("Topology and Groupoids")关于邻域的定义是这样的:
+这是我最开始学topology时，用的包包老师书上最前面的定义，所以一直在这里，这个地方我一直想去掉，因为会对初学者理解邻域和开集产生巨大的阻力，我自己被坑了很久(我以为只是一种old fashion)... 基准开领域这个名字就一直很奇怪，其实它就是subbasis的公理化，你需要往后学到basis的时候，至少你对拓扑有一个大概的了解之后，来尝试构造一个拓扑的时候，你将会知道它的真正含义. 所以为了消除这个阻力，请在后面看见基准开邻域的时候，直接想subbasis就行. 我在下面贴上了关于邻域更通用的定义.
+
+\begin{definition}
 \begin{itemize}
 	\item 如果$N$是$x$的一个邻域，则$x \in N$;
 	\item 如果$N$是一个包含$x$某个邻域的$X$的子集，则$N$同样是$x$的邻域;
 	\item 两个$x$的邻域的交还是一个$x$的一个邻域;
 	\item 如果$N$是$x$的一个邻域，且$N$包含一个$x$的邻域$M$，则$N$是$M$中所有点的邻域;
 \end{itemize}
-
-我更倾向于后面这种定义邻域的办法，不要用基准开邻域来定义，因为基准开领域其实是open neighborhood的概念，它是指它确实同时满足开和邻域的条件.这里同样可以给一个命题"如果一个子集$N$是$x$的open neighborhood当且仅当它是一个基准开邻域"。基准开邻域这个概念似乎非常old fashion，我在其他书中都没有看见过，奈何包包老师的书里有，所以这里需要好好思考一下。后面用基准开邻域的时候就想一下open neighborhood.
+\end{definition}
 
 我们现在可以用邻域的公理来定义拓扑空间，用$\mathbf{N}$表示一个邻域拓扑，即$\mathbf{N}$表示一个所有非空的$\mathbf{N}(x)$构成的邻域族，最后$(X,\mathbf{N})$表示一个拓扑空间，这种构造方式是Hausdorff提出来的，但是一般地经常用开集的公理来定义领域。
 
-用$(X,\tau)$表示一个拓扑空间，其中$\tau$表示$X$的一个子集族，并且满足下面公理：
+\begin{definition}
+用$(X,\tpl)$表示一个拓扑空间，其中$\tpl$表示$X$的一个子集族，并且满足下面公理：
 \begin{itemize}
 	\item $\emptyset \in \tau,X \in \tau$
 	\item $\tau$中任意两个元素的交集仍属于$\tau$
 	\item $\tau$中任意多个元素的并集仍属于$\tau$
 \end{itemize}	
-则称$\tau$里面的元素为开集，$\tau$表示$X$上的一个拓扑结构.注意这里第二条公理并不是和第三条公理一样是infinite，这里特指finite，为什么呢？我举个后面会提及的特殊拓扑结构--余有限拓扑，把这个拓扑结构放到正整数$\mathbb{N}$上，生成的开集如下\[S_n=\{1\} \cup \{n+1\} \cup \{n+1\} \cup \{n+1\} \cup \cdots = \{1\} \cup \bigcup\limits_{m=n+1}^{\infty}\{m\}  \]它们的闭集都是有限的，然后把这些开集交起来你会发现\[\bigcap\limits_{n=1}^{\infty} S_n = \{1\}\],得到的结果并不是一个开集，因为它的闭集并不是有限的.
+则称$\tpl$里面的元素为开集，$\tau$表示$X$上的一个拓扑结构.
+\end{definition}
+
+注意这里第二条公理并不是和第三条公理一样是infinite，这里特指finite，为什么呢？我举个后面会提及的特殊拓扑结构--余有限拓扑，把这个拓扑结构放到正整数$\mathbb{N}$上，生成的开集如下\[S_n=\{1\} \cup \{n+1\} \cup \{n+1\} \cup \{n+1\} \cup \cdots = \{1\} \cup \bigcup\limits_{m=n+1}^{\infty}\{m\}  \]它们的闭集都是有限的，然后把这些开集交起来你会发现\[\bigcap\limits_{n=1}^{\infty} S_n = \{1\}\],得到的结果并不是一个开集(因为它的闭集并不是有限的).
 
 开集定义的拓扑空间看起来要比邻域定义，要稍微简洁那么一点，两个定义都是等价的，你可以用邻域的推到开集。在邻域上基础上我们定义如果$U$是$X$的一个子集，且$U$是每一个$x \in U$的领域，则称$U$是一开集。基准开邻域的第三条公理告诉我们基准开邻域肯定是一个开集，然后我们给出一个命题
 
 \begin{proposition}
-一个集合是开集当且仅当它是若干个基准开领域的并集
+\rm 一个集合是开集当且仅当它是若干个基准开领域的并集(subbasis)
 \end{proposition}
 
 \begin{proof}
-如果当一个集合是开集时，根据开集的定义，它里面每个元素都有一个邻域，而每个邻域至少包含一个基准开邻域，因此所有基准开邻域的并构成了这个开集。反之若干个基准开领域的并，还是一个基准开领域，前面说过基准开领域是一个开集。
-
-注意，空集也是一族基准开领域的并，只不过这个集合族是空族。
+如果当一个集合是开集时，根据开集的定义，它里面每个元素都有一个邻域，而每个邻域至少包含一个基准开邻域，因此所有基准开邻域的并构成了这个开集。反之若干个基准开邻域的并，不会破坏基准开邻域的第三条公理。
 \end{proof}
 
-这个命题证明以后，现在来看看我们用邻域定义得到的开集是否遵循开集的基本公理？很显然地，当并集是基准开领域并的情况下，是满足上诉的开集公理的。回顾前面的定义，基准开邻域在这里起了不小作用，那为什么不一开始使用基准开邻域来定义开集呢？而是使用邻域？下面引用一段包老师的话，写的真好！
+基准开邻域结构(三条公理)和邻域结构(四条公理)都能刻画连续性。通常邻域结构很多，并不方便写出来，而基准邻域结构则是比较容易写出的，但它的缺点是：同一种连续性可以用不同的基准开邻域来描述。打个比方，邻域结构就是一个线性空间里面所有的向量，而基准开邻域相对于一个线性空间里面的基，所以很显然，在定义拓扑概念时，我们是希望从具有确定性的邻域结构出发去定义，等到具体计算的时候再用基准开邻域，而不是从基准开邻域结构出发去写一个表达式，用不那么确定的公式作为定义。当然邻域结构里面仍然包含很多冗余信息，因此我们最终选择另一套与之相互唯一确定的，更加简洁齐整的东西，把它称为拓扑结构(开集族).
 
-基准开邻域结构(三条公理)和邻域结构(四条公理)都能刻画连续性。通常邻域结构很多，并不方便写出来，而基准邻域结构则是比较容易写出的，但它的缺点是：同一种连续性可以用不同的基准开邻域来描述。打个比方，邻域结构就是一个线性空间里面所有的向量，而基准开邻域相对于一个线性空间里面的基，所以很显然，在定义拓扑概念时，我们是希望从具有确定性的邻域结构出发去定义，等到具体计算的时候再用基准开邻域，而不是从基准开邻域结构出发去写一个表达式，用不那么确定的公式作为定义。当然邻域结构里面仍然包含很多冗余信息，因此我们最终选择另一套与之相互唯一确定的，更加简洁齐整的东西，把它称为拓扑结构(开集族)
-
-当我们把一个拓扑空间当一个整体去研究的时候，用开集公理要比邻域的公理更加方便，领域公理似乎更强调“$x$点附近”会怎么样了？但是开集要更抽象一点，需要花些时间去理解，好吧我已经花了不少时间了！！！
+当我们把一个拓扑空间当一个整体去研究的时候，用开集公理要比邻域的公理更加方便，领域公理似乎更强调“$x$点附近”会怎么样了？但是开集要更抽象一点，需要花些时间去理解.
 
 \begin{example}
 集合$X$上的一个平凡拓扑为$\{X,\emptyset\}$,形象一点说就是“在$X$上无论怎么着都算充分接近”，即取一个$X$作为$x$的基准开邻域，平凡拓扑是$X$上最小的拓扑结构。又名无聊拓扑(by 齐震宇),哈哈哈...
@@ -480,12 +492,8 @@ standard topology其实就是由euclidean metric诱导出来的，你可以发�
 如何判定度量空间上的一个子集是否开（其拓扑是由其度量诱导出来的）？
 
 \begin{proposition}
-给定一个度量空间$(X,d)$和由度量$d$诱导出的拓扑$\tpl$，$X$上的子集$U$开当且仅当对任意$x \ in U$，存在一个开球$B_\varepsilon(x) \subseteq U$，其中$\varepsilon>0$.
+给定一个度量空间$(X,d)$和由度量$d$诱导出的拓扑$\tpl$，$X$上的子集$U$开当且仅当对任意$x \in U$，存在一个开球$B_\varepsilon(x) \subseteq U$，其中$\varepsilon>0$.
 \end{proposition}
-
-\begin{definition}[bounded]
-给定一个度量空间$(X,d)$，若对任意的$x,y \in X$，存在一个正实数$M$使得$d(x,y) < M$，则称度量空间$(X,d)$是bounded，度量$d$是一个bounded metric.
-\end{definition}
 
 \begin{definition}[metrizable]
 给定拓扑空间$(X,\tpl)$，若存在$X$上某个度量$d$可以诱导出拓扑$\tpl$，则称$(X,\tpl)$是metrizable.
@@ -494,6 +502,16 @@ standard topology其实就是由euclidean metric诱导出来的，你可以发�
 \begin{definition}[isometry]
 给定两个度量空间$(X,d)$和$(Y,d_1)$，若存在满射$\func{f}{(X,d)}{(Y,d_1)}$，使得对任意的$x_1,x_2 \in X$有\[d(x_1,x_2)=d_1(f(x_1),f_(x_2)).\]则称$f$是一个isometry，$(X,d)$是isometric于$(Y,d_1)$.
 \end{definition}
+
+\begin{definition}[Bounded]
+给定一个度量空间$(X,d)$，若对任意的$x,y \in X$，存在一个正实数$M$使得$d(x,y) < M$，则称度量空间$(X,d)$是bounded，度量$d$是一个bounded metric.
+\end{definition}
+
+\begin{definition}[Bounded Set]
+给定度量空间$X$上子集$A$，若存在$y \in X, \varepsilon >0$,使得$A \subseteq B_\varepsilon(y)$，则称$A$有界. 换句话就是$A$能被某个更大的开球盖住.
+\end{definition}
+
+上面两张定义都可以相互推的.
 
 \begin{definition}[Totol Boundedness]
 给定度量空间$(X,d)$和其上子集$A$，若对任意的$\varepsilon > 0$，都存在一组$x_1,\cdots,x_n \in X$，使得$A \subseteq \bigcup\limits_{i=1}^{n} B_\varepsilon(x_i)$.也就是说$A$可以被有限个半径为$\varepsilon$的开球盖住， 则称$A$ is totally bounded(完全有界).
@@ -684,7 +702,7 @@ $\mathbb{R}$和开区间$(-1,1)$同胚，构造一个$\func{f}((-1,1))(R)$\[f(x)
 对各种类型的拓扑空间进行同胚分类，是拓扑学最基本的研究课题之一。证明两个空间同胚，只要想办法把同胚映射构造出来就行了。而要区分两个空间不同胚，只需要证明一个空间满足某种性质，而另一空间不满足该性质，或者证明对两个空间算某种拓扑不变量的时候，计算结果不同。
 
 \newpage
-\subsection{Weaker and Stronger}
+\subsection{Coarser and Finer}
 
 \begin{definition}
 定义集合$X$上的两个拓扑结构$\tpl$和$\tpl'$,我们说$\tpl$比$\tpl'$更弱(coarser or weaker)，则$\tpl \subseteq \tpl'$，反过来说就是$\tpl'$比$\tpl$更强(finer or stronger).
@@ -693,10 +711,9 @@ $\mathbb{R}$和开区间$(-1,1)$同胚，构造一个$\func{f}((-1,1))(R)$\[f(x)
 \end{definition}
 
 
-
 \newpage
 \subsection{Product Topology}
-这章主要讲如何构造一个拓扑结构？这里有一种非常有趣的定义拓扑结构的方法.设有一个映射$\func{f}{X}{Y}$，集合$X$上尚未确定具体的拓扑结构，而集合$Y$上有个拓扑结构$\mu$,则可以利用$f$把这个拓扑"向左转移"到$X$上，即取$\tpl$为$X$上使得$\func{f}{(X,\tpl)}{(Y,u)}$连续的最小拓扑(最小的概念是指最小的$X$的子集族).
+这章主要讲如何构造一个拓扑结构？这里有一种非常有趣的定义拓扑结构的方法.设有一个映射$\func{f}{X}{Y}$，集合$X$上尚未确定具体的拓扑结构，而集合$Y$上有个拓扑结构$\tpl'$,则可以利用$f$把这个拓扑"向左转移"到$X$上，即取$\tpl$为$X$上使得$\func{f}{(X,\tpl)}{(Y,\tpl')}$连续的最小拓扑(最小的概念是指最小的$X$的子集族)，为什么是最小呢？因为这里$X$可以自然地取离散拓扑做为最大的拓扑.
 
 这个方法可以推广到一族映射$\func{f_\lambda}{X}{Y_\lambda}$上，相应地得到的拓扑就是$X$上所谓的"弱拓扑".类似地，也有一套利用映射"向右转移"拓扑结构的方法，相应地得到的拓扑就是$Y$上的"强拓扑".弱拓扑和强拓扑作用，都是利用映射把一个空间上的拓扑结构以最能充分利用该映射的方式转移到另一个空间上去.
 
@@ -707,21 +724,21 @@ $\mathbb{R}$和开区间$(-1,1)$同胚，构造一个$\func{f}((-1,1))(R)$\[f(x)
 考虑一个集合$X$.设$\Lambda$是一个指标集，并且对于每个指标$\lambda \in \Lambda$,取定一个拓扑空间$(Y_\lambda,\tpl_\lambda)$以及一个映射$\func{f_\lambda}{X}{Y_\lambda}$.则$X$上满足条件每个$\func{\lambda}{X}{Y_\lambda}$都连续的最小拓扑$\tpl$称为由这些$f_\lambda$决定的\textbf{弱拓扑}(weak topology).
 \end{definition}
 
-注意前面已经提到过的最小的含义，如果更形式化的理解是:如果有其他拓扑$\mu$也满足上述条件,则$\tpl \subseteq \mu$.
+注意前面已经提到过的最小的含义，如果更形式化的理解是:如果有其他拓扑$\tpl_0$也满足上述条件,则$\tpl \subseteq \tpl_0$.
 
-那么如何构造这个弱拓扑呢？很显然有一个拓扑是天然满足的上述条件的，那就是离散拓扑.但是我们寻找是符合这样条件的一个最小的拓扑。上述条件也可以理解为要求每个$Y_\lambda$中开集的原像都是开集,所以$\tpl$是包含这些原像的，但是只包含这些原像是不够的，因为我们并不能保证这些原像的交或者并是满足开集公理的，解决办法是把这些有限原像的交和任意的原像的并也取做开集。
+那么如何构造这个弱拓扑呢？上述条件也可以理解为要求每个$Y_\lambda$中开集的原像都是开集,所以$\tpl$是包含这些原像的，但是只包含这些原像是不够的，因为我们并不能保证这些原像的交或者并是满足开集公理的，解决办法是把这些原像先取有限交$\bigcap\limits_{\text{finite}} U$，在任意的并起来$\bigcup\limits_{\text{infinite}} \left( \bigcap\limits_{\text{finite}} U \right)$.
+
+我真想把这些穿插的基准开邻域去掉，把subbasis弄上去!!!!
 
 \begin{proposition}
-设$\Lambda$是一个指标集，并且对于每个指标$\lambda \in \Lambda$,取定一个拓扑空间$(Y_\lambda,\tpl_\lambda)$以及一个映射$\func{f_\lambda}{X}{Y_\lambda}$.取 \[\mathcal{U}(x)=\Set{f_{\lambda}^{-1}(U_\lambda)}{\lambda \in \Lambda,f_\lambda(x) \in U_\lambda \in \tpl_\lambda}\],然后取\[\mathcal{N}(x)=\{\mathcal{U}(x)\text{ 中有限个元素的交集}\}\],这样得到的$\mathcal{N}$是一个基准开邻域结构。并且由它生产的拓扑就是$X$上由这些$f_\lambda$决定的弱拓扑
+设$\Lambda$是一个指标集，并且对于每个指标$\lambda \in \Lambda$,取定一个拓扑空间$(Y_\lambda,\tpl_\lambda)$以及一个映射$\func{f_\lambda}{X}{Y_\lambda}$.取 \[\mathcal{U}(x)=\Set{f_{\lambda}^{-1}(U_\lambda)}{\lambda \in \Lambda,f_\lambda(x) \in U_\lambda \in \tpl_\lambda}\],然后取\[\mathcal{N}(x)=\{\mathcal{U}(x)\text{ 中有限个元素的交集}\}\],这样得到的$\mathcal{N}$是一个subbasis。并且由它生产的拓扑就是$X$上由这些$f_\lambda$决定的弱拓扑
 \end{proposition}
 
 \begin{proof}
-这里命题言下之意其实就直接把$Y_\lambda$中开集原像直接拿来当基准开邻域用,基准开邻域结构的公理是显然满足的.
-
-然后我们来说明它是最小的拓扑,只需要证明它是含于$X$上的任意拓扑，任意$X$上的拓扑$\tpl$,则当去$U_\lambda \in \tpl_\lambda$,则$f^{-1}(U_\lambda) \in \tpl$,因此$\mathcal{N}(x)$中基准开邻域均属于$\tpl$,而由$\mathbb{N}$生成的拓扑中的开集都是若干基准开邻域的并，所以也是属于$\tpl$，这说明$\mathcal{N}$生成的拓扑是$\tpl$的子族.
+subbasis生成拓扑过程是很自然的，然后我们来说明它是最小的拓扑,只需要证明它是含于$X$上的任意拓扑，假设任意$X$上的拓扑$\tpl$,取$U_\lambda \in \tpl_\lambda$,则$f^{-1}(U_\lambda) \in \tpl$,因此$\mathcal{N}(x)$含于$\tpl$,而由$\mathcal{N}$生成的拓扑中的开集都是其中任意元素的并，所以也是属于$\tpl$，这说明$\mathcal{N}$生成的拓扑是$\tpl$的子族.
 \end{proof}
 
-生成弱拓扑的过程简而言之就是\[\{U_\lambda\}\stackrel{\cap_{finite}}\longrightarrow \mathcal{N}\stackrel{\cup_{arbitrary}}\longrightarrow \tpl\].
+生成弱拓扑的过程简而言之就是\[\{U_\lambda\}\stackrel{\cap_{finite}}\longrightarrow \mathcal{N}\stackrel{\cup_{arbitrary}}\longrightarrow \tpl\]， generate by subbasis.
 
 
 \begin{example}
@@ -750,8 +767,14 @@ $\mathbb{R}$和开区间$(-1,1)$同胚，构造一个$\func{f}((-1,1))(R)$\[f(x)
 有点小疑问，这里的一组映射值域和前面提到的似乎有点不同啊？弱拓扑并没有要求映射的值域是相同的，定义域是相同的即可.
 
 \begin{proof}
-分别取$X$和$Y$的开集$U$和$V$,注意到$j_X^{-1}(U) \cap j_Y^{-1}(V)=(U \times V)$，并且\[(U_1 \times V_1) \cap (U_2 \times V_1)=(U_1 \cap U_1)\times (V_1 \cap V_2).\]后面性质为了进一步保证我们交出来的结果没问题。这个按照用基准开邻域刻画刻画的弱拓扑，我们有\[\mathcal{N}(x)=\Set{(p_x,p_y)}{p_x \in U \in \tpl_X,p_y \in V \in \tpl_Y}.\]
+分别取$X$和$Y$的开集$U$和$V$,注意到$j_X^{-1}(U) \cap j_Y^{-1}(V)=(U \times V)$，并且\[(U_1 \times V_1) \cap (U_2 \times V_1)=(U_1 \cap U_1)\times (V_1 \cap V_2).\]后面性质为了进一步保证我们先交再做preimage或者先preimage再交都是没有任何问题的. subbasis可以简单表示为\[\mathcal{N}(x)=\Set{(p_x,p_y)}{p_x \in U \in \tpl_X,p_y \in V \in \tpl_Y}.\]
 \end{proof}
+
+$j_X^{-1}(U) \cap j_Y^{-1}(V)=(U \times V)$可以很形象的用一个方形邻域来描述.
+
+\begin{center}
+\includegraphics[width=10cm, height=8cm]{images/product_topology.png}
+\end{center}
 
 \begin{definition}
 乘积拓扑的万有性质是指存在一些连续映射$\func{f_\alpha}{Z}{Y_\alpha}$,则存在唯一的连续映射$\func{g}{Z}{\prod Y_\alpha}$,其中$q_\alpha \circ \ g = f_\alpha$.
@@ -763,6 +786,7 @@ Z \arrow[rr, "g"] \arrow[rrdd, "f_\alpha"] &  & \prod Y_\alpha \arrow[dd, "q_\al
                                            &  & Y_\alpha                             
 \end{tikzcd}
 \end{center}
+注意$\prod Y_\alpha$表示无穷乘积.
 \end{definition}
 
 
@@ -772,10 +796,6 @@ Z \arrow[rr, "g"] \arrow[rrdd, "f_\alpha"] &  & \prod Y_\alpha \arrow[dd, "q_\al
 
 在证明上述命题之前，我们可以简单思考一下$d$确实是一个度量，有趣的为什么不能把$max$换成$min$?
 %why max not min https://pages.uoregon.edu/adding/courses/431-18/midterm1_sol.pdf
-
-\begin{center}
-\includegraphics[width=10cm, height=8cm]{images/product_topology.png}
-\end{center}
 
 %让$x \in X$,$y \in Y$,我们希望定义一个$(x,y)$的邻域，直觉上邻域里面的点$(x',y')$要尽可能的接近$(x,y)$，那么应该是$x$和$x'$接近，$y$和$y'$接近，这种想法不就是分别去取$x$在$X$和$y$在$Y$里面的邻域吗？但是呢，这样定义出来的$X \times Y$邻域是有问题的，观察上面的图，$M$和$N$分别是$X$和$Y$中$x$和$y$的邻域，按照邻域公理如果一个集合$P$包含$M \times N$，那么$P$也应该是一个邻域，现在你会发现这个形状不规则的$P$，你似乎没办法用$X$和$Y$里面的邻域表示了.
 
@@ -814,7 +834,16 @@ Z \arrow[rr, "f"] &  & Y_1 \times Y_2 \arrow[rru, "p_1"] \arrow[rrd, "p_2"'] &  
 考察平面上的一条参数曲线$x(t)=(x_1(t),x_2(t))$.上面定理告诉我们，$x$连续当且仅当$x_1$,$x_2$都连续.
 \end{example}
 
-乘积拓扑？弱拓扑？奇妙...
+乘积拓扑？弱拓扑？奇妙... 再来感受一下乘积拓扑里面一些有趣的性质
+
+\begin{proposition}
+让$C_1,C_2,\cdots,C_n$分别表示拓扑空间$X_1,X_2,\cdots,X_n$上的闭集，则$C_1 \times C_2 \times \cdots \times C_n$是乘积空间$X_1 \times X_2 \times \cdots \times X_n$上的闭集.
+\end{proposition}
+
+\begin{proof}
+$(X_1 \times X_2 \times \cdots \times X_n) \setminus C_1 \times C_2 \times \cdots \times C_n = [(X_1\setminus C_1) \times X_2 \times \cdots \times X_n] \cup [X_1 \times (X_2\setminus C_2) \times \cdots \times X_n] \cup \cdots \cup [X_1 \times X_2 \times \cdots \times (X_n\setminus C_n).]$ 
+\end{proof}
+
 
 \newpage
 \subsection{Subspace Topology}
@@ -1109,7 +1138,7 @@ $\mathbb{R}\mathbb{P}^2$中每个点$x$的原像集$p^{-1}(x)$恰好由球面上
 用文字来说就是包$S$的最小拓扑是任意并上$S$里面元素有限的交所构成的. 证明经典两边包含.
 
 \begin{definition}
-若拓扑空间上$(X,\tpl)$中的拓扑结构$\tpl = \tpl_S$，也就是说$\tpl$是由$S$导出的，则称$S$为拓扑空间$(X,\tpl)$的一个\rm subbasis(准基).
+若拓扑空间上$(X,\tpl)$中的拓扑结构$\tpl = \tpl_S$，也就是说$\tpl$是由$S$导出的，则称$S'$为拓扑空间$(X,\tpl)$的一个\rm subbasis(准基).
 \end{definition}
 
 如果我们能只做$S$里面元素的任意交集就能构成一个拓扑那就太好了，哈哈，这个时候$S$其实就是一个basis（拓扑基）.
@@ -1756,6 +1785,11 @@ $X$是一个度量空间，若子集$A$紧致则$A$是一个闭集.
 按照我们的基本想法来做一下. 现在$A$是紧致的,所以我们只需要关注有限个$U_y$就够了，也就是说我们也只需要取有限多个$U_{x_y}$交也就够了，记$V = \bigcap\limits_{y \in S} V_y$,其中$x \in V_y$代表$U_x$和$y$对应,这里$V$也是开集.我们现在只需要说明这个$V \cap A = \emptyset$就行了\[V \cap A \subseteq \left( \bigcap\limits_{y \in S} V_y \right) \cap \left(\bigcup\limits_{z \in S} U_z \right) = \bigcup\limits_{z \in S}\left(\bigcap\limits_{y \in S} V_y \cap U_z \right) \subseteq \bigcup\limits_{z \in S}(V_z \cap U_z) = \emptyset. \]注意最后的$V_z$这里是集合论手法$\bigcap\limits_{y \in S} V_y \subseteq V_z, z \in S$. 最后取遍所有$x$都有这样的一个开集$V$，$X \setminus A = \bigcup V$，所以$A$是一个闭集.
 \end{proof}
 
+上面这个例子更一般形式是下面的命题
+\begin{proposition}
+\rm Hausdorff拓扑空间的紧致子集是闭的.
+\end{proposition}
+
 \begin{proposition}
 紧致空间的闭集都是紧致的.
 \end{proposition}
@@ -1764,6 +1798,49 @@ $X$是一个度量空间，若子集$A$紧致则$A$是一个闭集.
 给定$X$紧致，$A$是$X$上的一个闭集，证明还是用集合论的手法:\[X = A \cup X \setminus A.\]取$A$上的一组开覆盖$O_i,i \in I$，所以$X = \left( \bigcup\limits_{i \in I} O_i \right) \cup X \setminus A$，其中$X \setminus A$开，所以整体上是$X$的一组开覆盖，我们可以从这组开覆盖里面来调一组有限开覆盖. 首先$X \setminus A \cap \left( \bigcup\limits_{i \in I} O_i \right)= \emptyset$，所以$X \setminus A$得先挑出来，也就是说我们可以从$O_i,i \in I$里面挑有限多个出来覆盖$A$，即$A$紧致.
 \end{proof}
 
+把Heine-Borel Theorem推广到更一般的情况上.
+\begin{proposition}
+\rm 度量空间$X$上子集$A$紧致，则$A$有界闭(closed and bounded).
+\end{proposition}
+
+\begin{proof}
+度量空间是一个Hausdorff空间，$A$紧致，所以$A$是闭的. 这一点前面已经证明了.
+
+$A$紧致，所以它可以被有限的开集盖住，为了说明$A$有界，我们只需要找一个更大的开球把$A$盖住就可以了. 现在来严格证明下，找一个更大开球时，首先要我们需要确定center点，设这个点为$x_0$，我们定义一个映射如下\[\func{f}{(A,\tpl)}{\mathbb{R}}, f(a) = d(a,x_0), a \in A.\]用表示$A$中一点到$x_0$的距离. 其中$\tpl$表示$A$是$X$子空间诱导出来的拓扑. 明显地，这个$f$是一个连续映射(可以利用性质就简单检验一下)，所以$f(A)$紧致，$\mathbb{R}$的紧致子集是有界闭的，也就是存在一个$M$使得$\forall a \in A, f(a) \leq M$，那么现在我们要找的这个更大的开球的半径也可以确定了，只需要取$r = 2M$即可，利用三角不等式我们知道$d(a_1,a_2)<2M$.  
+\end{proof}
+
+上述证明里面用$f$可以更一般化.
+
+\begin{lemma}
+给定一个连续映射$\func{f}{X}{\mathbb{R}}$，若$X$是一个紧致空间，则$f(X)$有界(上下界).
+\end{lemma}
+
+\begin{proof}
+连续映射保留紧致，所以$f(X)$紧致，而$\mathbb{R}$上的紧致子集有界闭.
+\end{proof}
+
+
+\begin{lemma}
+给定两个拓扑空间$X$和$Y$，$K$是$Y$上的一个紧致子集，$U$是乘积空间$X \times Y$上的一个开集. 定义集合$V = \Set{x \in X}{\{x\} \times K \subset U}$，则$V$是一个$X$上的一个开集.
+\end{lemma}
+%https://www.maths.tcd.ie/~dwilkins/Courses/221/Compact.pdf
+\begin{proof}
+证明$V$开的主旋律是给每个$x$都找一个含于$V$的开集. 假设$V$非空，fixed$V$中一点$x$. 对于任意$y \in Y$，存在一对开集$D_y \subseteq  X$和$E_y \subseteq Y$， 对应$(x,y) \in D_y \times E_y \subseteq U$. 因为$K$紧致，所以恒存在一个有限的开覆盖$K \subseteq E_{y_1},E_{y_2},\cdots,E_{y_n}$,其中$y_1,y_2,\cdots,y_n \in Y$(这里用到$K$紧致这个条件是因为不知道$E_y$是否有限).考虑$x \in N_x = D_{y_1} \cap D_{y_2} \cap \cdots \cap D_{y_n}$，其中$D_{y_i}$对应前面pair中的$D_y$. 自然地考虑\[N_x \times K \subseteq \bigcup\limits_{i}^{n}\left( N_x \times E_{y_i} \right) \subseteq \bigcup\limits_{i}^{n}\left( D_{y_i} \times E_{y_i} \right) \subseteq U.\]所以$N_x \subseteq U$，每个$x$都有这样的一个开集，从而$V = \bigcup N_x$.
+\end{proof} 
+
+\begin{theorem}[Tychonoff's Theorem for Finite Products]
+若$X_1,X_2,\cdots,X_n$都是紧致空间，则有限乘积空间$\prod\limits^{n} X_i$也是紧致的.
+\end{theorem}
+
+
+\begin{proof}
+
+\end{proof}
+
+
+\begin{theorem}[Generalized Heine-Borel Theorem]
+$\mathbb{R}^{n},n \geq 1$上的子集$A$紧致当且仅当$A$有界闭.
+\end{theorem}
 
 \end{document}
 
