@@ -1825,16 +1825,21 @@ $A$紧致，所以它可以被有限的开集盖住，为了说明$A$有界，�
 \end{lemma}
 %https://www.maths.tcd.ie/~dwilkins/Courses/221/Compact.pdf
 \begin{proof}
-证明$V$开的主旋律是给每个$x$都找一个含于$V$的开集. 假设$V$非空，fixed$V$中一点$x$. 对于任意$y \in Y$，存在一对开集$D_y \subseteq  X$和$E_y \subseteq Y$， 对应$(x,y) \in D_y \times E_y \subseteq U$. 因为$K$紧致，所以恒存在一个有限的开覆盖$K \subseteq E_{y_1},E_{y_2},\cdots,E_{y_n}$,其中$y_1,y_2,\cdots,y_n \in Y$(这里用到$K$紧致这个条件是因为不知道$E_y$是否有限).考虑$x \in N_x = D_{y_1} \cap D_{y_2} \cap \cdots \cap D_{y_n}$，其中$D_{y_i}$对应前面pair中的$D_y$. 自然地考虑\[N_x \times K \subseteq \bigcup\limits_{i}^{n}\left( N_x \times E_{y_i} \right) \subseteq \bigcup\limits_{i}^{n}\left( D_{y_i} \times E_{y_i} \right) \subseteq U.\]所以$N_x \subseteq U$，每个$x$都有这样的一个开集，从而$V = \bigcup N_x$.
+证明$V$开的主旋律是给每个$x$都找一个含于$V$的开集. 假设$V$非空，fixed $V$中一点$x$. 对于任意$y \in Y$，存在一对开集$D_y \subseteq  X$和$E_y \subseteq Y$， 对应$(x,y) \in D_y \times E_y \subseteq U$. 因为$K$紧致，所以恒存在一个有限的开覆盖$K \subseteq E_{y_1},E_{y_2},\cdots,E_{y_n}$,其中$y_1,y_2,\cdots,y_n \in Y$(这里用到$K$紧致这个条件是因为不知道$E_y$是否有限).考虑$x \in N_x = D_{y_1} \cap D_{y_2} \cap \cdots \cap D_{y_n}$，其中$D_{y_i}$对应前面pair中的$D_y$. 自然地考虑\[N_x \times K \subseteq \bigcup\limits_{i}^{n}\left( N_x \times E_{y_i} \right) \subseteq \bigcup\limits_{i}^{n}\left( D_{y_i} \times E_{y_i} \right) \subseteq U.\]所以$N_x \subseteq U$，每个$x$都有这样的一个开集，从而$V = \bigcup N_x$.
 \end{proof} 
 
 \begin{theorem}[Tychonoff's Theorem for Finite Products]
 若$X_1,X_2,\cdots,X_n$都是紧致空间，则有限乘积空间$\prod\limits^{n} X_i$也是紧致的.
 \end{theorem}
 
-
 \begin{proof}
+It suffice to prove that the product of two compact topological spaces, then by induction.
 
+给定两个紧致空间$X$和$Y$，$O_i,i \in I$是它们的一组开覆盖，我们目标是可以从里面调出一组有限开覆盖出来.
+
+还是先fixed一点$x \in X$，则$\{x\} \times Y$是$X \times Y$的一个紧致子集，因为把$y \in Y$映射到$(x,y)$这是一个homoemophism，$Y$紧致所以$\{x\} \times Y$紧致. 进一步这里存在$\{x\} \times Y$的一组有限开覆盖$\bigcup O_{i_k}$. 同样地这里也用$V_x$来表示形如$\{x'\} \times Y \subset \bigcup O_{i_k}$这样的所有$x' \in X$. 根据前面的Lemma，$\bigcup O_{i_k}$是一个$X \times Y$上的开集，所以$V_x$是一个开集. 
+
+现在我们知道了$V_x \times Y$可以被$\bigcup O_{i_k}$有限覆盖. 但是$X$还没有被盖住，再用$\{V_x \colon x \in X\}$作为$X$的一组开覆盖，由于$X$紧致，所以只需要有限多个$V_{x_j}$就可以盖住. $X \times Y = \bigcup \left( V_{x_j} \times Y \right)$，而$V_{x_j} \times Y$前面已经证明可以被有限多个$O_{i_k}$盖住，所以$X \times Y$也可以被有限多个$\bigcup\bigcup O_{i_k}$盖住，$X \times Y$紧致.
 \end{proof}
 
 
