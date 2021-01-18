@@ -844,6 +844,12 @@ Z \arrow[rr, "f"] &  & Y_1 \times Y_2 \arrow[rru, "p_1"] \arrow[rrd, "p_2"'] &  
 $(X_1 \times X_2 \times \cdots \times X_n) \setminus C_1 \times C_2 \times \cdots \times C_n = [(X_1\setminus C_1) \times X_2 \times \cdots \times X_n] \cup [X_1 \times (X_2\setminus C_2) \times \cdots \times X_n] \cup \cdots \cup [X_1 \times X_2 \times \cdots \times (X_n\setminus C_n).]$ 
 \end{proof}
 
+有个很显然的性质，但是很好用
+\begin{proposition}
+给定拓扑空间$(X_1,\tpl_1),(X_2,\tpl_2)\cdots(X_n,\tpl_n)$和它们的乘积拓扑$(X_1 \times X_2 \cdots X_n)$，则$(X_i,\tpl_i)$和$(X_1 \times X_2 \cdots X_n)$上的某个子空间同胚. (投影)
+\end{proposition}
+
+
 
 \newpage
 \subsection{Subspace Topology}
@@ -1812,11 +1818,11 @@ $A$紧致，所以它可以被有限的开集盖住，为了说明$A$有界，�
 上述证明里面用$f$可以更一般化.
 
 \begin{lemma}
-给定一个连续映射$\func{f}{X}{\mathbb{R}}$，若$X$是一个紧致空间，则$f(X)$有界(上下界).
+给定一个连续映射$\func{f}{X}{\mathbb{R}}$(R-value)，若$X$是一个紧致空间，则$f(X)$有界(上下界).
 \end{lemma}
 
 \begin{proof}
-连续映射保留紧致，所以$f(X)$紧致，而$\mathbb{R}$上的紧致子集有界闭.
+连续映射保留紧致，所以$f(X)$紧致，而$\mathbb{R}$上的紧致子集有界闭. 有界代表有boundary，而闭的则表示极值点在$f(X)$里面. 假设上确界在$\mathbb{R} \setminus f(X)$中，$\mathbb{R} \setminus f(X)$开，则存在一个开区间$p \in (a,b)$，这就矛盾了，我们可以找到比$p$更小的确界点.
 \end{proof}
 
 
@@ -1844,8 +1850,26 @@ It suffice to prove that the product of two compact topological spaces, then by 
 
 
 \begin{theorem}[Generalized Heine-Borel Theorem]
-$\mathbb{R}^{n},n \geq 1$上的子集$A$紧致当且仅当$A$有界闭.
+$\mathbb{R}^{n},n \geq 1$上的子集$K$紧致当且仅当$K$有界闭.
 \end{theorem}
+
+\begin{proof}
+($\Rightarrow.$)假设$K$是$\mathbb{R}^{n}$上的一个紧致子集. $\mathbb{R}^{n}$是一个Hausdorff空间，所以$K$是闭的. 让$B_m$表示以原点为中心半径为$m$的开球. 则$\Set{B_m}{m \in \mathbb{N}}$是$K$一个开覆盖，因为$K$紧致，所以可以挑出有限个开集$B_{m_i}$盖住$K$. 用$M$表示$m_1,m_2,\cdots,m_k$的最大值，则$K \subseteq B_M$，所以$K$有界.
+
+($\Leftarrow.$)假设$K$有界闭. $K$有界，则存在$M$使得任意$(x_1,x_2,\cdots,x_n) \in K, -M \leq x_i \leq M, i=1,2,\cdots,n$. 也就是说$A \subseteq C=\Set{(x_1,x_2,\cdots,x_n) \in \mathbb{R}^{n}}{-M \leq x_i \leq M\ \text{for}\ i=1,2,\cdots,n}$. $C$其实是一个乘积空间$\prod\limits^{n} [-M,M]$，而$[-M,M]$在$\mathbb{R}$上紧致的. 根据前面定理我们知道$C$也是紧致的，还有$K$是闭的，所以$K$紧致.
+\end{proof}
+
+
+\newpage
+\subsection{Compact Metric Spaces}
+
+在度量空间中经常用序列收敛的技术来讨论各种拓扑问题.
+
+\begin{proposition}
+紧致度量空间上的所有点列都有一个收敛子列.
+\end{proposition}
+
+
 
 \end{document}
 
