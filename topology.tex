@@ -453,6 +453,11 @@ $X$和$d$合起来叫一个\textbf{度量空间}(metric space)，记做$(X,d)$.
 \end{enumerate}
 \end{proof}
 
+\begin{example}[离散拓扑]
+$$
+d(x, y) = \left\{\begin{matrix} 0 & \mathrm{if} \: x = y\\ 1 & \mathrm{if} \: x \neq y \end{matrix}\right.
+$$
+\end{example}
 
 \begin{definition}[$\mathbb{R}$上的欧式度量]
 $\func{d}{\mathbb{R} \times \mathbb{R}}{\mathbb{R}}$ given by \[d(x,y) = |x-y|, \ \  x,y \in \mathbb{R}.\]
@@ -504,7 +509,7 @@ standard topology其实就是由euclidean metric诱导出来的，你可以发�
 \end{definition}
 
 \begin{definition}[Bounded]
-给定一个度量空间$(X,d)$，若对任意的$x,y \in X$，存在一个正实数$M$使得$d(x,y) < M$，则称度量空间$(X,d)$是bounded，度量$d$是一个bounded metric.
+给定一个度量空间$(X,d)$，若对任意的$x,y \in X$，存在一个正实数$M$使得$d(x,y) < M$，则称度量空间$(X,d)$是bounded，度量$d$是一个bounded metric.$M$的最小值称之为the diameter of $X$，记为diam $A$.
 \end{definition}
 
 \begin{definition}[Bounded Set]
@@ -513,9 +518,31 @@ standard topology其实就是由euclidean metric诱导出来的，你可以发�
 
 上面两张定义都可以相互推的.
 
+在这里记录一点关于闭包有趣的小性质. $A$的闭包$\overline{A}$可以看做$X$中所有包含$A$的闭集的交，所以$\overline{A}$是$X$上含有$A$最小的闭集. 若$X$是一个度量空间，取$\overline{A}$中一点$x$，对于任意的$\varepsilon >0$，存在$x' \in A$使得$d(x,x') < \varepsilon$.是不是对闭包又增加了一点形象的理解？ ）再来一个Lemma.
+
+\begin{lemma}
+给定度量空间$X$，取$X$上一个子集$A$，则diam $A$ = diam $\overline{A}$.
+\end{lemma}
+
+\begin{proof}
+很明显的是diam $A \leq$ diam $\overline{A}$. 所以我们只需要说明把小于等于反过来写依然成立即可. 任取$x,y \in \overline{A}$. 对于任意的$\varepsilon > 0 $，存在$x',y' \in A$满足$d(x,x') < \varepsilon$和$d(y,y') < \varepsilon$.有下面不等式成立\[d(x,y)\leq d(x,x')+d(x',y')+d(y,y') \leq 2\varepsilon + d(x',y').\]所以diam $\overline{A} \leq$ diam $A$.
+
+\begin{center}
+\includegraphics[width=10cm, height=8cm]{images/diam_closure.jpg}
+\end{center}
+\end{proof}
+
 \begin{definition}[Totol Boundedness]
 给定度量空间$(X,d)$和其上子集$A$，若对任意的$\varepsilon > 0$，都存在一组$x_1,\cdots,x_n \in X$，使得$A \subseteq \bigcup\limits_{i=1}^{n} B_\varepsilon(x_i)$.也就是说$A$可以被有限个半径为$\varepsilon$的开球盖住， 则称$A$ is totally bounded(完全有界).
 \end{definition}
+
+\begin{proposition}
+给定度量空间$X$，若$X$上的任意序列都有一个收敛子列(列紧)，则$X$完全有界.
+\end{proposition}
+
+\begin{proof}
+若前提条件满足，假设$X$不是完全有界的，则存在一个$\varepsilon$，使得无法用有限多个$B_\varepsilon(x_i)$开球盖住. 取$x_1 \in X$，因为$B_\varepsilon(x_1)$无法用盖住$X$，所以可以再取一点$x_2 \in X \ B_\varepsilon(x_1)$. by induction，我们可以一直这样取下去，因为$Y \ \bigcup\limits_{i=1}^{n} B_\varepsilon(y_i)$不为空.这样我们找到一个序列$\{x_n\}$，使得$d(x_m,x_n) \geq \varepsilon,m \neq n$.由收敛原理这样的$\{x_n\}$并不收敛，与前提矛盾.
+\end{proof}
 
 可以利用下面的方法去判定度量空间上的闭集.
 
@@ -1865,9 +1892,26 @@ $\mathbb{R}^{n},n \geq 1$上的子集$K$紧致当且仅当$K$有界闭.
 
 在度量空间中经常用序列收敛的技术来讨论各种拓扑问题.
 
+\begin{definition}
+如果拓扑空间$X$中任意序列都有收敛子列，则称$X$列紧.
+\end{definition}
+
+
 \begin{proposition}
-紧致度量空间上的所有点列都有一个收敛子列.
+紧致度量空间上的所有点列都有一个收敛子列. 也就是说紧致度量空间是列紧的.
 \end{proposition}
+
+这个命题的条件可以更弱一点.
+
+\begin{proposition}
+紧致第一可数空间列紧.
+\end{proposition}
+
+\begin{proof}
+任取紧致空间$X$中的序列${x_n}$. 一定存在一点$P$使得$P$的任意开集都包含$\{x_n\}$中无限多项. 假设不存在这样的点$P$，反过来说就是$X$上每一个点都一个开集只含有$\{x_n\}$中有限项，这样的开集构成了$X$上的一个开覆盖，但是无论你怎么从里面取有限多个开集它们都只能包含有限多项，这与$X$紧致矛盾.
+
+在前面可数的那节，我们知道有可数邻域基，就可以构造出一个递减可数邻域基。我们现在取$P$点的递减可数邻域基$U_1 \supseteq U_2 \supseteq \cdots$. 由于前面我们知道$P$的任意开集都包含$\{x_n\}$无限多个点，所以我们依次从$U_i$里面挑一个$x_{n_i}$出来，它们是收敛于$P$点.
+\end{proof}
 
 
 
