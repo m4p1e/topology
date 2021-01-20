@@ -395,7 +395,7 @@ $X$的子集族$\sigma$是某个拓扑结构下全体闭集构成的集合当且
 
 \newpage
 \subsection{Metric Space}
-
+%https://zhuanlan.zhihu.com/p/54041981
 在介绍度量空间之前，还是有必要先讲一下欧式空间，度量空间是欧式空间下的一般情况推广，欧式空间上的拓扑结构怎么表示呢？我先看一维欧式空间$\mathbb{R}$
 
 \begin{definition}
@@ -557,6 +557,25 @@ standard topology其实就是由euclidean metric诱导出来的，你可以发�
 \end{proof}
 
 
+\begin{definition}[度量空间上的柯西序列]
+如果度量空间$X$上的序列$\{x_n\}$满足对于任意的$\varepsilon > 0$，存在正整数$N$,当$n,n'>N$时，$d(x_n,x_{n'}) < \varepsilon$. 则称$\{x_n\}$为一个柯西序列.
+\end{definition}
+
+$X$上收敛子列都是柯西序列，这一点的证明和数分里面的证明一样. 自然地反过来想，度量空间中的柯西序列是不是收敛序列呢？度量空间中的收敛强调收敛于$X$中确定一点，柯西序列收敛，但是可能收敛的那一点并不在$X$里面，所以我们引入完备的概念.
+
+\begin{definition}[完备性]
+如果度量空间$X$上的所有的柯西数列都收敛于$X$中某点，则称$X$是完备的(complete)
+\end{definition}
+
+\begin{proposition}
+如果度量空间$X$列紧，则$X$完备.
+\end{proposition}
+
+\begin{proof}
+设$\{x_n\}$是$X$上的一个柯西数列. 从里面挑一个子序列$\{x_{n_i}\}$出来，由前提条件我们知道这个子序列收敛于某个$p \in X$. 我们现在来证明它$\{x_n\}$也是收敛于$p$的.
+
+根据柯西数列的定义，我们找到对应的$N$，使得$m > N,n >N$时,$d(x_m,x_n) < \frac{1}{2}\varepsilon$. 同样当$n_j > N$时，你可以把$n_i$取的大一点，也有$d(x_{n_j},p) < \frac{1}{2}\varepsilon$.我们可以把前面的$m$换成$x_{n_j}$也有$d(x_n,x_{n_j})< \varepsilon$成立. 根据三角不等式我们有\[d(x_n,p) \leq d(x_n,x_{n_j}) + d(x_{n_j},p) \leq \varepsilon.\]所以$\{x_n\}$也是收敛于$p$点，即$X$是完备的.
+\end{proof}
 
 \newpage
 \subsection{Potency of Set and Countable Set}
@@ -1893,7 +1912,7 @@ $\mathbb{R}^{n},n \geq 1$上的子集$K$紧致当且仅当$K$有界闭.
 在度量空间中经常用序列收敛的技术来讨论各种拓扑问题.
 
 \begin{definition}
-如果拓扑空间$X$中任意序列都有收敛子列，则称$X$列紧.
+如果拓扑空间$X$中任意序列都有收敛子列，则称$X$列紧(sequentially compact).
 \end{definition}
 
 
@@ -1912,6 +1931,38 @@ $\mathbb{R}^{n},n \geq 1$上的子集$K$紧致当且仅当$K$有界闭.
 
 在前面可数的那节，我们知道有可数邻域基，就可以构造出一个递减可数邻域基。我们现在取$P$点的递减可数邻域基$U_1 \supseteq U_2 \supseteq \cdots$. 由于前面我们知道$P$的任意开集都包含$\{x_n\}$无限多个点，所以我们依次从$U_i$里面挑一个$x_{n_i}$出来，它们是收敛于$P$点.
 \end{proof}
+
+
+\begin{lemma}[Lebesgue引理]
+如果度量空间$X$的子集$A$满足\[\bigcup\Set{B_\delta(a)}{a\in A} =X,\]则称$A$为$X$的一个$\delta$-net.对于一个列紧度量空间$X$，任取$\delta > 0$均存在$X$的一个有限子集$A$，使得$A$构成$X$的$\delta$-net.
+\end{lemma}
+
+\begin{proof}
+假设$X$上存在某个$\delta>0$，$X$上没有对应的$\delta$-net. 然后取一组有限点$\{x_n\}$，它们肯定不是$\delta$-net, 即$\bigcup B_\delta(x_i)$是无法盖住$X$的. 所以我们可以取一点$x_{n+1} \in X \setminus \bigcup B_\delta(x_i)$.然后by induction，可以取无限多个这样的点. 如果不能则有限多个$x_i$就把$X$盖住了. 你可以观察到当$i,j > n$时，有$d(x_i,x_j) >= \delta$. 即这样构造出来的序列是不收敛的，与$X$列紧矛盾.  
+\end{proof}
+
+列紧性在连续函数上也能跟紧致性一样保持.
+%http://www.math.ncku.edu.tw/~fjmliou/advcal/ODE.pdf
+\begin{lemma}
+给定一个连续函数$\func{f}{X}{Y}$，若$A$是$X$上的一个列紧子集，则$f(A)$也是$Y$上的一个列紧子集.
+\end{lemma}
+
+\begin{proof}
+给定$f(A)$上一个任意序列$\{y_n\}$. 对应的我们可以在$X$上选取序列$\{x_n \in A\}$使得$y_n = f(x_n)$. 因为$A$列紧，所以我们可以挑一个收敛子列$\{x_{n_i}\}$出来. 进一步由于$f$连续，所以$\{f(x_{n_i})\}$也是收敛的，这样我们就找到了$\{y_n\}$的一个收敛子列，即$f(A)$列紧.
+\end{proof}
+
+\begin{lemma}
+让$X$是一个列紧空间，给定一个R-value连续函数$\func{f}{X}{\mathbb{R}}$，则$f(X)$有界且包含界点.
+\end{lemma}
+
+%http://www.math.ncku.edu.tw/~fjmliou/advcal/Seqcomp.pdf
+\begin{proof}
+从前面Lemma我们知道$f(X)$是列紧的，在数分里面Bolzano-Weierstrass Theorem告诉我们有界数列闭有收敛子列. 其等价命题是$\mathbb{R}$上列紧子集当且仅当有界闭.
+\end{proof}
+
+\begin{proposition}
+所有完备有界(complete totally bounded)的度量空间是紧致的.
+\end{proposition}
 
 
 
