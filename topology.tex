@@ -541,7 +541,7 @@ standard topology其实就是由euclidean metric诱导出来的，你可以发�
 \end{proposition}
 
 \begin{proof}
-若前提条件满足，假设$X$不是完全有界的，则存在一个$\varepsilon$，使得无法用有限多个$B_\varepsilon(x_i)$开球盖住. 取$x_1 \in X$，因为$B_\varepsilon(x_1)$无法用盖住$X$，所以可以再取一点$x_2 \in X \ B_\varepsilon(x_1)$. by induction，我们可以一直这样取下去，因为$Y \ \bigcup\limits_{i=1}^{n} B_\varepsilon(y_i)$不为空.这样我们找到一个序列$\{x_n\}$，使得$d(x_m,x_n) \geq \varepsilon,m \neq n$.由收敛原理这样的$\{x_n\}$并不收敛，与前提矛盾.
+若前提条件满足，假设$X$不是完全有界的，则存在一个$\varepsilon$，使得无法用有限多个$B_\varepsilon(x_i)$开球盖住. 取$x_1 \in X$，因为$B_\varepsilon(x_1)$无法用盖住$X$，所以可以再取一点$x_2 \in X \setminus B_\varepsilon(x_1)$. by induction，我们可以一直这样取下去，因为$Y \ \bigcup\limits_{i=1}^{n} B_\varepsilon(y_i)$不为空.这样我们找到一个序列$\{x_n\}$，使得$d(x_m,x_n) \geq \varepsilon,m \neq n$.由收敛原理这样的$\{x_n\}$并不收敛，与前提矛盾.
 \end{proof}
 
 可以利用下面的方法去判定度量空间上的闭集.
@@ -1909,7 +1909,7 @@ $\mathbb{R}^{n},n \geq 1$上的子集$K$紧致当且仅当$K$有界闭.
 \newpage
 \subsection{Compact Metric Spaces}
 
-在度量空间中经常用序列收敛的技术来讨论各种拓扑问题.
+在度量空间中经常用序列收敛的技术来讨论各种拓扑问题. 看这章内容的时候，需要回过头取看看metric space那章，有些答案在里面.
 
 \begin{definition}
 如果拓扑空间$X$中任意序列都有收敛子列，则称$X$列紧(sequentially compact).
@@ -1956,14 +1956,60 @@ $\mathbb{R}^{n},n \geq 1$上的子集$K$紧致当且仅当$K$有界闭.
 \end{lemma}
 
 %http://www.math.ncku.edu.tw/~fjmliou/advcal/Seqcomp.pdf
+%https://www.math.cuhk.edu.hk/course_builder/1617/mmat5000/mmat5000%20analysis.pdf
 \begin{proof}
 从前面Lemma我们知道$f(X)$是列紧的，在数分里面Bolzano-Weierstrass Theorem告诉我们有界数列闭有收敛子列. 其等价命题是$\mathbb{R}$上列紧子集当且仅当有界闭.
 \end{proof}
 
-\begin{proposition}
-所有完备有界(complete totally bounded)的度量空间是紧致的.
-\end{proposition}
+还是有必要来证一下这个Bolzano-Weierstrass Theorem的等价命题.
 
+\begin{theorem}
+$\mathbb{R}^{n}$上的列紧子集当且仅当有界闭.
+\end{theorem} 
+
+\begin{proof}
+有界闭推紧列比较clearly，我们主要看列紧推有界闭. 给定前提条件子集$A$列紧，假设不是界的，则可以构造一个序列使得任意的$d(x_n,x_m) > M$，你在这个序列里面找不出来一个子列收敛，所以$A$必须有界.
+
+证$A$是闭的，这个可以去看metric space那一章的证明metric space的闭集里面的收敛子列都收敛在这个闭集自己里面一点. 通过假设不是闭的，可以构造出一个序列收敛于$A$的外面，与前提矛盾. 其实也必要这么麻烦，只需要证明序列与子序列收敛于同一极限就行.
+\end{proof}
+
+
+\begin{lemma}[Lebesgue number lemma]
+在列紧空间$X$上任取开覆盖$\mathcal{U}$，存在$L > 0$，使得任取正实数$\delta < L$及$x \in X$，存在$U \in \mathcal{U}$使得$B_\delta(x) \subseteq U$.
+\end{lemma}
+
+\begin{proof}
+直觉上只要这个$L$取的越小，就可以找到这样一个满足上述条件，我们来严格证明一下，如果找到这样一个$L$.
+
+我们构造一个非常有趣的函数$f(x)=\sup\Set{d(x,U^{c})}{U \in \mathcal{U}}$. 其中$d(x,U^{c}) = \inf\Set{d(x,x')}{x' \in U^{c}}$表示点到集合距离. 这个$f(x)$是一个连续函数，因为$|f(x)-f(y)| \leq d(x,y)$. 我们来画一个图.
+\begin{center}
+\includegraphics[width=7cm, height=4cm]{images/sup_distance_of_point_between_set.jpg}
+\end{center}
+对于某个$x$，我们只需要考虑它和包含它的那个开集的余集就行了，因为$x$在除此之外开覆盖里面的所有开集的集里面即$d(x,U^{c})=0$. 给定任意两个点，如果它们处于两个disjointed的开集里面，如上图. 如果它们处于同一个开集里面我们可以把上面不等式变一下$f(y)-d(x,y) \leq f(x) \leq f(y)+d(x,y)$. 再画一个图. 图中固定$f(y)$的值. 
+
+\begin{center}
+\includegraphics[width=7cm, height=5cm]{images/sup_distance_of_point_between_set2.jpg}
+\end{center}
+
+这个函数在刻画开集中一点距离这个开集外面最近有多远，所以我们能取到这个$f(x)$的下确界就好了. 根据前面lemma列紧空间的像是有界闭的，所以可以让$L = \inf(f(X))$，这样就能满足命题中的条件.
+\end{proof}
+
+前面证了那么多的命题，\textcolor{red}{其实就是想说明在度量空间上紧致和列紧是等价的}，我们来补全这个命题，最后的证明过程是非常顺畅的！
+
+\begin{proof}
+任取列紧度量空间$X$上一个开覆盖$\mathcal{U}$. 取一个小于Lebesgue数$L(\mathcal{U})$的正实数$\delta$，则存在一个有限的$\delta$-net $\{a_1,a_2,\cdots,a_n\}$. 然后再对每个$a_i$取$U_i \in \mathcal{U}$使得$B_\delta(a_i) \subseteq U_i$，则$\{U_n\}$构成了$\mathcal{U}$的一个有限开覆盖.
+\end{proof}
+
+\begin{proposition}
+给定一个度量空间$X$，下面几个命题都是相互等价的:
+\begin{enumerate}
+	\item $X$ 紧致(compact).
+	\item $X$ 列紧(sequentially compact).
+	\item $X$ 完备和完全有界(complete and totally bounded).
+\end{enumerate}
+
+第二个推第三个metric space那一节有的.
+\end{proposition}
 
 
 \end{document}
