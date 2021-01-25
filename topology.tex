@@ -568,6 +568,14 @@ $X$上收敛子列都是柯西序列，这一点的证明和数分里面的证�
 \end{definition}
 
 \begin{proposition}
+度量空间$X$complete，若$X$上子空间$K$complete,则$K$是$X$的一个闭集.
+\end{proposition}
+
+\begin{proof}
+假设$K$不是一个闭集，还是用$A = \overline{A}$则$A$是闭包这个性质. 则可以找到一点$x \in  X \setminus K$是$K$的聚点，则可以用开球$B_\frac{1}{n}(x) \cap K$来造一个柯西序列，它是不收敛于$K$的，产生矛盾则$K$是一个闭集.
+\end{proof}
+
+\begin{proposition}
 如果度量空间$X$列紧，则$X$完备.
 \end{proposition}
 
@@ -1256,6 +1264,10 @@ $X$是一个集合，$R$是$X$上的一个等价关系，若子集$X$上的子�
 
 saturated有点像环里面的ideal，它可以吸收与它里面元素等价的其他元素.
 
+\begin{definition}
+给定集合$X$上的子集族$\mathcal{A} = \{A_i\}_{i \in I}$，如果$\mathcal{A}$中元素的有限交集非空，即$\bigcap\limits_{j \in J} A_j$，其中$J \subseteq I$且非空. 则称$A$有FIP性质(finite intersection property).
+\end{definition}
+
 \newpage
 \section{General Topology}
 \subsection{Basis and Countable Axiom}
@@ -1781,6 +1793,12 @@ $X$是一个连通但是不是道路连通的拓扑空间。
 若拓扑空间$X$的任意开覆盖有有限子覆盖，则称$X$\textbf{紧致}(\rm compact).
 \end{definition}
 
+同样也可以用闭集来定义
+
+\begin{definition}
+Any collection of closed subsets of $X$ with the finite intersection property has nonempty intersection.
+\end{definition}
+
 \begin{example}
 If $(X,\tpl) = \mathbb{R}$ and $A = (0,\infty)$, then $A$ is not compact.
 \begin{proof}
@@ -2008,9 +2026,20 @@ $\mathbb{R}^{n}$上的列紧子集当且仅当有界闭.
 	\item $X$ 完备和完全有界(complete and totally bounded).
 \end{enumerate}
 
-第二个推第三个metric space那一节有的.
+2推3metric space那一节有的. 2推1也可以 2 $\Rightarrow$ totally bounded $\Rightarrow$ Lindelof (要证compact就是要证任意满足FIP的闭集族,里面所有元素交都是非空的)
+%https://math.stackexchange.com/questions/1924338/proving-that-compactness-implies-the-finite-intersection-property
 \end{proposition}
 
+来记录下3推2
+\begin{proof}
+(3) $\Rightarrow$ (2). 我们任取$X$上一个序列$x_n,n\in \mathbb{N}$. $X$是totally bounded，则$X$可以被有限多个任意的$n \in \mathbb{N}$半径为$\frac{1}{n}$的开球盖住. 我们先取有限个半径为$1$的开球$B_1$盖住$X$. 则肯定有一个半径为$1$开球含有无限多个$x_n$中的项，这一步可以用反证法. 这里其实有点像我们在数分里面证明B.Bolzano-C.Weierstrass定律有界序列一定有收敛子列时配合区间套使用的方法，可以回过头去看看. 然后呢我们取半径为$\frac{1}{2}$的开球$B_\frac{1}{2}$盖住$X$，特别地前面取的$B_1$是可以被有限多个$B_\frac{1}{2}$盖住住的，同理其中一个$B_\frac{1}{2}$也是含有无限多个$x_n$中的像. by induction，存在一个$B_k,k \in \mathbb{N}$包含无限多个$x_n$中像. 然后你从$x_n$挑一个子列出来使得$x_{n_k} \in B_1 \cap B_\frac{1}{2} \cdots \cap B_k$. 你会发现这个子列是一个柯西序列. 因为当你任取$i,j > k$时，都有$d(x_{n_i},x_{n_j}) < \frac{1}{k}$. 对于任意的$\varepsilon > 0$，你只需要取$k = \frac{1}{\varepsilon}$向上取整就行.
+
+又因为$X$是complete的，$X$上的柯西序列都是收敛的，所以$x_{n_k}$收敛.{\color{red} 总结一下就是找一个柯西子列，complete下收敛}.
+
+\begin{center}
+\includegraphics[width=6cm, height=6cm]{images/complete_totally_bounded_to_sequentially_compact.jpg}
+\end{center}
+\end{proof}
 
 \end{document}
 
