@@ -2041,6 +2041,28 @@ $\mathbb{R}^{n}$上的列紧子集当且仅当有界闭.
 \end{center}
 \end{proof}
 
+
+\newpage
+\subsection{Net}
+\begin{definition}
+\rm 如果一个非空集合$A$上存在一种关系$\leq$满足反身性，传递性和任意一对元素都有上界(upper bound). 换句话说就是对任意的$a,b \in A$，存在$c$使得$a \leq c$和$b \leq c$. 则称$A$是是一个directed set(directed preorder).
+\end{definition}
+
+我们知道metric space $X$上定义的序列是一个$\mathbb{N} \mapsto X$上的映射，那么net就是序列在更一般地拓扑空间上的推广.
+
+\begin{definition}
+给定一个directed set $A$和拓扑空间$X$，映射$v \colon A \mapsto X$就被称为$X$上的一个net.  常常用$x.= x_a(a\in A)$表示.
+\end{definition}
+
+那么我们肯定要问net的极限是什么？在定义极限之前先看两个重要的刻画.
+\begin{definition}
+Consider net $\func{v}{A}{X}$， 给定$X$上一个子集$S$. 
+\begin{enumerate}
+	\item 如果存在$i \in A$，使得对任意的$j \geq i$有$v_j \in S$. 则称$v$是eventually.
+	\item 如果对于任意的$i \in A$，都存在$j \geq i$使得$v_j \in S$. 则称$v$是frequently.
+\end{enumerate}
+\end{definition}
+
 \end{document}
 
 
