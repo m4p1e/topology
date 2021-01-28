@@ -56,7 +56,7 @@
 \newcommand\SET[2]{\Set{#1}{\text{#2}}} %
 \begin{document}
 \title{TopOlOgy WiTh TeArs}
-\author{枫聆}
+\author{枫聆(maplgebra)}
 \maketitle
 
 \tableofcontents
@@ -2045,25 +2045,58 @@ $\mathbb{R}^{n}$上的列紧子集当且仅当有界闭.
 \newpage
 \subsection{Net}
 \begin{definition}
-\rm 如果一个非空集合$A$上存在一种关系$\leq$满足反身性，传递性和任意一对元素都有上界(upper bound). 换句话说就是对任意的$a,b \in A$，存在$c$使得$a \leq c$和$b \leq c$. 则称$A$是是一个directed set(directed preorder).
+\rm 如果一个非空集合$A$上存在一种关系$\leq$满足反身性，传递性和任意一对元素都有上界(upper bound). 换句话说就是对任意的$a,b \in A$，存在$c$使得$a \leq c$和$b \leq c$. 则称$A$是一个directed set(directed preorder).
 \end{definition}
 
 我们知道metric space $X$上定义的序列是一个$\mathbb{N} \mapsto X$上的映射，那么net就是序列在更一般地拓扑空间上的推广.
 
 \begin{definition}
-给定一个directed set $A$和拓扑空间$X$，映射$v \colon A \mapsto X$就被称为$X$上的一个net.  常常用$x.= x_a(a\in A)$表示.
+给定一个directed set $A$和拓扑空间$X$，映射$v \colon A \mapsto X$就被称为$X$上的一个net.  常常用$x.= x_\alpha(\alpha \in A)$表示.
 \end{definition}
 
 那么我们肯定要问net的极限是什么？在定义极限之前先看两个重要的刻画.
 \begin{definition}
 Consider net $\func{v}{A}{X}$， 给定$X$上一个子集$S$. 
 \begin{enumerate}
-	\item 如果存在$i \in A$，使得对任意的$j \geq i$有$v_j \in S$. 则称$v$是eventually.
+	\item 如果存在$i \in A$，使得对任意的$j \geq i$有$v_j \in S$. 则称$v$是eventually in S.
 	\item 如果对于任意的$i \in A$，都存在$j \geq i$使得$v_j \in S$. 则称$v$是frequently.
 \end{enumerate}
 \end{definition}
+%https://ncatlab.org/nlab/show/net
 
+
+\begin{definition}
+给定拓扑空间$X$和一个net $x_\alpha(\alpha \in A)$. 我们说$x_\alpha$收敛到某个$x \in X$，则表示对于$x$任意的open neighborhood $U$，$x_\alpha$都是eventually in $U$.
+\end{definition}
+
+注意这里的收敛可能是不唯一的. 也可以这样理解，$x$是net的一个聚点. eventually并不是说某个$i$之后所有的点，而是满足前面描述的relation即可，所以可能只是net中的一部分点！想想我们在metric space里面，如果某个序列收敛，那它一定会收敛到唯一的$x$. 这是因为Hausdorff的性质在这里，你假设它还收敛一点$x'$，则存在两个分别包含$x$和$x'$且不相交的开球，你是没办法保证序列中的点同时掉在这两个开球里面的，所以是唯一的。 自然地，我们会问那net什么时候也只有唯一收敛点呢？
+
+\begin{proposition}
+\rm 拓扑空间$X$是Hausdorff当且仅当其上的所有net最多只有一个聚点(limit point)
+\end{proposition}
+
+\begin{proof}
+注意现在是双向的，左边推右边跟前面我们证明metric里面序列唯一收敛一样. 我们主要来看一下怎么从右边推左边.
+
+在右边前提的条件下，假设$X$不是Hausdorff. 那就说明有两个点$x$和$x'$，它们的开集总是相交的.我们考虑一个比较特殊的directed set，里面是元素是一个pair $(U,V)$，其中$U$是$x$的开集，$V$是$x'$的开集. 那么给定两个pair $(U,V)$和$(U',V')$它们之间relation就表示为如果$U \subseteq U'$且$V \subseteq V'$，则$(U,V) \geq (U',V')$. 很明显这个relation是ok的. 然后我们用这个directed set构造一个net出来. 取$x_\alpha \in U_\alpha \cap V_\alpha$. 你会发现这个net is eventually lies on $U \cap V$，也就是说net是同时收敛于$x$和$x'$的. 这和前提是矛盾. 所以最后$X$是一个Hausdorff space. (这个构造方式真的优雅，奇特的directed set!)
+\end{proof}
+
+闭包的新定义.
+\begin{proposition}
+Let $X$ is topological space, $A \subseteq X$. Then $\overline{A} = \Set{x \in X}{\exists\ \text{net}\ x_\alpha \in A \ \text{converging to}\ x}.$
+\end{proposition}
+
+现在net收敛则$f$连续是双向的了.
+\begin{proposition}
+Given map $\func{f}{X}{Y}$ between topological spaces, and $x_0 \in X$.we have $f$ is continuous only if and only if $\forall$ net $x_\alpha \in X$ converges to $x_0$, then $f(x_\alpha)$ converges to $f(x_0)$.
+\end{proposition}
+
+\begin{proof}
+($\Leftarrow$) 前提条件成立下，我们假设$f$不是连续函数. 则存在$f(x_0)$的一个开集$V$，它对应的preimage $K$不是$x_0$的开集. 也就是说$x_0 \in K \setminus K^\circ$. 我们现在让$x_0$的所有开集是一个directed set $D$. 其relation $\geq$ 为 $\subseteq$(越大的让它越靠近$x_0$). 对于任意$A \in D$，$A$ 都是不entirely lies on $K$. 现在我们可以构造一个net $x_A \in A \setminus K$.很明显$x_0$是net的一个limit point. 但是现在$x_A$都是不在$K$里面的，所以$f(x_A) \notin V$. 也就是说$f(x_A)$不会eventually lies on $V$. 与前提条件矛盾.
+\end{proof}
 \end{document}
+
+
 
 
 %https://www.jstor.org/stable/2974580 Characterizing Continuity 在定义的连续的时候，我们是要求inverse image是开，那么有没有一种方法可以从"image如何如何,则f连续?" 这篇文章在聊这个问题.
