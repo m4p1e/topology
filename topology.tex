@@ -1268,6 +1268,10 @@ saturated有点像环里面的ideal，它可以吸收与它里面元素等价的
 给定集合$X$上的子集族$\mathcal{A} = \{A_i\}_{i \in I}$，如果$\mathcal{A}$中元素的有限交集非空，即$\bigcap\limits_{j \in J} A_j$，其中$J \subseteq I$且非空. 则称$A$有FIP性质(finite intersection property).
 \end{definition}
 
+\begin{definition}
+给定拓扑空间$X$上子集$A$. 若$A$上收敛序列都会收敛到$A$中的某个点，则称$A$ is sequentially closed.(列闭)
+\end{definition}
+
 \newpage
 \section{General Topology}
 \subsection{Basis and Countable Axiom}
@@ -1319,16 +1323,16 @@ saturated有点像环里面的ideal，它可以吸收与它里面元素等价的
 设${x_n}$是一个点列，若点$x$满足任取$x$的邻域$U$,存在自然数$N$,使得当$n > N$时每个$x_n$都在$U$中，则称$x$为点列${x_n}$的一个\textbf{极限}(limit).
 \end{definition}
 
-数学分析中的数列极限的推广，把里面的$\varepsilon$变成了一般性的邻域$U$可刻画.在数学分析中聚点的定义是若点$a$的任意去心邻域内都有数集$A$中的点，就称点$a$就是数集$A$的聚点(accumulating point).用形式语言来描述就是\[\forall \delta > 0,\exists x \in A \colon 0 < |x-a| < \delta.\].在拓扑学里面来描述就是在拓扑空间$X$下，若$A$是$X$的某个子集，取$x \in X$,若$x$的每个邻域都含有$A \smallsetminus \{x\}$的点，则称$x$是$A$的聚点.这里有一个聚点另外一种形式的刻画
+数学分析中的数列极限的推广，把里面的$\varepsilon$变成了一般性的邻域$U$可刻画.在数学分析中聚点的定义是若点$a$的任意去心邻域内都有数集$A$中的点，就称点$a$就是数集$A$的聚点(accumulating point).用形式语言来描述就是\[\forall \delta > 0,\exists x \in A \colon 0 < |x-a| < \delta.\].在拓扑学里面来描述就是在拓扑空间$X$下，若$A$是$X$的某个子集，取$x \in X$,若$x$的每个邻域都含有$A \setminus \{x\}$的点，则称$x$是$A$的聚点.这里有一个聚点另外一种形式的刻画
 
 \begin{proposition}
-设$x \in X$有可数邻域基，$A \subseteq X$，则$x$是$A$的聚点当且仅当存在由$A \smallsetminus {x}$中的点构成的点列${x_n}$以$x$为极限.
+设$x \in X$有可数邻域基，$A \subseteq X$，则$x$是$A$的聚点当且仅当存在由$A \setminus {x}$中的点构成的点列${x_n}$以$x$为极限.
 \end{proposition}
 
 \begin{proof}
 从数分里面的定义，看起来确实像可以取定一个数列，它的极限点. 来严格证明一下，若$x$是$A$的聚点，怎么来构造一个点列让它的极限是$x$呢？从上一个命题里面我们可以找一个$x$的可数邻域为$\{V_1,V_2,\cdots\}$使得$m > n$时$V_m \subseteq V_n$,然后在分别在$V_n \cap A$取一点$x_n \neq x$(聚点的定义是每个邻域都有$A$中的点),则以点列${x_n}$以$x$为极限.
 
-反过来存在$A \smallsetminus \{x\}$中的点列${x_n}$以$x$为极限,则当$n >N$时，$x$的任何邻域都要包含某个$x_n \in A \smallsetminus \{x\}$,因此$x$是$A$的聚点.
+反过来存在$A \setminus \{x\}$中的点列${x_n}$以$x$为极限,则当$n >N$时，$x$的任何邻域都要包含某个$x_n \in A \setminus \{x\}$,因此$x$是$A$的聚点.
 \end{proof}
 
 聚点和极限本质上刻画的是同一个东西，都是有无穷多个点聚在某处，数分里面的聚点是针对某个数列，而现在直接给你一个子集，要说明子集的聚点？这个就不唯一了，你可以从这个子集里面取很多个点列出来。
@@ -2043,25 +2047,58 @@ $\mathbb{R}^{n}$上的列紧子集当且仅当有界闭.
 
 
 \newpage
-\subsection{Net}
+\subsection{Net and Filter}
+%http://www.math.toronto.edu/ivan/mat327/docs/other/nets.pdf
+net是序列一般性推广，为什么需要net的存在呢？ 我们来看两个命题.
+
+\begin{theorem}
+\rm 若$X$是Hausdorff space. 则$X$所有序列都只会收敛到最多一个点. 也就是说收敛序列只能收敛到一个点.
+\end{theorem}
+
+\begin{proposition}
+给定拓扑空间$X$上一个子集$A$. 取$a \in X$，若$A$中某个序列收敛到$a$，则$a \in \overline{A}$.
+\end{proposition}
+
+如果你把这些命题反过来说是否依然成立呢？很遗憾是一般情况下并不成立，你需要加上$X$第一个可数这个条件. That is fine，似乎用序列的极限来刻画一些东西的时候，在某些方面好像还差点意思，主要是这个$\mathbb{N}$是个麻烦. 所以我们需要powerful一点的工具.
+
+net就为应运而生，我们用定义一种更一般的序列，在它的基础上再去讨论它的极限. 所以我们的第一件事就是把$\mathbb{N}$去掉.
+
 \begin{definition}
 \rm 如果一个非空集合$A$上存在一种关系$\leq$满足反身性，传递性和任意一对元素都有上界(upper bound). 换句话说就是对任意的$a,b \in A$，存在$c$使得$a \leq c$和$b \leq c$. 则称$A$是一个directed set(directed preorder).
 \end{definition}
 
+记录几个我们可能常用的directed set.
+
+\begin{example}
+对拓扑空间$(X,\tpl)$上某个点$x$. 取它的所有开集可以构成一个directed set\[D_x = \Set{U \in \tpl}{x \in U}.\]它上面的relation $\leq$ 等价于 $\supseteq$. 形象一点就是越大的开集，在relation上越小. 我们会经常这样做，因为我想跟后面一点的开集越靠近$x$. 
+\end{example}
+
+\begin{example}
+$(D_1,\leq_1)$和$(D_2,\leq_2)$是两个directed sets. 我们定义一个类似它们乘积的directed set\[(D_1 \times D_2), \leq).\]其中$\leq$定义为\[(a,b) \leq (x,y)\ \text{当且仅当}\ a \leq x , b \leq y.\]
+\end{example}
+
+
+\begin{remark}
+很自然地，序列也是一个net，因为$(\mathbb{N},\leq)$是一个directed set.
+\end{remark}
+
 我们知道metric space $X$上定义的序列是一个$\mathbb{N} \mapsto X$上的映射，那么net就是序列在更一般地拓扑空间上的推广.
 
 \begin{definition}
-给定一个directed set $A$和拓扑空间$X$，映射$v \colon A \mapsto X$就被称为$X$上的一个net.  常常用$x.= x_\alpha(\alpha \in A)$表示.
+给定一个directed set $A$($(D,\leq)$)和拓扑空间$X$，映射$v \colon A \mapsto X$就被称为$X$上的一个net.  常常用$x.= x_\alpha(\alpha \in A)$表示.
 \end{definition}
+
 
 那么我们肯定要问net的极限是什么？在定义极限之前先看两个重要的刻画.
 \begin{definition}
 Consider net $\func{v}{A}{X}$， 给定$X$上一个子集$S$. 
 \begin{enumerate}
 	\item 如果存在$i \in A$，使得对任意的$j \geq i$有$v_j \in S$. 则称$v$是eventually in S.
-	\item 如果对于任意的$i \in A$，都存在$j \geq i$使得$v_j \in S$. 则称$v$是frequently.
+	\item 如果对于任意的$i \in A$，都存在$j \geq i$使得$v_j \in S$. 则称$v$是frequently in S.
 \end{enumerate}
 \end{definition}
+
+形象一点说就是eventually保证从某项起满比它“大”的其他项都会掉到$S$里面，而frequently是说对于每一项都有比它“大”的项会掉在$S$里面，这里“大”就是directed set的relation. eventually 这里把这些掉大的掉在$S$里面的项拿出来就可以表示the tail of the net\[T_j = \Set{v(j)}{j \geq i \in A} \subseteq S.\]
 %https://ncatlab.org/nlab/show/net
 
 
@@ -2072,7 +2109,7 @@ Consider net $\func{v}{A}{X}$， 给定$X$上一个子集$S$.
 注意这里的收敛可能是不唯一的. 也可以这样理解，$x$是net的一个聚点. eventually并不是说某个$i$之后所有的点，而是满足前面描述的relation即可，所以可能只是net中的一部分点！想想我们在metric space里面，如果某个序列收敛，那它一定会收敛到唯一的$x$. 这是因为Hausdorff的性质在这里，你假设它还收敛一点$x'$，则存在两个分别包含$x$和$x'$且不相交的开球，你是没办法保证序列中的点同时掉在这两个开球里面的，所以是唯一的。 自然地，我们会问那net什么时候也只有唯一收敛点呢？
 
 \begin{proposition}
-\rm 拓扑空间$X$是Hausdorff当且仅当其上的所有net最多只有一个聚点(limit point)
+\rm 拓扑空间$X$是Hausdorff当且仅当其上的所有net最多收敛到同一个点.
 \end{proposition}
 
 \begin{proof}
@@ -2086,16 +2123,65 @@ Consider net $\func{v}{A}{X}$， 给定$X$上一个子集$S$.
 Let $X$ is topological space, $A \subseteq X$. Then $\overline{A} = \Set{x \in X}{\exists\ \text{net}\ x_\alpha \in A \ \text{converging to}\ x}.$
 \end{proposition}
 
+\begin{proof}
+这个命题你需要说明任取$\overline{A}$中一点都存在一个$A$中net收敛于它,反过来任何一个$A$中net收敛于某个$x$，则$x \in \overline{A}$.
+
+先证第一部分. 前提是取$x \in \overline{A}$，我们要构造一个$A$中的net出来收敛于$x$. 取遍$x$的开集$U$. 在这些开集的基础上构造一个directed set，$\leq$ 等价于$\supseteq$. 前面我们在example中提到过的经常用directed set. net取把对应$U$映到$x \in U \cap A$. 很明显这样net是收敛于$x$的.
+
+再证第二部分. 前提$A$中net $x_\alpha$收敛于$x$，我们现在要证明$x \in \overline{A}$. 假设$x \notin \overline{A}$. 则$x$的所有开集都和$A$没有交集，根据net收敛的定义，net要eventually的lies on $x$的每一个开集里面才行，但是net都在$A$里面. 这与命题矛盾了. 所以$x \in \overline{A}.$
+\end{proof}
+
+你从这个证明里面的可以感受到，取the collection of open set没有任何限制，如果我们要构造一个序列的话，必须要第一可数在这. 这就是net的powerful! 
+
+这里自然的还有一个推论
+
+\begin{corollary}
+给定$X$上子集$A$，$A$闭当且仅当所有$A$里面net都收敛于$A$里面一点.
+\end{corollary}
+
 现在net收敛则$f$连续是双向的了.
 \begin{proposition}
 Given map $\func{f}{X}{Y}$ between topological spaces, and $x_0 \in X$.we have $f$ is continuous only if and only if $\forall$ net $x_\alpha \in X$ converges to $x_0$, then $f(x_\alpha)$ converges to $f(x_0)$.
 \end{proposition}
 
 \begin{proof}
-($\Leftarrow$) 前提条件成立下，我们假设$f$不是连续函数. 则存在$f(x_0)$的一个开集$V$，它对应的preimage $K$不是$x_0$的开集. 也就是说$x_0 \in K \setminus K^\circ$. 我们现在让$x_0$的所有开集是一个directed set $D$. 其relation $\geq$ 为 $\subseteq$(越大的让它越靠近$x_0$). 对于任意$A \in D$，$A$ 都是不entirely lies on $K$. 现在我们可以构造一个net $x_A \in A \setminus K$.很明显$x_0$是net的一个limit point. 但是现在$x_A$都是不在$K$里面的，所以$f(x_A) \notin V$. 也就是说$f(x_A)$不会eventually lies on $V$. 与前提条件矛盾.
+($\Leftarrow$) 前提条件成立下，我们假设$f$不是连续函数. 则存在$f(x_0)$的一个开集$V$，它对应的preimage $K$不是$x_0$的开集. 也就是说$K \setminus K^\circ$非空. 我们取$x_0' \in K \setminus K^\circ$(这里我没有直接取$x_0$，因为在这里我认为并不能说明$x_0 \in K \setminus K^\circ$). $V$是一个开集，$f(x_0') \in V$，所以一定存在一个$V' \subseteq V$，它是$f(x_0')$的开集. 我们现在让$x_0'$的所有开集是一个directed set $D$. 其relation $\geq$ 为 $\subseteq$(越大的让它越靠近$x_0$). 对于任意$A \in D$，$A$ 都是不entirely lies on $K$. 现在我们可以构造一个net $x_A \in A \setminus K$.很明显$x_0'$是net的一个limit point. 但是现在$x_A$都是不在$K$里面的，所以$f(x_A) \notin V$，也不会在$V'$里面. 也就是说$f(x_A)$不会eventually lies on $V'$. 与前提条件矛盾.
 \end{proof}
-\end{document}
 
+在讨论subnet之前，我需要理一下convergence和accumulation point的概念. convergence是说从某一项起后面的项都掉在某个开集里面，而accumulate point是说它的每一个开集里面都可以找到$A$中的某个点. 这二者有什么关系呢？ covergence收敛到的那个点(limit point)可以看做这个序列的accumulation point. 而我们找到net的极限可能不是唯一的，我们在讨论net的时候，只是在把里面一部分点拿出来讨论. 那我们可以取尝试更准确的取定义一下net的聚点.
+
+
+\begin{definition}
+Let $\func{v}{D}{X}$ be a net，and fix $x \in X$. Then $x$ is called an \textbf{accumulation point} of $v$ if $v$ eventually in $U$.
+\end{definition}
+
+好吧感觉又把net收敛的定义写了一遍，但是我觉得是意义的.
+
+\begin{definition}
+若direct set $D$的子集$D'$满足$\forall i \in D$存在$j \in D'$使得$j \geq i$. 则称$D'$ is cofinal.
+\end{definition}
+
+
+在序列的世界里面我有子序列的概念，那么在net的世界里面，有没有subnet的概念呢？当然有，如果给定一个序列$\{x_n\}$，那么它的子序列为$\{x_{n_k}\}$. 现在我们可以形式化的刻画一下这个$n_k$是怎么来的，似乎也有那么一个特殊的映射在这里$\func{h}{N}{N}$，定义域的$N$是子序列的下标. 基于这样的直觉我们也需要一个特殊的映射在这里去连续net和subnet.
+
+\begin{definition}
+在拓扑空间$X$给定两个nets $\func{v}{D}{X}$和$\func{w}{\mathcal{E}}{X}$(其中$(D,\leq)$和$(\mathcal{E},\preceq)$都是directed set)，如果存在映射$\func{h}{\mathcal{E}}{D}$满足下面几个关系
+\begin{enumerate}
+	\item $h$ is monotone: if $\alpha \preceq \beta$，then $h(\alpha) \preceq h(\beta).$
+	\item $h$ is cofinal，means $h(\mathcal{E})$ is a cofinal subset of $D$.
+	\item $w(\alpha) = v(h(\alpha))$ for all $\alpha \in \mathcal{E}$ 
+\end{enumerate}
+则称$w$是$v$的一个\textbf{subsnet}.
+\end{definition}
+
+在sequence的世界里, 如果$x_n$收敛到$x$则subsequence也是收敛到$x$的. 同样在net的世界亦是如此.
+
+\begin{proposition}
+给定一个net $\func{v}{D}{X}$,$v$收敛到$x$. 若$v'$是$v$的一个subnet，则$v'$同样收敛到$x$. 
+\end{proposition} 
+
+
+\end{document}
 
 
 
