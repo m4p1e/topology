@@ -1323,7 +1323,22 @@ saturated有点像环里面的ideal，它可以吸收与它里面元素等价的
 设${x_n}$是一个点列，若点$x$满足任取$x$的邻域$U$,存在自然数$N$,使得当$n > N$时每个$x_n$都在$U$中，则称$x$为点列${x_n}$的一个\textbf{极限}(limit).
 \end{definition}
 
-数学分析中的数列极限的推广，把里面的$\varepsilon$变成了一般性的邻域$U$可刻画.在数学分析中聚点的定义是若点$a$的任意去心邻域内都有数集$A$中的点，就称点$a$就是数集$A$的聚点(accumulating point).用形式语言来描述就是\[\forall \delta > 0,\exists x \in A \colon 0 < |x-a| < \delta.\].在拓扑学里面来描述就是在拓扑空间$X$下，若$A$是$X$的某个子集，取$x \in X$,若$x$的每个邻域都含有$A \setminus \{x\}$的点，则称$x$是$A$的聚点.这里有一个聚点另外一种形式的刻画
+数学分析中的数列极限的推广，把里面的$\varepsilon$变成了一般性的邻域$U$可刻画.在数学分析中聚点的定义是若点$a$的任意去心邻域内都有数集$A$中的点，就称点$a$就是数集$A$的聚点(accumulating point).用形式语言来描述就是\[\forall \delta > 0,\exists x \in A \colon 0 < |x-a| < \delta.\].在拓扑学里面来描述就是在拓扑空间$X$下，若$A$是$X$的某个子集，取$x \in X$,若$x$的每个邻域都含有$A \setminus \{x\}$的点，则称$x$是$A$的聚点.
+
+聚点也可以有几种的不同的类型
+
+\begin{enumerate}
+ \item 如果$x$的邻域都包含$A$中无限多个点，则称$x$是$\omega$聚点.
+ \item 如果$x$的邻域都包含$A$中不可数多个点，则称$x$是condensation point.
+\end{enumerate}
+
+同样集合的聚点和序列的聚点是不一样的，前面是说的集合的聚点.
+
+\begin{definition}
+给定序列$\{x_n\}$. 若$x \in X$满足任意$x$的邻域都包含无数多个$\{x_n\}$中的项，则称$x$是序列$\{x_n\}$的聚点.
+\end{definition}
+
+这里有一个聚点另外一种形式的刻画
 
 \begin{proposition}
 设$x \in X$有可数邻域基，$A \subseteq X$，则$x$是$A$的聚点当且仅当存在由$A \setminus {x}$中的点构成的点列${x_n}$以$x$为极限.
@@ -2148,37 +2163,81 @@ Given map $\func{f}{X}{Y}$ between topological spaces, and $x_0 \in X$.we have $
 ($\Leftarrow$) 前提条件成立下，我们假设$f$不是连续函数. 则存在$f(x_0)$的一个开集$V$，它对应的preimage $K$不是$x_0$的开集. 也就是说$K \setminus K^\circ$非空. 我们取$x_0' \in K \setminus K^\circ$(这里我没有直接取$x_0$，因为在这里我认为并不能说明$x_0 \in K \setminus K^\circ$). $V$是一个开集，$f(x_0') \in V$，所以一定存在一个$V' \subseteq V$，它是$f(x_0')$的开集. 我们现在让$x_0'$的所有开集是一个directed set $D$. 其relation $\geq$ 为 $\subseteq$(越大的让它越靠近$x_0$). 对于任意$A \in D$，$A$ 都是不entirely lies on $K$. 现在我们可以构造一个net $x_A \in A \setminus K$.很明显$x_0'$是net的一个limit point. 但是现在$x_A$都是不在$K$里面的，所以$f(x_A) \notin V$，也不会在$V'$里面. 也就是说$f(x_A)$不会eventually lies on $V'$. 与前提条件矛盾.
 \end{proof}
 
-在讨论subnet之前，我需要理一下convergence和accumulation point的概念. convergence是说从某一项起后面的项都掉在某个开集里面，而accumulate point是说它的每一个开集里面都可以找到$A$中的某个点. 这二者有什么关系呢？ covergence收敛到的那个点(limit point)可以看做这个序列的accumulation point. 而我们找到net的极限可能不是唯一的，我们在讨论net的时候，只是在把里面一部分点拿出来讨论. 那我们可以取尝试更准确的取定义一下net的聚点.
+在讨论subnet之前，我需要理一下convergence和accumulation point的概念. convergence是说从某一项起后面的项都掉在某个开集里面，而accumulate point是说它的每一个开集里面都可以找到$A$中的某个点. 这二者有什么关系呢？ covergence收敛到的那个点(limit point)可以看做这个序列的accumulation point. 而我们找到net的极限可能不是唯一的，我们在讨论net的时候，只是在把里面一部分点拿出来讨论. 那我们可以取尝试更准确地去定义一下net的聚点.
 
 
 \begin{definition}
-Let $\func{v}{D}{X}$ be a net，and fix $x \in X$. Then $x$ is called an \textbf{accumulation point} of $v$ if $v$ eventually in $U$.
+Let $\func{v}{D}{X}$ be a net，and fix $x \in X$. Then $x$ is called an $\omega - \textbf{accumulation point}$ of $v$ if for every open set $U$ containing $x$ and every $d \in D$，there is $e \in D$ with $d \leq e$ such that $v(e) \in U.$
 \end{definition}
 
-好吧感觉又把net收敛的定义写了一遍，但是我觉得是意义的.
+这个一般性accumulation point的定义似乎和序列中聚点的定义有些不一样. 你如果把它放在序列上，就是给定任意的$x$的开集$U$和$m \in \mathbb{N}$，存在$n \geq m$使得$x_n \in U$. 其实也是在描述$U$交$\{x_n\}$是unbouned的，和原来是等价的. 
 
 \begin{definition}
 若direct set $D$的子集$D'$满足$\forall i \in D$存在$j \in D'$使得$j \geq i$. 则称$D'$ is cofinal.
 \end{definition}
 
 
-在序列的世界里面我有子序列的概念，那么在net的世界里面，有没有subnet的概念呢？当然有，如果给定一个序列$\{x_n\}$，那么它的子序列为$\{x_{n_k}\}$. 现在我们可以形式化的刻画一下这个$n_k$是怎么来的，似乎也有那么一个特殊的映射在这里$\func{h}{N}{N}$，定义域的$N$是子序列的下标. 基于这样的直觉我们也需要一个特殊的映射在这里去连续net和subnet.
+在序列的世界里面我有子序列的概念，那么在net的世界里面，有没有subnet的概念呢？当然有，如果给定一个序列$\{x_n\}$，那么它的子序列为$\{x_{n_k}\}$. 现在我们可以形式化的刻画一下这个$n_k$是怎么来的，似乎也有那么一个特殊的映射在这里$\func{h}{N}{N}$，定义域的$N$是子序列的下标. 基于这样的直觉我们也需要一个特殊的映射在这里去联系net和subnet.
 
 \begin{definition}
 在拓扑空间$X$给定两个nets $\func{v}{D}{X}$和$\func{w}{\mathcal{E}}{X}$(其中$(D,\leq)$和$(\mathcal{E},\preceq)$都是directed set)，如果存在映射$\func{h}{\mathcal{E}}{D}$满足下面几个关系
 \begin{enumerate}
-	\item $h$ is monotone: if $\alpha \preceq \beta$，then $h(\alpha) \preceq h(\beta).$
+	\item $h$ is monotone: if $\alpha \preceq \beta$，then $h(\alpha) \leq h(\beta).$
 	\item $h$ is cofinal，means $h(\mathcal{E})$ is a cofinal subset of $D$.
 	\item $w(\alpha) = v(h(\alpha))$ for all $\alpha \in \mathcal{E}$ 
 \end{enumerate}
-则称$w$是$v$的一个\textbf{subsnet}.
+则称$w$是$v$的一个\textbf{subnet}.
 \end{definition}
 
 在sequence的世界里, 如果$x_n$收敛到$x$则subsequence也是收敛到$x$的. 同样在net的世界亦是如此.
 
 \begin{proposition}
-给定一个net $\func{v}{D}{X}$,$v$收敛到$x$. 若$v'$是$v$的一个subnet，则$v'$同样收敛到$x$. 
+\rm 给定一个net $\func{v}{D}{X}$，$v$收敛到$x$. 若$v'$是$v$的一个subnet，则$v'$同样收敛到$x$. 
 \end{proposition} 
+
+\begin{proof}
+给定$v$的一个subnet $v'$，假设$v'$并不会收敛到$x$. 言下之意存在$x$的某个开集$U$，$v'$不会eventually lies on it. 怎么把这个东西转换到$v$上呢？ 如果我的找到方法，我就能真正的感受到subnet definition.  也就是对于任意的$i' \in \mathcal{E}$，满足$i' \preceq j'$不会全落在$U$中. $h$可以保留这个$i'$和$j'$序的关系，还有一个问题是$h(i')$可能不意味着能取遍$D$，但是$h(\mathbb{E})$ 是一个$D$的cofinal，也就是说在任何的$D$中任意的$\leq$ relation，都会携带$h(\mathbb{E})$. 这样不就好了，也是在说任意的$i \in D$，也有一部分$i \leq j \in h(\mathbb{E})$，不会落在$U$中. 我们似乎用了subnet definition前两个条件，第三个条件在哪使用呢？ 它似乎保证了我们前面在论证的过程中使用的是同一个$x$中的元素，这是必须的，只有这样相同元素满足不同的性质才能制造矛盾。 这个proof几乎是叙述式的，lol，因为是一遍思考一遍写下来，记录一下思考的过程吧. 这样我们对subnet的定义有了一些认知了，至少我们知道为什么要这些条件了.
+\end{proof}
+
+如果我们把前面的问题反过来说，subsequence收敛，那么original sequence收敛吗？一般情况下，original sequence并不收敛. 但是这里我们考虑subsequence 收敛到某个$x$，那这个$x$一定会是original sequence的一个accumulation point. 这个还是很显然的，因为
+任意$x$的开集$U$，subsequence从某项起以后都会掉在里面，也就是说明original sequence也有点在里面.
+
+
+但是这个问题能不能反过来说呢？ original sequence有一个accumulation point，则存在一个subsequence 收敛到它？ 看其实是正确的，但是还是不行，没有第一可数这个条件造不出这个subsequence. 现在来看看我们把它放在net里呢？
+
+\begin{theorem}
+Let $\func{v}{D}{X}$ be a net. Fix $x \in X$. Then $x$ is an accumulation point of $v$ if and only if there is subnet $v'$ of $v$ such that $v' \rightarrow x$.	
+\end{theorem}
+
+
+\begin{proof}
+($\Leftarrow$) 
+
+($\Rightarrow$) 给定前提条件$x$是$v$的一个accumulation point. 我们需要构造一个subnet $\func{w}{\mathcal{E}}{X}$收敛于$x$. 言下之意是我们要找到directed $\mathcal{E}$和映射$\func{h}{\mathcal{E}}{D}$.
+
+首先我们取$x$的所有开集构成的一个directed set $D_x$(relation $\leq$ 等价于 $supseteq$)，然后我们定义$\mathcal{E}$为一个类似乘积directed set $\mathcal{E}$，只是这里要加上一点限制如果$(d,U) \in \mathcal{E}$则$v(d) \in U $(这个限制直至关重要). 我们需要check一下$\mathcal{E}$是不是一个directed set，反身性和传递性都乘积net的relation(在乘积net下，$(d,U) \leq (d',U')$等价于$d \leq d$且$U \leq U'$.)下是比较显然的，如果再看一下upper bound的性质是否满足，给定$(d,U)$和$(d',U')$，自然地我们取$V = U \cap U'$. $D$的限制下可以找到一个$e$使得$d \leq e$且$d' \leq e$. 由于$x$是$v$的一个accumulation point，根据定义我们可以找到$e \leq e'$，使得$v(e') \in V$. 所以这个upper bound就是$(e',U)$，则$\mathcal{E}$确实是一个directed set.
+
+我们再来定义一下$h$，使得\[h((d,U)) = d.\]. 我们来check一下$h$是否满足上述3个条件. 在乘积directed set下 $h$ is monotone 和 $h$ is cofinal是显然的. 所以最后我们来定义$v'$使得$v'(\alpha) = v(h(\alpha))$.
+
+
+现在我们已经构造出了一个subnet，现在我们说明它是收敛于$x$的. 对任意的$x$的开集$U$，取$(d,U)$，我们知道$v(d) \in U$，即$v'((d,U)) \in U$，那么对于任意的$(d,U) \leq (d',U')$，有$U' \subseteq U$，即$v(d') \in U' \subseteq U$. 从而$v'((d',U')) \in U$. $v'$是eventually lies on $U$的，$v'$收敛于$x$.
+\end{proof}
+
+
+有时间再证吧...
+\begin{theorem}
+给定集合$X$上两个拓扑$\tpl_1$和$\tpl_2$. $\tpl_1$等于$\tpl_2$当且仅当对于$X$上的任意net，若net收敛在任意一个拓扑里面收敛，则也在另外一个拓扑里面收敛.
+\end{theorem}
+
+
+\begin{definition}
+给定集合$X$. 若$X$上某个子集族$\mathcal{F} \subseteq P(X)$满足下面三个条件:
+\begin{enumerate}
+ \item $\emptyset \notin \mathcal{F}.$
+ \item $\mathcal{F}$ is closed upwards: if $A \in \mathcal{F}$ and $A \subseteq B$，then $B \in \mathcal{F}.$
+ \item $F$ is closed under finite intersections: if $A,B \in \mathcal{F}$，then $A \cap B \subseteq \mathcal{F}.$
+\end{enumerate}
+\end{definition}
 
 
 \end{document}
